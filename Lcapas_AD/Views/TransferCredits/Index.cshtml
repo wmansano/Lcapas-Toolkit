@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Transfer Credits - Home";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-generic.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_TransferCreditsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>@Html.LcActionLink("Home", "Index", "Home")</li>
+    <li>@Html.LcActionLink("Transfer Credits Home", "Index", "TransferCredits")</li>
+    <li>@Html.LcActionLink("Generate Transfer Credit XML", "GenerateTransferCreditXML", "TransferCredits")</li>
+</ul>

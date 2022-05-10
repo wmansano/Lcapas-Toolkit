@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Settings - Home";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-generic.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/AdminSite.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_SettingsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>@Html.LcActionLink("Home", "Index", "Home")</li>
+    @*<li>@Html.LcActionLink("General Settings", "Index", "Settings")</li>*@
+    <li>@Html.LcActionLink("Application Settings", "Index", "ApplicationSettings")</li>
+    @*<li>@Html.LcActionLink("Transcript Settings", "Index", "TranscriptSettings")</li>*@
+    <li>@Html.LcActionLink("Users Settings", "Index", "Users")</li>
+    <li>@Html.LcActionLink("Permissions", "Permissions", "Settings")</li>
+    <li>@Html.LcActionLink("System Settings", "SystemSettings", "Settings")</li>
+    <li>@Html.LcActionLink("Server Status", "ServerStatus", "Settings")</li>
+    @*<li>@Html.LcActionLink("Report Settings", "Index", "Reports")</li>*@
+    @*Need to move general application settings to this screen*@
+    @*<li>@Html.ActionLink("General Parameters", "Parameters", "Settings")</li>*@
+</ul>

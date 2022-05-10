@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by CGI INFORMATION SYSTEMS (CGI INFORMATION SYSTEMS) -->
+<xs:schema xmlns:b="http://schemas.microsoft.com/BizTalk/2003" xmlns:StatData="urn:ca:applyalberta:message:StatisticalData:v1.0.1" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:core="urn:org:pesc:core:CoreMain:v1.2.0" targetNamespace="urn:ca:applyalberta:message:StatisticalData:v1.0.1" elementFormDefault="unqualified" attributeFormDefault="unqualified">
+  <xs:import namespace="urn:org:pesc:core:CoreMain:v1.2.0" schemaLocation="CoreMain_v1.2.0.xsd"/>
+  <!--======================================================-->
+  <!--XML Message Schema for APAS Statistical Data-->
+  <!--Revision: 1.0.0-->
+  <!--Date:       13-Nov-2007-->
+  <!--Change Log:-->
+  <!--0.0.0  13-Nov-2007  CGI - Initial version  -->
+  <!--======================================================-->
+  <xs:element name="StatisticalData" type="StatData:StatisticalDataType"/>
+  <xs:complexType name="StatisticalDataType">
+    <xs:sequence minOccurs="0">
+      <xs:element name="CreateDateTime" type="core:CreatedDateTimeType"/>
+      <xs:element name="ApplicationID" type="StatData:ApplicationIDType" minOccurs="0"/>
+      <xs:element name="ApplicantASN" type="core:AgencyAssignedIDType"/>
+      <xs:element name="ApplicationType1" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+            <xs:minLength value="0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="ApplicationType2" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:maxLength value="50"/>
+            <xs:minLength value="0"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="InstitutionID" type="core:LocalOrganizationIDType"/>
+      <xs:element name="ApplicationStage" type="StatData:ApplicationStageType"/>
+      <xs:element name="AcademicSession" type="core:AcademicSessionDetailType"/>
+      <xs:element name="ApplicationDegreeProgram" type="StatData:AcademicProgramType" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ValidationErrorType">
+    <xs:sequence minOccurs="0">
+      <xs:element name="ErrorMessage" type="StatData:ErrorMessageType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ApplicationIDType">
+    <xs:restriction base="xs:positiveInteger"/>
+  </xs:simpleType>
+  <xs:simpleType name="InstitutionIDType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ApplicantASNType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ApplicationStageType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:enumeration value="Stopped"/>
+      <xs:enumeration value="Submitted"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AcademicProgramNameType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="60"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AcademicProgramCodeType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ErrorMessageType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AcademicProgramType">
+    <xs:sequence>
+      <xs:element name="AcademicProgramType" type="core:AcademicProgramTypeType" minOccurs="0"/>
+      <xs:element name="AcademicProgramName" type="core:AcademicProgramNameType" minOccurs="0"/>
+      <xs:element name="AcademicProgramCode" type="StatData:AcademicProgramCodeType" minOccurs="0"/>
+      <xs:element name="AcademicProgramFaculty" type="xs:string" minOccurs="0"/>
+      <xs:element name="AcademicProgramDegreeLevel" minOccurs="0">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="AssociateDegree"/>
+            <xs:enumeration value="Bachelors"/>
+            <xs:enumeration value="Certificate"/>
+            <xs:enumeration value="Masters"/>
+            <xs:enumeration value="Doctorate"/>
+            <xs:enumeration value="NonDegree"/>
+            <xs:enumeration value="Professional"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="AcademicProgramDegreeTitle" type="xs:string" minOccurs="0"/>
+      <xs:element name="AcademicProgramCampus" type="xs:string" minOccurs="0"/>
+      <xs:element name="AcademicProgramPriority" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

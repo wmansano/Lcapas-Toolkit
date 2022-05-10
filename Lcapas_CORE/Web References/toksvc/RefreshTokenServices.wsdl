@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://applyalberta.ca/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://applyalberta.ca/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://applyalberta.ca/">
+      <s:element name="RefreshToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="key" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="tokenValue" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefreshTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefreshTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RefreshTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:RefreshToken" />
+  </wsdl:message>
+  <wsdl:message name="RefreshTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:RefreshTokenResponse" />
+  </wsdl:message>
+  <wsdl:portType name="RefreshTokenServicesSoap">
+    <wsdl:operation name="RefreshToken">
+      <wsdl:input message="tns:RefreshTokenSoapIn" />
+      <wsdl:output message="tns:RefreshTokenSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RefreshTokenServicesSoap" type="tns:RefreshTokenServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RefreshToken">
+      <soap:operation soapAction="http://applyalberta.ca/RefreshToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RefreshTokenServicesSoap12" type="tns:RefreshTokenServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RefreshToken">
+      <soap12:operation soapAction="http://applyalberta.ca/RefreshToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RefreshTokenServices">
+    <wsdl:port name="RefreshTokenServicesSoap" binding="tns:RefreshTokenServicesSoap">
+      <soap:address location="https://applyalberta.ca/APAS.WebServices/RefreshTokenServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="RefreshTokenServicesSoap12" binding="tns:RefreshTokenServicesSoap12">
+      <soap12:address location="https://applyalberta.ca/APAS.WebServices/RefreshTokenServices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

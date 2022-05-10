@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="title" content="LC APAS Integration Toolkit" />
+
+    @*@section JavaScript {*@
+    <script type="text/javascript">
+            var CalendarImagePath = '@Url.Content("~/Content/images/calendar.png")';
+            var imagePath = '@Url.Content("~/Content/Images/")';
+    </script>
+    @*}*@
+
+    @Styles.Render("~/Content/Jquery-ui/jquery-ui.css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/css")
+    @RenderSection("Styles", false)
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("JavaScriptVariables", false)
+    @Scripts.Render("~/bundles/custom")
+
+    @RenderSection("JavaScript", false)
+
+</head>
+<body>
+    <div class="header-bkg-img"></div>
+    <div class="menu-bkg-img"></div>
+    <div class="footer-bkg-img"></div>
+    <div class="layout-container">
+        <div class="header">
+            <img src="~/Content/images/lcapaslogo.png" class="logoImage" />
+            <div class="logo">
+                <label class="logoTitle" href="#">LC Integration Toolkit</label>
+                @if (ViewBag.Environment == "test")
+                {
+                    <label class="env-lbl">(TEST)</label>
+                }
+                @if (ViewBag.Environment == "rotest")
+                {
+                    <label class="env-lbl">(ROTEST)</label>
+                }
+                @if (ViewBag.Environment == "patch")
+                {
+                    <label class="env-lbl">(Patch)</label>
+                }
+                @if (ViewBag.Environment == "dev")
+                {
+                    <label class="env-lbl">(DEV)</label>
+                }
+                <br />
+                <label class="logoSubtitle">Integration Toolkit for APAS Applications and Transcripts, Reports, Transfer Credits and MyCreds</label>
+            </div>
+            <div class="menu">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <ul>
+                        <li><input type="image" title="Applications" src="~/Content/images/applications.png" class="menu-icons" onclick="location.href='@Url.Action("Index", "Applications")'" /></li>
+                        <li><input type="image" title="Transcripts" src="~/Content/images/transcripts.png" class="menu-icons" onclick="location.href='@Url.Action("Index", "Transcripts")'" /></li>
+                        @*<li><input type="image" title="DataShare" src="~/Content/images/data-share.png" class="menu-icons" onclick="location.href='@Url.Action("Index", "DataShare")'" /></li>*@
+                        <li><input type="image" title="Settings" src="~/Content/images/settings.png" class="menu-icons" onclick="location.href='@Url.Action("Index", "Settings")'" /></li>
+                        <li><input type="image" title="Reports" src="~/Content/images/reports.png" class="menu-icons" onclick="location.href='@Url.Action("Index", "Reports")'" /></li>
+                        <li><input type="image" title="Transfer Credits" src="~/Content/images/transfer-credits.png" class="menu-icons" onclick="location.href='@Url.Action("Index", "TransferCredits")'" /></li>
+                        <li><input type="image" title="MyCreds" src="~/Content/images/mycreds.png" class="menu-icons" onclick="location.href='@Url.Action("Index", "MyCreds")'" /></li>
+                    </ul>
+                }
+            </div>
+            <div class="header-menu">
+                <div class="top-menu">
+                    @RenderSection("Menu", false)
+                </div>
+                <div class="login-welcome">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <text>
+                            Welcome @User.Identity.Name,
+                        </text>
+                        <a href='@Url.Action("LogOff", "Login")' title="Click here to logout">Logout</a>
+                    }
+                    else
+                    {
+                        <a href='@Url.Action("Index", "Login")' title="Click here to login">Login</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            @RenderBody()
+        </div>
+        <div class="footer">
+            <p class="legal">(c) @DateTime.Now.Year LC Integration Toolkit by LC ITS</p>
+        </div>
+        <div style="clear: both;">
+            &nbsp;
+        </div>
+        <!-- end footer -->
+        <!-- dialog boxes-->
+        <div id="dialog-confirm"></div>
+        <div id="dialog-message"></div>
+        <div id="dialog-warning"></div>
+        <div id="dialog-error"></div>
+        <div id="dialog-cancel"></div>
+        @RenderSection("CreateDialog", false)
+
+        <div id="popupIframe" class="hide">
+            <div class="display-message-content">
+                <iframe id="iframeContent"></iframe>
+                <div class="loader"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

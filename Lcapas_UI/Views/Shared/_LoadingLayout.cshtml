@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lethbridge College - Admissions</title>
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jqueryui")*@
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @*@Styles.Render("~/Content/themes/base/css")*@
+    @*@Styles.Render("~/Content/css/jqueryui")*@
+    @RenderSection("JavaScript", false)
+    @RenderSection("Styles", false)
+    <script type="text/javascript">
+        var LoadLanding = '@Url.Action("Index", "Index")';
+    </script>
+</head>
+    <body>
+        @RenderBody()
+    </body>
+</html>

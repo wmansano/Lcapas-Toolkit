@@ -1,0 +1,314 @@
+﻿@model Lcapas.Core.Library.BulkSendListViewObj
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-transcripts.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var ExportBulkSendBatchPath = '@Url.Action("ExportBulkSendBatch", "MyCreds")';
+        var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+        var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    </script>
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_MyCredsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        <div class="paging">
+            @if (Model.Students.Any())
+            {
+                <div class="page-print">
+                    <input id="excelMyCredsBulkSendReportBtn" type="button" value="Export to Excel" class="button" />
+                </div>
+                <div class="page-print">
+                    <input id="prntMyCredsBulkSendReportBtn" type="button" value="Print Report" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            @using (Html.BeginForm("BulkSend", "MyCreds", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+            {
+                <table id="data-tbl" class="display">
+                    <thead class="columnScrolling">
+                        <tr class="tableHeader">
+                            <th></th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.AcadCredentialsID, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.StudentRecord.FullName, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.StudentRecord.Snumber, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.StudentRecord.Email, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.Ethnic, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.AlienStatus, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.ProgramCode, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @*@Html.LabelFor(m => m.SearchFilter.ProgramDesc, new { @class = "control-label" })*@
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.Campus, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.CCDType, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.AcadHonors, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.AcadGPA, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.FromAcadCCDDate, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.ToAcadCCDDate, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.FromAcadCredAddDate, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.SearchFilter.ToAcadCredAddDate, new { @class = "control-label" })
+                            </th>
+                            <th title="Clear"></th>
+                        </tr>
+                        <tr class="tableHeader hide-scroll">
+                            <th id="selectAll" title="Select All" class="text-right col-xw-20">
+                                <input type="checkbox" id="SelectAll" class="text" checked>
+                            </th>
+                            <th title="Acad Cred ID" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.SearchFilter.AcadCredentialsID, new { @id = "AcadCredentialsID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Student Name" class="col-xw-150">
+                                @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.FullName, new { @id = "FullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-150" })
+                            </th>
+                            <th title="sNumber" class="col-xw-60">
+                                @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.Snumber, new { @id = "Snumber", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="sNumber" class="col-xw-150">
+                                @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.Email, new { @id = "Email", @class = "text ui-widget-content ui-corner-all searchfield col-xw-150" })
+                            </th>
+                            <th title="Ethnic" class="col-xw-50">
+                                @Html.ListBoxFor(m => m.SearchFilter.Ethnic, Model.Ethnic, new { @id = "Ethnic", @class = "multi-select col-xw-50" })
+                            </th>
+                            <th title="Alien Status" class="col-xw-50">
+                                @Html.ListBoxFor(m => m.SearchFilter.AlienStatus, Model.AlienStatus, new { @id = "AlienStatus", @class = "multi-select col-xw-50" })
+                            </th>
+                            <th title="Program" class="ms-fw-450 col-xw-70">
+                                @Html.ListBoxFor(m => m.SearchFilter.ProgramCode, Model.ProgramCode, new { @id = "ProgramCode", @class = "multi-select col-xw-70" })
+                            </th>
+                            <th title="Program" class="col-fw-200">
+                                @*@Html.TextBoxFor(m => m.SearchFilter.ProgramDesc, new { @id = "ProgramDesc", @class = "text ui-widget-content ui-corner-all searchfield col-xw-200" })*@
+                            </th>
+                            <th title="Campus" class="col-xw-40">
+                                @Html.ListBoxFor(m => m.SearchFilter.Campus, Model.Campus, new { @id = "Campus", @class = "multi-select col-xw-40" })
+                            </th>
+                            <th title="CCD Type" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.SearchFilter.CCDType, Model.CDDType, new { @id = "CCDType", @class = "multi-select col-xw-40" })
+                            </th>
+                            <th title="Honors" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.SearchFilter.AcadHonors, Model.Honors, new { @id = "AcadHonors", @class = "multi-select col-xw-60" })
+                            </th>
+                            <th title="GPA" class="col-xw-60">
+                                @Html.TextBoxFor(m => m.SearchFilter.AcadGPA, new { @id = "AcadGPA", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Acad CCD Date" class="col-fw-100">
+                                @Html.TextBoxFor(m => m.SearchFilter.FromAcadCCDDate, "{0:yyyy/MM/dd}", new { @id = "FromAcadCCDDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                            </th>
+                            <th title="Acad CCD Date" class="col-fw-100">
+                                @Html.TextBoxFor(m => m.SearchFilter.ToAcadCCDDate, "{0:yyyy/MM/dd}", new { @id = "ToAcadCCDDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                            </th>
+                            <th title="Acad Add Date" class="col-fw-100">
+                                @Html.TextBoxFor(m => m.SearchFilter.FromAcadCredAddDate, "{0:yyyy/MM/dd}", new { @id = "FromAcadCredAddDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                            </th>
+                            <th title="Acad Add Date" class="col-fw-100">
+                                @Html.TextBoxFor(m => m.SearchFilter.ToAcadCredAddDate, "{0:yyyy/MM/dd}", new { @id = "ToAcadCredAddDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                            </th>
+                            <th title="Clear" class="col-fw-80">
+                                <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("BulkSend", "MyCreds")';return false;" />
+                                <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                                @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                                @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                                @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                                @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Students.Count > 0)
+                        {
+                            foreach (var studentObj in Model.Students)
+                            {
+                                //string newRequestClass = (studentObj.DateProduced == null ? "text-bold yellow" : "");
+
+                                @*<tr id="requestLine-@studentObj.RequestID" class="pad-left-tr-25 @newRequestClass" onmouseover="style.backgroundColor='lightblue';style.cursor='default';" onmouseout="style.backgroundColor=@(string.IsNullOrWhiteSpace(newRequestClass) ? "'white'" : "'#ffff78'");">*@
+                                <tr id="requestLine-@studentObj.AcadCredentialsID" class="pad-left-tr-25" onmouseover="style.backgroundColor='lightblue';style.cursor='default';" onmouseout="style.backgroundColor='white';" );">
+                                    <td>
+                                        <input type="checkbox" name="@studentObj.AcadCredentialsID" checked>
+                                    </td>
+                                    <td>
+                                        @studentObj.AcadCredentialsID
+                                    </td>
+                                    <td>
+                                        @studentObj.FullName
+                                    </td>
+                                    <td>
+                                        @studentObj.sNumber
+                                    </td>
+                                    <td>
+                                        @studentObj.Email
+                                    </td>
+                                    <td>
+                                        @studentObj.Ethnic
+                                    </td>
+                                    <td>
+                                        @studentObj.AlienStatus
+                                    </td>
+                                    <td>
+                                        @studentObj.ProgramCode
+                                    </td>
+                                    <td>
+                                        @studentObj.ProgramDesc
+                                    </td>
+                                    <td>
+                                        @studentObj.Campus
+                                    </td>
+                                    <td>
+                                        @studentObj.CCDType
+                                    </td>
+                                    <td>
+                                        @studentObj.AcadHonors
+                                    </td>
+                                    <td>
+                                        @studentObj.AcadGPA
+                                    </td>
+                                    <td colspan="2" class="text-center">
+                                        @if (studentObj.AcadCCDDate != null && studentObj.AcadCCDDate.HasValue)
+                                        {
+                                            @studentObj.AcadCCDDate.Value.ToString("yyyy/MM/dd")
+                                        }
+                                    </td>
+                                    <td colspan="2" class="text-center">
+                                        @if (studentObj.AcadCredAddDate != null && studentObj.AcadCredAddDate.HasValue)
+                                        {
+                                            @studentObj.AcadCredAddDate.Value.ToString("yyyy/MM/dd")
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (studentObj.AcadCoursesCount == null || studentObj.AcadCoursesCount == 0)
+                                        {
+                                            <img src="~/Content/Images/bullet_ball_glass_red.png" class="request-status pull-right" title="No Acad. Courses/Transcript" />
+                                        }
+                                        else
+                                        {
+                                            if (!string.IsNullOrWhiteSpace(studentObj.Restriction))
+                                            {
+                                                <img src="~/Content/Images/bullet_ball_glass_yellow.png" class="request-status pull-right" title="Student Restriction" />
+                                            } else { 
+                                                if (studentObj.InvalidEmail)
+                                                {
+                                                    <img src="~/Content/Images/bullet_ball_glass_grey.png" class="request-status pull-right" title="Invalid Personal Email" />
+                                                }
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="14" style="color:red;text-align:center;">
+                                    <br />No records found.
+                                    <br />Please enter search parameters and click 'Search'. <br />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="ajax-loader">
+            <div class="ajax-loader-content">
+                <center>
+                    <h3>Please wait, generating transcript batch...</h3>
+                    <img src="~/Content/images/ajax-loader.gif" class="img-responsive" />
+                </center>
+            </div>
+        </div>
+
+        <div id="bottom_anchor"></div>
+        <br />
+        <div class="request-legend" style="width: auto;">
+            <label>Legend: </label>
+            <img src="~/Content/Images/bullet_ball_glass_grey.png" class="request-status" />
+            <label class="legend-item">Invalid Personal Email</label>
+            <img src="~/Content/Images/bullet_ball_glass_yellow.png" class="request-status" />
+            <label class="legend-item">Student Restriction</label>
+            <img src="~/Content/Images/bullet_ball_glass_red.png" class="request-status" />
+            <label class="legend-item">No Acad. Courses/Transcript</label>
+        </div>
+        <div class="pull-right batch-button" style="padding-bottom: 10px;">
+            <input id="generateMyCredsBulkSend" type="button" value="Generate Bulk Send Batch" key="Request" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+
+            <span class="batch-option-group">
+                <label class="control-label" for="uploadMyCredsAPI">Upload with MyCreds API:</label>
+                <input type="checkbox" id="uploadMyCredsAPI" name="uploadMyCredsAPI">
+            </span>
+            &nbsp;&nbsp;
+            <span class="batch-option-group">
+                <label class="control-label" for="useMyCredsXsl">Use MyCreds Stylesheet:</label>
+                <input type="checkbox" id="useMyCredsXsl" name="useMyCredsXsl" checked>
+            </span>
+        </div>
+
+    </div>

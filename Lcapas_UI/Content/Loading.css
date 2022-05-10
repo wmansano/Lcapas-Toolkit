@@ -1,0 +1,29 @@
+﻿body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#overlay {
+    visibility: visible;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 1000;
+}
+
+#overlay div {
+    width: 350px;
+    height: 100px;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: -25%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    font-size: larger;
+}

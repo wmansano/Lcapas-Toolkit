@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Transcript Settings";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-generic.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/AdminSite.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_TranscriptSettingsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>@Html.LcActionLink("Settings Home", "Index", "Settings")</li>
+    <li>@Html.LcActionLink("Transcript Settings", "Index", "TranscriptSettings")</li>
+    @*<li>@Html.LcActionLink("Synchronize Messages", "SynchronizeMessages", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Confirm Message Status", "MessageStatus", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Refresh Institutions", "RefreshInstitutions", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Set System Preferences", "SystemPreferences", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Edit Contact Information", "ContactInformation", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Configure Email", "ConfigureEmail", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Set Default Stylesheets", "DefaultStylesheets", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Set Enabled Functionality", "EnabledFunctionality", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Edit Notification Settings", "NotificationSettings", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("View Security Log", "SecurityLog", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("View Operations Log", "OperationsLog", "TranscriptSettings")</li>
+    <li>@Html.LcActionLink("Manage Toolkit Users", "ToolkitUsers", "TranscriptSettings")</li>*@
+</ul>

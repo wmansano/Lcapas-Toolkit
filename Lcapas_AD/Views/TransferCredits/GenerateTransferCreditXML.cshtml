@@ -1,0 +1,270 @@
+﻿@model Lcapas.Core.Library.TransferCreditViewObj
+
+@section JavaScriptVariables {
+    <script type="text/javascript">
+    var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+    var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    var XMLReportPath = '@Url.Action("XMLReport", "TransferCredits")';
+    </script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_TransferCreditsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+
+    <div class="container">
+        @using (Html.BeginForm("GenerateTransferCreditXML", "TransferCredits", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+        {
+        <h2>@Model.PageTitle</h2>
+        <div class="paging">
+            @if (Model.ReportSearchFilter != null)
+            {
+                <div class="page-print">
+                    <input id="excelTransCredBtn" type="button" value="Export to Excel" class="button" />
+                </div>
+                <div class="page-print">
+                    <input id="prntTransCredBtn" type="button" value="Print Reports" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-print">
+                    <input id="xmlTransCredBtn" type="button" value="XML Download" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            <table id="data-tbl" class="TFtable display">
+                <thead class="tableHeader">
+                    <tr class="tableHeader">
+                        <th></th>
+                        <th class="col-xw-50">
+                            @Html.LabelFor(m => m.ReportSearchFilter.ASN, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th class="col-fw-100">
+                            @Html.LabelFor(m => m.ReportSearchFilter.BirthDate, new { @class = "control-label col-fw-100" })
+                        </th>
+                        <th class="col-fw-100">
+                            @Html.LabelFor(m => m.ReportSearchFilter.Provider, new { @class = "control-label col-fw-100" })
+                        </th>
+                        <th class="col-fw-100">
+                            @Html.LabelFor(m => m.ReportSearchFilter.AcademicYear, new { @class = "control-label col-fw-100" })
+                        </th>
+                        <th class="col-fw-100">
+                            @Html.LabelFor(m => m.ReportSearchFilter.ProgramID, new { @class = "control-label col-fw-100" })
+                        </th>
+                        <th class="col-xw-50">
+                            @Html.LabelFor(m => m.ReportSearchFilter.SpecializationID, new { @class = "control-label col-xw-100 " })
+                        </th>
+                        <th class="col-xw 100">
+                            @Html.LabelFor(m => m.ReportSearchFilter.FromInstitution, new { @class = "control-label col-xw-100" })
+                        </th>
+                        <th class="col-xw 100">
+                            @Html.LabelFor(m => m.ReportSearchFilter.FromInstitutionLoc, new { @class = "control-label col-xw-100" })
+                        </th>
+                        <th class="col-xw-50">
+                            @Html.LabelFor(m => m.ReportSearchFilter.FromInstitutionCourseCode, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th class="col-fw-30">
+                            @Html.LabelFor(m => m.ReportSearchFilter.FromInstitutionAcademicYearCourseTaken, new { @class = "control-label col-fw-30" })
+                        </th>
+                        <th class="col-xw-30">
+                            @Html.LabelFor(m => m.ReportSearchFilter.TCACourseCode, new { @class = "control-label col-xw-10" })
+                        </th>
+                        <th class="col-xw-10">
+                            @Html.LabelFor(m => m.ReportSearchFilter.TCAForCourseTransfer, new { @class = "control-label col-xw-10" })
+                        </th>
+                        <th class="col-fw-50">
+                            @Html.LabelFor(m => m.ReportSearchFilter.TCAAcadmicYear, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th class="col-xw-50">
+                            @Html.LabelFor(m => m.ReportSearchFilter.TCTBYCourse, new { @class = "control-label col-xw-50" })
+
+                        </th>
+                        <th class="col-fw-100">
+                            @Html.LabelFor(m => m.ReportSearchFilter.TCTForPLAR, new { @class = "control-label col-fw-100" })
+
+                        </th>
+                        <th colspan="2" />
+                    </tr>
+                    <tr class="tableHeader hide-scroll">
+                        <th id="selectAll" title="Select All" class="col-xw-10">
+                            <input id="SelectAll" type="checkbox" class="text" checked>
+                        </th>
+                        <th title="FromDate" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.ASN, new { @id = "ASN", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })
+                        </th>
+                        <th title="ToDate" class="col-fw-60">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.BirthDate, "{0:yyyy-MM-dd}", new { @id = "BirthDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                        </th>
+                        <th title="Provider" class="col-fw-60">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.Provider, new { @id = "Provider", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })
+                        </th>
+                        <th title="Provider" class="col-fw-60">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.AcademicYear, new { @id = "AcademicYear", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })
+                        </th>
+                        <th title="Provider" class="col-fw-60">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.ProgramID, new { @id = "ProgramID", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })
+                        </th>
+                        <th title="Specialization ID" class="col-xw-80">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.SpecializationID, new { @id = "SpecializationID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                        </th>
+                        <th title="From Institution" class="col-xw-60">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.FromInstitution, new { @id = "FromInstitution", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                        </th>
+                        <th title="From Institution Loc" class="col-xw-100">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.FromInstitutionLoc, new { @id = "FromInstitutionLoc", @class = "text ui-widget-content ui-corner-all searchfield col-xw-100" })
+                        </th>
+                        <th title="From Institution Course Code" class="col-xw-150">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.FromInstitutionCourseCode, new { @id = "FromInstitutionCourseCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-150" })
+                        </th>
+                        <th title="From Institution Academic Year Course Taken" class="col-fw-80">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.FromInstitutionAcademicYearCourseTaken, new { @id = "FromInstitutionAcademicYearCourseTaken", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })
+                        </th>
+                        <th title="TCA Course Code" class="col-fw-80">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.TCACourseCode, new { @id = "TCACourseCode", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })
+                        </th>
+                        <th title="TCA For Course Transfer" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.TCAForCourseTransfer, new { @id = "TCAForCourseTransfer", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Country" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.TCAAcadmicYear, new { @id = "TCAAcadmicYear", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Postal Code" class="col-xw-70">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.TCTBYCourse, new { @id = "TCTBYCourse", @class = "text ui-widget-content ui-corner-all searchfield col-xw-70" })
+                        </th>
+                        <th title="Postal Code" class="col-fw-70">
+                            @Html.TextBoxFor(m => m.ReportSearchFilter.TCTForPLAR, new { @id = "TCTForPLAR", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })
+                        </th>
+                        <th title="Clear" class="col-xw-30">
+                            <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("GenerateTransferCreditXML", "TransferCredits")';return false;" />
+                        </th>
+                        <th title="Search" class="col-xw-30">
+                            <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                            @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                            @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                            @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                            @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.ReportSearchResultsFilter.Count > 0)
+                    {
+                        foreach (var item in Model.ReportSearchResultsFilter)
+                        {
+                    <tr class="tableBody-student-daily-request">
+                        <td>
+                            <input type="checkbox" name="@item.ASN;@item.TCACourseCode" checked>
+                        </td>
+                        <td class="col-xw-60">
+                            @item.ASN
+                        </td>
+                        <td class="col-xw-100">
+                            @if (item.BirthDate != null)
+                            {
+                                @item.BirthDate.Value.ToString("yyyy/MM/dd")
+                            }
+                        </td>
+                        <td class="col-xw-60">
+                            @item.Provider
+                        </td>
+                        <td class="col-xw-60">
+                            @item.AcademicYear
+                        </td>
+                        <td class="col-xw-60">
+                            @item.ProgramID
+                        </td>
+                        <td class="col-xw-100">
+                            @item.SpecializationID
+                        </td>
+                        <td class="col-xw-60">
+                            @item.FromInstitution
+                        </td>
+                        <td class="col-xw-100">
+                            @item.FromInstitutionLoc
+                        </td>
+                        <td class="col-xw-150">
+                            @item.FromInstitutionCourseCode
+                        </td>
+                        <td class="col-xw-80">
+                            @item.FromInstitutionAcademicYearCourseTaken
+                        </td>
+                        <td class="col-xw-80">
+                            @item.TCACourseCode
+                        </td>
+                        <td class="col-xw-10 text-center">
+                            @item.TCAForCourseTransfer
+                        </td>
+                        <td class="col-xw-50 text-center">
+                            @item.TCAAcadmicYear.ToString()
+                        </td>
+                        <td class="col-xw-100">
+                            @item.TCTBYCourse
+                        </td>
+                        <td class="col-xw-50 text-center">
+                            @item.TCTForPLAR
+                        </td>
+                        <td colspan="2" />
+                    </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="20" style="color:red;text-align:center;">
+                                <br />No records found.
+                                <br />Please enter search parameters and click 'Search'. <br />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="bottom_anchor"></div>
+        <br />
+        }
+    </div>

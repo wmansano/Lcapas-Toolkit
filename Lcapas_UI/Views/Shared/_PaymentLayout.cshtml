@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lethbridge College - Admission Applications</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/css/jqueryui")
+    @RenderSection("JavaScript", false)
+    @RenderSection("Styles", false)
+    <script type="text/javascript">
+        var ApplicationPath = '@Url.Action("Application", "Landing", new { uuid = ViewBag.UUID})';
+    </script>
+</head>
+<body>
+    <div id="page-container">
+        <div id="image-header"></div>
+        <div class="navigation top-navigation">
+            <a class="left" href="@ViewBag.ApasReturnPath">Return to ApplyAlberta</a>
+            <a class="right" href="@ViewBag.ApasLogoutPath">Logout</a>
+        </div>
+        <div class="header">
+            <h2 class="headercenter">Application for Admission</h2>
+        </div>
+        <div id="contentdiv" style="width:90%;">
+            @RenderBody()
+        </div>
+        <div id="page-footer">
+            <div class="navigation bottom-navigation">
+                <div class="address">
+                    Phone: <b>403-320-3323</b>,&emsp;Toll-free: <b>1-800-572-0103</b> ext <b>3323</b>,&emsp;Email: <b>admissions@lethbridgecollege.ca</b>
+                </div>
+            </div>
+            <div id="footerswoop"></div>
+            <div id="footerinner">
+                <div class="left">
+                    <img src="~/Content/Images/applyalberta_logo.jpg" class="ApplyAlbertaLogo">
+                </div>
+                <div class="right">
+                    © Lethbridge College<br />
+                    3000 College Drive South<br />
+                    Lethbridge, AB T1K 1L6
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="@ViewBag.ApasWriteGifPath" alt="WriteGif" />
+</body>
+</html>

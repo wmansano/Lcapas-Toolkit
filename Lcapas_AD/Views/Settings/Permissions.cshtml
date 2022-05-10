@@ -1,0 +1,88 @@
+﻿@model Lcapas.Core.Library.PermissionsViewObj
+
+@{
+    ViewBag.Title = "Permissions";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var createPermissionTypeUrl = '@Url.Action("CreatePermissionType", "Settings")';
+        var deletePermissionTypeUrl = '@Url.Action("DeletePermissionType", "Settings")';
+    </script>
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_SettingsMenu.cshtml")
+}
+
+@using (Html.BeginForm("Permissions", "Settings", FormMethod.Post, new { DefaultButton = "search-btn", @id = "item-form", showActive = "false" }))
+{
+    @Html.AntiForgeryToken()
+    <h2>@ViewBag.Title</h2>
+
+    <div class="form-horizontal">
+        <div class="row">
+            <input type="button" value="Create Controller" class="button create-item" item-type="0"> |
+            <input type="button" value="Create Action" class="button create-item" item-type="1"> |
+            <input type="button" value="Create Permission" class="button create-item" item-type="2">
+        </div>
+
+        <div id="form-container" class="form-group row">
+            <div class="col-md-12">
+                <div class="list-group">
+                    @if (Model != null && Model.ControllerTypes.Any())
+                    {
+                        foreach (var controller in Model.ControllerTypes.OrderBy(o => o.ControllerDesc))
+                        {
+                            <a href="#list-controller-item-@controller.ControllerId" class="list-group-item collapsed arrow" data-toggle="collapse">@controller.ControllerDesc</a>
+                            <span class="pull-right" style="margin: -20px 5px 0 0; position: relative;">
+                                <input type="image" class="icon-delete delete-item" type-code="0" obj-type="controller" item="@controller.ControllerId" code="@controller.ControllerTypeType" desc="@controller.ControllerDesc" src="~/Content/Images/error.png" width="15" height="15" title="Delete Controller Type" />
+                            </span>
+                            <ul id="list-controller-item-@controller.ControllerId" class="list-group collapse in">
+                                @foreach (var action in Model.ActionTypes.Where(x => x.ControllerType.ControllerId == controller.ControllerId).OrderBy(o => o.ActionDesc))
+                                {
+                                    <a href="#list-action-item-@action.ActionId" class="list-group-item collapsed arrow" data-toggle="collapse">@action.ActionDesc</a>
+                                    <span class="pull-right" style="margin: -20px 5px 0 0; position: relative;">
+                                        <input type="image" class="icon-delete delete-item" type-code="1" obj-type="action" item="@action.ActionId" code="@action.ActionTypeType" desc="@action.ActionDesc" src="~/Content/Images/error.png" width="15" height="15" title="Delete Action Type" />
+                                    </span>
+                                    <ul id="list-action-item-@action.ActionId" class="list-group collapse in">
+                                        @foreach (var permission in Model.PermissionRecords.Where(x => x.ActionType.ActionId == action.ActionId).OrderBy(o => o.PermissionRecordNote))
+                                        {
+                                            <li id="@permission.PermissionRecordId" class="list-group-item ui-state-default">
+                                                <span class="item-content" title="@permission.PermissionRecordNote">@permission.PermissionRecordNote</span>
+                                                <div class="pull-right" style="margin: -13px -10px 0 0;">
+                                                    <input type="image" class="icon-delete delete-item" type-code="2" obj-type="permission" item="@permission.PermissionRecordId" code="@permission.PermissionRecordId" desc="@permission.PermissionRecordNote" src="~/Content/Images/error.png" width="15" height="15" title="Delete Permission Record" />
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </ul>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(m => m.SaveType, new { @id = "permission-save-type" })
+
+    @section CreateDialog {
+        @RenderPage("~/Views/Settings/_CreateDialogPermission.cshtml", Model)
+    }
+}
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.list-group').collapse('hide');
+    });
+</script>
+

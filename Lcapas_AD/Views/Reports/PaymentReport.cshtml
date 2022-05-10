@@ -1,0 +1,370 @@
+﻿@model Lcapas.Core.Library.PaymentReportViewObj
+
+@section JavaScriptVariables {
+<script type="text/javascript">
+    var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+</script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>@Model.PageTitle</h2>
+        <div class="paging">
+            @if (Model.PaymentReportSearchFilter != null)
+            {
+                <div class="page-print">
+                    <input id="prntPayReportBtn" type="button" value="Print Reports" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            @using (Html.BeginForm("PaymentReport", "Reports", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+            {
+                <table id="data-tbl" class="TFtable display">
+                    <thead class="tableHeader">
+                        <tr class="tableHeader">
+                            <th></th>
+                            <th class="col-xw-120">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.FullName, new { @class = "control-label col-xw-120" })
+                            </th>
+                            <th class="col-xw-30">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.PrevSNumber, new { @class = "control-label col-xw-30" })
+                            </th>
+                            <th class="col-xw-20">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.TermCode, new { @class = "control-label col-xw-20" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.ProgramCode, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.CampusCode, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.LanguageCode, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-120">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.BilltoName, new { @class = "control-label col-xw-120" })
+                            </th>
+                            <th class="col-xw-160">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.BilltoEmail, new { @class = "control-label col-xw-160" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.BilltoStreet, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-20">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.BilltoCountry, new { @class = "control-label col-xw-20" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.BilltoZip, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.BilltoPhone, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.CardType, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.Method, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.RespMsg, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.Result, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-fw-100">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.PaidDateTime, new { @class = "control-label col-xw-100" })
+                            </th>
+                            <th class="col-xw-160">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.AddressLine1, new { @class = "control-label col-xw-160" })
+                            </th>
+                            <th class="col-xw-160">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.AddressLine2, new { @class = "control-label col-xw-160" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.City, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.Province, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.PostalCode, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.Country, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class=" col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.AreaCode, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class=" col-xw-50">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.PhoneNumber, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-fw-100">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.BirthDate, new { @class = "control-label col-xw-100" })
+                            </th>
+                            <th class="col-xw-160">
+                                @Html.LabelFor(m => m.PaymentReportSearchFilter.EmailAddress, new { @class = "control-label col-xw-160" })
+                            </th>
+                            <th colspan="2" />
+                        </tr>
+                        <tr class="tableHeader hide-scroll">
+                            <th id="selectAll" title="Select All">
+                                <input id="SelectAll" type="checkbox" class="text" checked>
+                            </th>
+                            <th title="Last Name" class="col-xw-120">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.FullName, new { @id = "FullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-120" })
+                            </th>
+                            <th title="Prev SNumber" class="col-xw-30">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.PrevSNumber, new { @id = "PrevSNumber", @class = "text ui-widget-content ui-corner-all searchfield col-xw-30" })
+                            </th>
+                            <th title="Term Code" class="col-xw-50">
+                                @Html.DropDownListFor(m => m.PaymentReportSearchFilter.TermCode, Model.TermCodeSelectedList, "", new { @id = "TermCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Program" class="col-xw-60">
+                                @Html.DropDownListFor(m => m.PaymentReportSearchFilter.ProgramCode, Model.ProgramCodeSelectedList, "", new { @id = "ProgramCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Campus" class="col-xw-50">
+                                @Html.DropDownListFor(m => m.PaymentReportSearchFilter.CampusCode, Model.CampusCodeSelectedList, "", new { @id = "CampusCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Language" class="col-xw-50">
+                                @Html.DropDownListFor(m => m.PaymentReportSearchFilter.LanguageCode, Model.LanguageCodeSelectedList, "", new { @id = "LanguageCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Bill to name" class="col-xw-120">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.BilltoName, new { @id = "BilltoName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-120" })
+                            </th>
+                            <th title="Bill to email" class="col-xw-160">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.BilltoEmail, new { @id = "BilltoEmail", @class = "text ui-widget-content ui-corner-all searchfield col-xw-160" })
+                            </th>
+                            <th title="Bill to street" class="col-xw-120">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.BilltoStreet, new { @id = "BilltoStreet", @class = "text ui-widget-content ui-corner-all searchfield col-xw-120" })
+                            </th>
+                            <th title="Bill to country" class="col-xw-30">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.BilltoCountry, new { @id = "BilltoCountry", @class = "text ui-widget-content ui-corner-all searchfield col-xw-30" })
+                            </th>
+                            <th title="Bill to zip" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.BilltoZip, new { @id = "BilltoZip", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Bill to phone" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.BilltoPhone, new { @id = "BilltoPhone", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Card type" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.CardType, new { @id = "CardType", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Payment Method" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.Method, new { @id = "Method", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Response message" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.RespMsg, new { @id = "RespMsg", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Result" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.Result, new { @id = "Result", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Paid DateTime" class="col-fw-100">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.PaidDateTime, "{0:yyyy-MM-dd}", new { @id = "PaidDateTime", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                            </th>
+                            <th title="Address Line1" class="col-xw-160">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.AddressLine1, new { @id = "AddressLine1", @class = "text ui-widget-content ui-corner-all searchfield col-xw-160" })
+                            </th>
+                            <th title="Address Line2" class="col-xw-160">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.AddressLine2, new { @id = "AddressLine2", @class = "text ui-widget-content ui-corner-all searchfield col-xw-160" })
+                            </th>
+                            <th title="City" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.City, new { @id = "City", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Province" class=" col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.Province, new { @id = "Province", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Postal Code" class=" col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.PostalCode, new { @id = "PostalCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Country" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.Country, new { @id = "Country", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Area Code" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.AreaCode, new { @id = "AreaCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Phone Number" class=" col-xw-50">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.PhoneNumber, new { @id = "PhoneNumber", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Birth Date" class="col-fw-100">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.BirthDate, "{0:yyyy-MM-dd}", new { @id = "BirthDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                            </th>
+                            <th title="Email Address" class="col-xw-160">
+                                @Html.TextBoxFor(m => m.PaymentReportSearchFilter.EmailAddress, new { @id = "EmailAddress", @class = "text ui-widget-content ui-corner-all searchfield col-xw-160" })
+                            </th>
+                            <th title="Clear">
+                                <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("PaymentReport", "Reports")';return false;" />
+                            </th>
+                            <th title="Search">
+                                <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                                @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                                @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                                @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                                @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.PaymentReportSearchResultsFilter.Count > 0)
+                        {
+                            foreach (var item in Model.PaymentReportSearchResultsFilter)
+                            {
+                                <tr class=" tableBody">
+                                    <td>
+                                        <input type="checkbox" name="@item.PaypalResponseId" checked>
+                                    </td>
+                                    <td class="col-xw-120">
+                                        @item.FullName
+                                    </td>
+                                    <td class="col-xw-30">
+                                        @item.PrevSNumber
+                                    </td>
+                                    <td class="col-xw-20">
+                                        @item.TermCode
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @item.ProgramCode
+                                    </td>
+                                    <td class="col-xw-30">
+                                        @item.CampusCode
+                                    </td>
+                                    <td class="col-xw-30">
+                                        @item.LanguageCode
+                                    </td>
+                                    <td class="col-xw-120">
+                                        @item.BilltoName
+                                    </td>
+                                    <td class="col-xw-160">
+                                        @item.Billtoemail
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Billtostreet
+                                    </td>
+                                    <td class="col-xw-30">
+                                        @item.Billtocountry
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Billtozip
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Billtophone
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Cardtype
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Method
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Respmsg
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Result
+                                    </td>
+                                    <td class="col-fw-100">
+                                        @if (item.PaidDateTime != null)
+                                        {
+                                            @item.PaidDateTime.Value.ToString("yyyy/MM/dd")
+                                        }
+                                    </td>
+                                    <td class="col-xw-160">
+                                        @item.AddressLine1
+                                    </td>
+                                    <td class="col-xw-160">
+                                        @item.AddressLine2
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.City
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Province
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.PostalCode
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.Country
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.AreaCode
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.PhoneNumber
+                                    </td>
+                                    <td class="col-fw-100">
+                                        @if (item.BirthDate != null)
+                                        {
+                                            @item.BirthDate.Value.ToString("yyyy/MM/dd")
+                                        }
+                                    </td>
+                                    <td class="col-xw-160">
+                                        @item.EmailAddress
+                                    </td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="35" style="color:red;text-align:center;">
+                                    <br />No records found.
+                                    <br />Please enter search parameters and click 'Search'. <br />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div id="bottom_anchor"></div>
+        <br />
+        </div>

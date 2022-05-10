@@ -1,0 +1,255 @@
+﻿@model Lcapas.Core.Library.CollOverduesReportViewObj
+
+@section JavaScriptVariables {
+<script type="text/javascript">
+    var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+    var PrintQueryPath = '@Url.Action("PrintQuery", "Reports")';
+</script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+ 
+@Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>@Model.PageTitle</h2>
+        <div class="paging">
+            @if (Model.CollOverduesReportSearchFilter != null)
+            {
+                <div class="page-print">
+                    <input id="excelOverduesReportBtn" type="button" value="Export to Excel" class="button" />
+                </div>
+                <div class="page-print">
+                    <input id="prntOverduesReportBtn" type="button" value="Print Reports" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-print">
+                    <input id="prntOverduesQueryBtn" type="button" value="Query Report" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            @using (Html.BeginForm("CollOverduesReport", "Reports", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+
+            {
+                <table id="data-tbl" class="TFtable display">
+                    <thead class="tableHeader">
+                        <tr class="tableHeader">
+                            <th></th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.ID, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.FullName, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.AlienStatus, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.Status, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.CondProgram, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.CondStatus, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.Phone1, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.Type1, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.Phone2, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.Type2, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.Deadline, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.StartTerm, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.Location, new { @class = "control-label" })
+                            </th>
+                            <th title="Comments - Case Sensitive">
+                                @Html.LabelFor(m => m.CollOverduesReportSearchFilter.Comments, new { @class = "control-label" })
+                            </th>
+                            <th colspan="2" />
+                        </tr>
+                        <tr class="tableHeader hide-scroll">
+                            <th id="selectAll" title="Select All" class="col-xw-20">
+                                <input id="SelectAll" type="checkbox" class="text" checked>
+                            </th>
+                            <th title="ID" class="col-xw-60">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.ID, new { @id = "ID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Full Name" class="col-xw-200">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.FullName, new { @id = "FullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-200" })
+                            </th>
+                            <th title="Alien Status" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.CollOverduesReportSearchFilter.AlienStatus, Model.ColleagueAlienStatusSelectedList, new { @id = "AlienStatus", @class = "multi-select col-xw-30" })
+                            </th>
+                            <th title="Status" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.Status, new { @id = "Status", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Cond. Program" class="col-xw-80">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.CondProgram, new { @id = "CondProgram", @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                            </th>
+                            <th title="Cond. Status" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.CondStatus, new { @id = "CondStatus", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Phone1" class="col-xw-80">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.Phone1, new { @id = "Phone1", @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                            </th>
+                            <th title="Type1" class="col-xw-20">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.Type1, new { @id = "Type1", @class = "text ui-widget-content ui-corner-all searchfield col-xw-20" })
+                            </th>
+                            <th title="Phone2" class="col-xw-80">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.Phone2, new { @id = "Phone2", @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                            </th>
+                            <th title="Type2" class="col-xw-20">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.Type2, new { @id = "Type2", @class = "text ui-widget-content ui-corner-all searchfield col-xw-20" })
+                            </th>
+                            <th title="Deadline" class="col-fw-100">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.Deadline, "{0:yyyy-MM-dd}", new { @id = "Deadline", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                            </th>
+                            <th title="Start Term" class="col-xw-70">
+                                @Html.ListBoxFor(m => m.CollOverduesReportSearchFilter.StartTerm, Model.ColleagueTermSelectedList, new { @id = "StartTerm", @class = "multi-select col-xw-70" })
+                            </th>
+                            <th title="Location" class="col-xw-40">
+                                @Html.ListBoxFor(m => m.CollOverduesReportSearchFilter.Location, Model.ColleagueLocationSelectedList, new { @id = "Location", @class = "multi-select col-xw-40" })
+                            </th>
+                            <th title="Comments - Case Sensitive" class="col-xw-100">
+                                @Html.TextBoxFor(m => m.CollOverduesReportSearchFilter.Comments, new { @id = "Comments", @class = "text ui-widget-content ui-corner-all searchfield col-xw-100" })
+                            </th>
+                            <th title="Clear" class="col-xw-20">
+                                <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("CollOverduesReport", "Reports")';return false;" />
+                            </th>
+                            <th title="Search" class="col-xw-40">
+                                <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                                @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                                @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                                @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                                @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="hide-scroll">
+                        @if (Model.CollOverduesReportSearchResultsFilter.Count > 0)
+                        {
+                            foreach (var item in Model.CollOverduesReportSearchResultsFilter)
+                            {
+                                <tr class=" tableBody">
+                                    <td>
+                                        <input type="checkbox" name="@item.ApplicationID;@item.Deadline.Value.ToString("yyyy/M/d");@item.StartTerm;@item.Status" checked>
+                                    </td>
+                                    <td>
+                                        @item.ID
+                                    </td>
+                                    <td>
+                                        @item.FullName
+                                    </td>
+                                    <td>
+                                        @item.AlienStatus
+                                    </td>
+                                    <td>
+                                        @item.Status
+                                    </td>
+                                    <td>
+                                        @item.CondProgram
+                                    </td>
+                                    <td>
+                                        @item.CondStatus
+                                    </td>
+                                    <td>
+                                        @item.Phone1
+                                    </td>
+                                    <td>
+                                        @item.Type1
+                                    </td>
+                                    <td>
+                                        @item.Phone2
+                                    </td>
+                                    <td>
+                                        @item.Type2
+                                    </td>
+                                    <td class="col-xw-80">
+                                        @item.Deadline.Value.ToString("yyyy/MM/dd")
+                                    </td>
+                                    <td>
+                                        @item.StartTerm
+                                    </td>
+                                    <td>
+                                        @item.Location
+                                    </td>
+                                    <td colspan="3">
+                                        @item.Comments
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="35" style="color:red;text-align:center;">
+                                    <br />No records found.
+                                    <br />Please enter search parameters and click 'Search'. <br />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div id="bottom_anchor"></div>
+        <br />
+        </div>

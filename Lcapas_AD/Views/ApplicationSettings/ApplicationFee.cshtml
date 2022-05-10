@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Lcapas.Core.Models.Lcappsdb.ApplicationFee>
+
+@{
+    ViewBag.Title = "Application Fee";
+}
+
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var createItemUrl = '@Url.Action("ApplicationFeeCreate", "ApplicationSettings")';
+        var deleteItemUrl = '@Url.Action("ApplicationFeeDelete", "ApplicationSettings")';
+    </script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-applications.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        /*Create dialog size*/
+        .ui-dialog-content {
+            height: 200px !important;
+        }
+    </style>
+}
+
+@section Menu {
+    @RenderPage("~/Views/Menu/_ApplicationSettingsMenu.cshtml")
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    <div class="form-horizontal">
+        <div class="row">
+            <input type="button" value="Create Application Fee" class="btn btn-default button create-item">
+        </div>
+
+        <div id="form-container" class="form-group row">
+            <div class="col-md-12">
+                <div class="list-group">
+                    <a href="#list-item" class="list-group-item arrow" data-toggle="collapse">Application Fees</a>
+                    <ul id="list-item" class="list-group" item-type="Application Fee">
+                        @foreach (var item in Model.OrderByDescending(p => p.StartDateTime))
+                        {
+                            <li id="@item.ApplicationFeeId" class="list-group-item ui-state-default">
+                                <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                                <div class="pull-right" style="margin-right: -10px;">
+                                    <input type="image" class="icon-delete delete-item" item="@item.ApplicationFeeId" code="$@String.Format("{0:0.00}", item.ApplicationFeeAmt)" desc="@item.StartDateTime" src="~/Content/Images/error.png" width="15" height="15" title="Delete Application Fee" />
+                                </div>
+                                <span class="item-content" title="@item.Message">@Html.DisplayFor(modelItem => item.StartDateTime) ($@String.Format("{0:0.00}", item.ApplicationFeeAmt)) @(!string.IsNullOrWhiteSpace(item.Message) ? " - Message: " + Html.TruncateString(item.Message, 40) : "")</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @section CreateDialog {
+        @using (Html.BeginForm("ApplicationFeeCreate", "ApplicationSettings", FormMethod.Post, new { DefaultButton = "search-btn", @id = "item-form", showActive = "false" }))
+        {
+            @RenderPage("~/Views/ApplicationSettings/_CreateDialogAppFee.cshtml")
+        }
+    }
+
+</div>

@@ -1,0 +1,418 @@
+﻿@model Lcapas.Core.Library.ApplicationReportViewObj
+
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+        var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    </script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+    <h2>@Model.PageTitle</h2>
+    <div class="paging">
+        @if (Model.ApplicationReportSearchFilter != null)
+        {
+            <div class="page-print">
+                <input id="excelAppReportBtn" type="button" value="Export to Excel" class="button" />
+            </div>
+            <div class="page-print">
+                <input id="prntAppReportBtn" type="button" value="Print Reports" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+            </div>
+            <div class="page-last">
+                @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                {
+                    <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                }
+            </div>
+            <div class="page-next">
+                @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                {
+                    <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                }
+            </div>
+            <div class="page-num">
+                @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+            </div>
+            <div class="page-prev">
+                @if (Model.Pagination.PageIndex > 1)
+                {
+                    <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                }
+            </div>
+            <div class="page-first">
+                @if (Model.Pagination.PageIndex > 1)
+                {
+                    <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                }
+            </div>
+            <div class="page-size">
+                @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+            </div>
+            <div class="page-results">
+                @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+            </div>
+        }
+    </div>
+    <br />
+    <div id="table-container">
+        @using (Html.BeginForm("ApplicationReport", "Reports", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+        {
+            <table id="data-tbl" class="TFtable display">
+                <thead class="tableHeader">
+                    <tr class="tableHeader">
+                        <th></th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.FullName, new { @class = "control-label col-xw-120" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.ProgramCode, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.TermCode, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.CampusCode, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.sNumber, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.AgencyAssignedID, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.LanguageCode, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.AdmitStatus, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.StudyLoad, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.ReferenceTypeDesc, new { @class = "control-label col-xw-120" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.PreviouslyApplied, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.Disability, new { @class = "control-label col-xw-30" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.ApplicationID, new { @class = "control-label col-xw-50" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.FromDate, new { @class = "control-label col-xw-100" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.ReceivedDateTime, new { @class = "control-label col-xw-100" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.PaidDateTime, new { @class = "control-label col-xw-100" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.PrevSNumber, new { @class = "control-label col-xw-30" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.AddressLine1, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.AddressLine2, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.City, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.Province, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.PostalCode, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.Country, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.AreaCode, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.PhoneNumber, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.Gender, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.BirthDate, new { @class = "control-label col-xw-100" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.EthnicityRace, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.FirstEntryIntoCountry, new { @class = "control-label col-xw-20" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.FamilyAttendedCollegeListCode, new { @class = "control-label col-xw-170" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.ApplicationReportSearchFilter.EmailAddress, new { @class = "control-label col-xw-160" })
+                        </th>
+                        <th colspan="2"></th>
+                    </tr>
+                    <tr class="tableHeader hide-scroll">
+                        <th id="selectAll" title="Select All">
+                            <input id="SelectAll" type="checkbox" class="text" checked>
+                        </th>
+                        <th title="Full Name" class="col-xw-120">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.FullName, new { @id = "FullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-120" })
+                        </th>
+                        <th title="Program" class="col-xw-80">
+                            @Html.DropDownListFor(m => m.ApplicationReportSearchFilter.ProgramCode, Model.ProgramCodeSelectedList, "", new { @id = "ProgramCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                        </th>
+                        <th title="Term" class="col-xw-50">
+                            @Html.DropDownListFor(m => m.ApplicationReportSearchFilter.TermCode, Model.TermCodeSelectedList, "", new { @id = "TermCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Campus" class="col-xw-30">
+                            @Html.DropDownListFor(m => m.ApplicationReportSearchFilter.CampusCode, Model.CampusCodeSelectedList, "", new { @id = "CampusCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="sNumber" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.sNumber, new { @id = "sNumber", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="ASN" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.AgencyAssignedID, new { @id = "AgencyAssignedID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Language" class="col-xw-50">
+                            @Html.ListBoxFor(m => m.ApplicationReportSearchFilter.LanguageListCode, Model.LanguageCodeSelectedList, new { @id = "LanguageListCode", @class = "text ui-widget-content ui-corner-all multi-select col-xw-50" })
+                        </th>
+                        <th title="Admit Status" class="col-xw-20">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.AdmitStatus, new { @id = "AdmitStatus", @class = "text ui-widget-content ui-corner-all searchfield col-xw-20" })
+                        </th>
+                        <th title="Study Load" class="col-xw-50">
+                            @Html.DropDownListFor(m => m.ApplicationReportSearchFilter.StudyLoad, Model.StudenLoadCodeSelectedList, "", new { @id = "StudyLoad", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Created Date" class="col-xw-80">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.ReferenceTypeDesc, new { @id = "ReferenceTypeDesc", @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                        </th>
+                        <th title="Previously Applied" class="col-xw-50">
+                            @Html.DropDownListFor(m => m.ApplicationReportSearchFilter.PreviouslyApplied, Model.PreviousAppliedCodeSelectedList, "", new { @id = "PreviouslyApplied", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Disability" class="col-xw-30">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.Disability, new { @id = "Disability", @class = "text ui-widget-content ui-corner-all searchfield col-xw-30" })
+                        </th>
+                        <th title="Application ID" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.ApplicationID, new { @id = "ApplicationID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="From Date" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.FromDate, "{0:yyyy-MM-dd}", new { @id = "FromDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                        </th>
+                        <th title="Received Date" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.ReceivedDateTime, "{0:yyyy-MM-dd}", new { @id = "ReceivedDateTime", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                        </th>
+                        <th title="Paid Date" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.PaidDateTime, "{0:yyyy-MM-dd}", new { @id = "PaidDateTime", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                        </th>
+                        <th title="Value" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.PrevSNumber, new { @id = "PrevSNumber", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Address Line1" class="col-xw-130">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.AddressLine1, new { @id = "AddressLine1", @class = "text ui-widget-content ui-corner-all searchfield col-xw-120" })
+                        </th>
+                        <th title="Address Line2" class="col-xw-130">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.AddressLine2, new { @id = "AddressLine2", @class = "text ui-widget-content ui-corner-all searchfield col-xw-120" })
+                        </th>
+                        <th title="City" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.City, new { @id = "City", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Province" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.Province, new { @id = "Province", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Postal Code" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.PostalCode, new { @id = "PostalCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Country" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.Country, new { @id = "Country", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Area Code" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.AreaCode, new { @id = "AreaCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Created Date" class="col-xw-50">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.PhoneNumber, new { @id = "PhoneNumber", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                        </th>
+                        <th title="Gender" class="col-xw-70 ms-fw-130">
+                            @Html.ListBoxFor(m => m.ApplicationReportSearchFilter.Gender, Model.GenderCodeSelectedList, new { @id = "Gender", @class = "multi-select col-xw-70" })
+                        </th>
+                        <th title="Birth Date" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.BirthDate, "{0:yyyy-MM-dd}", new { @id = "BirthDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                        </th>
+                        <th title="Ethnicity Race" class="col-xw-60 ms-fw-190">
+                            @Html.ListBoxFor(m => m.ApplicationReportSearchFilter.EthnicityRace, Model.EthnicityRaceCodeSelectedList, new { @id = "EthnicityRace", @class = "multi-select col-xw-60" })
+                        </th>
+                        <th title="First Entry Into Country Date" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.FirstEntryIntoCountry, "{0:yyyy-MM-dd}", new { @id = "FirstEntryIntoCountry", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                        </th>
+                        <th title="Family Attended College" class="col-xw-170">
+                            @Html.DropDownListFor(m => m.ApplicationReportSearchFilter.FamilyAttendedCollegeListCode, Model.FamilyAttendedCollegeCodeSelectedList, "", new { @id = "FamilyAttendedCollege", @class = "text ui-widget-content ui-corner-all searchfield col-xw-170" })
+                        </th>
+                        <th title="Email Address" class="col-xw-160">
+                            @Html.TextBoxFor(m => m.ApplicationReportSearchFilter.EmailAddress, new { @id = "EmailAddress", @class = "text ui-widget-content ui-corner-all searchfield col-xw-160" })
+                        </th>
+                        <th title="Clear">
+                            <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("ApplicationReport", "Reports")';return false;" />
+                        </th>
+                        <th title="Search">
+                            <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                            @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                            @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                            @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                            @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                        </th>
+                    </tr>
+            </thead>
+            <tbody>
+                @if (Model.ApplicationReportSearchResultsFilter.Count > 0)
+                {
+                    foreach (var item in Model.ApplicationReportSearchResultsFilter)
+                    {
+                        <tr class=" tableBody">
+                            <td>
+                                <input type="checkbox" name="@item.ApplicationID" checked>
+                            </td>
+                            <td>
+                                @item.FullName
+                            </td>
+                            <td>
+                                @item.ProgramCode
+                            </td>
+                            <td>
+                                @item.TermCode
+                            </td>
+                            <td>
+                                @item.CampusCode
+                            </td>
+                            <td>
+                                @item.sNumber
+                            </td>
+                            <td>
+                                @item.AgencyAssignedID
+                            </td>
+                            <td>
+                                @item.LanguageCode
+                            </td>
+                            <td>
+                                @item.AdmitStatus
+                            </td>
+                            <td>
+                                @item.StudyLoad
+                            </td>
+                            <td>
+                                @item.ReferenceTypeDesc
+                            </td>
+                            <td>
+                                @item.PreviouslyApplied
+                            </td>
+                            <td>
+                                @item.Disability
+                            </td>
+                            <td>
+                                @item.ApplicationID
+                            </td>
+                            <td>
+                                @if (item.FromDate != null)
+                                {
+                                    @item.FromDate.Value.ToString("yyyy/MM/dd")
+                                }
+                            </td>
+                            <td>
+                                @if (item.ReceivedDateTime != null)
+                                {
+                                    @item.ReceivedDateTime.Value.ToString("yyyy/MM/dd")
+                                }
+                            </td>
+                            <td>
+                                @if (item.PaidDateTime != null)
+                                {
+                                    @item.PaidDateTime.Value.ToString("yyyy/MM/dd")
+                                }
+                            </td>
+                            <td>
+                                @item.PrevSNumber
+                            </td>
+                            <td>
+                                @item.AddressLine1
+                            </td>
+                            <td>
+                                @item.AddressLine2
+                            </td>
+                            <td>
+                                @item.City
+                            </td>
+                            <td>
+                                @item.Province
+                            </td>
+                            <td>
+                                @item.PostalCode
+                            </td>
+                            <td>
+                                @item.Country
+                            </td>
+                            <td>
+                                @item.AreaCode
+                            </td>
+                            <td>
+                                @item.PhoneNumber
+                            </td>
+                            <td>
+                                @item.Gender
+                            </td>
+                            <td>
+                                @if (item.BirthDate != null)
+                                {
+                                    @item.BirthDate.Value.ToString("yyyy/MM/dd")
+                                }
+                            </td>
+                            <td>
+                                @item.EthnicityRace
+                            </td>
+                            <td>
+                                @if (item.FirstEntryIntoCountry != null)
+                                {
+                                    @item.FirstEntryIntoCountry.Value.ToString("yyyy/MM/dd")
+                                }
+                            </td>
+                            <td>
+                                @item.FamilyAttendedCollege
+                            </td>
+                            <td colspan="3">
+                                @item.EmailAddress
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="20" style="color:red;text-align:center;">
+                            <br />No records found.
+                            <br />Please enter search parameters and click 'Search'. <br />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }
+    </div>
+    <div id="bottom_anchor"></div>
+    <br />
+</div>

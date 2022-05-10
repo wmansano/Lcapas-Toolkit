@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://applyalberta.ca/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://applyalberta.ca/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://applyalberta.ca/">
+      <s:element name="GetInstitutionByAPASCode">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="code" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInstitutionByAPASCodeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInstitutionByAPASCodeResult" type="tns:InstitutionDetails" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InstitutionDetails">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ACT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="APAS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ATP" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CCD" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CEEBACT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CSIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DUNS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ESIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FICE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IPEDS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="NCHELPID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OPEID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PSIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="USIS" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationIDCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProvinceName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MunicipalityName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InstitutionTypes" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="RoleTypeCodes" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine1" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressLine3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ElectronicAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FaxNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="WebSiteURL" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsApplicationServiceProvider" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTranscriptPublisher" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsTranscriptSubscriber" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParentAPASCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InstitutionStatus" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInstitutionList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="filter" type="tns:InstitutionListFilterCriteria" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InstitutionListFilterCriteria">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="InstitutionType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UpdateDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="RecordOffset" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Region" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="MaxResults" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="APASCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsTranscriptSubscriber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsTranscriptPublisher" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="IsApplicationProvider" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInstitutionListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInstitutionListResult" type="tns:InstitutionList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InstitutionList">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="NumberOfRecordsFound" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Offset" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ArrayOfInstitutionListItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInstitutionListItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InstitutionListItem" nillable="true" type="tns:InstitutionListItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InstitutionListItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="OrganizationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="APASCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetInstitutionByAPASCodeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInstitutionByAPASCode" />
+  </wsdl:message>
+  <wsdl:message name="GetInstitutionByAPASCodeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInstitutionByAPASCodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInstitutionListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInstitutionList" />
+  </wsdl:message>
+  <wsdl:message name="GetInstitutionListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInstitutionListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="InstitutionInformationAndCodesServicesSoap">
+    <wsdl:operation name="GetInstitutionByAPASCode">
+      <wsdl:input message="tns:GetInstitutionByAPASCodeSoapIn" />
+      <wsdl:output message="tns:GetInstitutionByAPASCodeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInstitutionList">
+      <wsdl:input message="tns:GetInstitutionListSoapIn" />
+      <wsdl:output message="tns:GetInstitutionListSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InstitutionInformationAndCodesServicesSoap" type="tns:InstitutionInformationAndCodesServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetInstitutionByAPASCode">
+      <soap:operation soapAction="http://applyalberta.ca/GetInstitutionByAPASCode" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInstitutionList">
+      <soap:operation soapAction="http://applyalberta.ca/GetInstitutionList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InstitutionInformationAndCodesServicesSoap12" type="tns:InstitutionInformationAndCodesServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetInstitutionByAPASCode">
+      <soap12:operation soapAction="http://applyalberta.ca/GetInstitutionByAPASCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInstitutionList">
+      <soap12:operation soapAction="http://applyalberta.ca/GetInstitutionList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InstitutionInformationAndCodesServices">
+    <wsdl:port name="InstitutionInformationAndCodesServicesSoap" binding="tns:InstitutionInformationAndCodesServicesSoap">
+      <soap:address location="https://applyalberta.ca/APAS.WebServices/InstitutionInformationAndCodesServices.asmx" />
+    </wsdl:port>
+    <wsdl:port name="InstitutionInformationAndCodesServicesSoap12" binding="tns:InstitutionInformationAndCodesServicesSoap12">
+      <soap12:address location="https://applyalberta.ca/APAS.WebServices/InstitutionInformationAndCodesServices.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

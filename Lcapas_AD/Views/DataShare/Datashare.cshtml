@@ -1,0 +1,196 @@
+﻿@model Lcapas.Core.Library.AdmissionsApplicationObj
+@{
+    ViewBag.Title = Model.PageTitle;
+}
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var ApplicationsIndexPath = '@Url.Action("Datashare", "Datashare")';
+        var ExportApplicationsPath = '@Url.Action("ExportApplications", "Applications")';
+        var PrepareWordReportPath = '@Url.Action("PrepareWordReport", "Applications")';
+        var DownloadWordReportPath = '@Url.Action("DownloadWordReport", "Applications")';
+        var PrepareExcelReportPath = '@Url.Action("PrepareExcelReport", "Applications")';
+        var DownloadExcelReportPath = '@Url.Action("DownloadExcelReport", "Applications")';
+    </script>
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-applications.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_DataShareMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<div class="container">
+    <h2>@Model.PageTitle</h2>
+    <div class="paging">
+        @if (Model.ApplicationSearchFilter != null)
+        {
+            <div class="page-last">
+                @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                {
+                    <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                }
+            </div>
+            <div class="page-next">
+                @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                {
+                    <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                }
+            </div>
+            <div class="page-num">
+                @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+            </div>
+            <div class="page-prev">
+                @if (Model.Pagination.PageIndex > 1)
+                {
+                    <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                }
+            </div>
+            <div class="page-first">
+                @if (Model.Pagination.PageIndex > 1)
+                {
+                    <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                }
+            </div>
+            <div class="page-size">
+                @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+            </div>
+            <div class="page-results">
+                @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+            </div>
+        }
+    </div>
+    <br />
+    <table id="applications-tbl" class="display">
+        <thead>
+            @using (Html.BeginForm("Datashare", "Datashare", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+            {
+                <tr class="tableHeader">
+                    <th></th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.FromDate, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.ToDate, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.Exported, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.ASN, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.LastName, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.FirstName, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.MiddleName, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.Gender, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ApplicationSearchFilter.Program, new { @class = "control-label" })
+                    </th>
+                    <th colspan="2" />
+                </tr>
+                <tr class="tableHeader">
+                    <th title="Select All">
+                        <input type="checkbox" id="SelectAll" class="text" checked>
+                    </th>
+                    <th title="From Date" class="date-container col-fw-100">
+                        @Html.TextBoxFor(m => m.ApplicationSearchFilter.FromDate, new { @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield" })
+                    </th>
+                    <th title="To Date" class="date-container col-fw-100">
+                        @Html.TextBoxFor(m => m.ApplicationSearchFilter.ToDate, new { @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield" })
+                    </th>
+                    <th title="Exported" class="col-fw-100">
+                        @Html.EnumDropDownListFor(m => m.ApplicationSearchFilter.Exported, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="ASN" class="col-fw-100">
+                        @Html.TextBoxFor(m => m.ApplicationSearchFilter.ASN, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="Last Name" class="col-fw-100">
+                        @Html.TextBoxFor(m => m.ApplicationSearchFilter.LastName, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="First Name" class="col-fw-100">
+                        @Html.TextBoxFor(m => m.ApplicationSearchFilter.FirstName, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="Middle Name" class="col-fw-100">
+                        @Html.TextBoxFor(m => m.ApplicationSearchFilter.MiddleName, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="Gender" class="col-fw-100">
+                        @Html.EnumDropDownListFor(m => m.ApplicationSearchFilter.Gender, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="Program" class="col-fw-100">
+                        @Html.DropDownListFor(m => m.ApplicationSearchFilter.Program, Model.ApplicationSearchFilter.Programs, string.Empty, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="Clear">
+                        <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("Applications", "Applications")';return false;" />
+                    </th>
+                    <th title="Search">
+                        <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                        @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                        @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                    </th>
+                </tr>
+            }
+        </thead>
+        <tbody>
+            @if (Model.ApplicationSearchResultsFilter.Count > 0)
+            {
+                foreach (var item in Model.ApplicationSearchResultsFilter)
+                {
+                    <tr onmouseover="style.backgroundColor='lightblue';style.cursor='default';" onmouseout="style.backgroundColor='white';">
+                        <td>
+                            <input type="checkbox" name="@item.Uuid" checked>
+                        </td>
+                        <td colspan="2" class="col-fw-100">
+                            @item.CreatedDateTime.Value.ToString("yyyy/MM/dd hh:mm tt")
+                        </td>
+                        <td class="col-fw-100" style="@(item.ExportedDateTime != null ? "color:green" : "color:grey")">
+                            @(item.ExportedDateTime != null ? @item.ExportedDateTime.Value.ToString("yyyy/MM/dd hh:mm tt") : "New" )
+                        </td>
+                        <td class="col-fw-100">
+                            @item.ASN
+                        </td>
+                        <td class="col-fw-100">
+                            @item.LastName
+                        </td>
+                        <td class="col-fw-100">
+                            @item.FirstName
+                        </td>
+                        <td class="col-fw-100">
+                            @item.MiddleName
+                        </td>
+                        <td class="col-fw-100">
+                            @item.Gender
+                        </td>
+                        <td class="col-fw-100">
+                            @item.ProgramCode
+                        </td>
+                        <td colspan="2" />
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="10" style="color:red;text-align:center;">
+                        <br />No records found.
+                        <br />Please enter search parameters and click 'Search'. <br />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table><br />
+    @*<input id="export" type="button" value="Export" disabled="@Model.ApplicationDialogFilter.Exported" class="btn btn-default button pull-right">*@
+    <input id="export" type="button" value="Export" class="btn btn-default button pull-right hor-pad">
+    <input id="prntAppBtn" type="button" value="Print Applications" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+    @*<input id="prntListBtn" type="button" value="Print Excel List" class="btn btn-default button pull-right hor-pad" />*@
+</div>
+    

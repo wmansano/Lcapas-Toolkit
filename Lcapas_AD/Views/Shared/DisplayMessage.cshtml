@@ -1,0 +1,20 @@
+﻿@model HtmlString
+
+@{
+    Layout = null;
+}
+
+@*<pre>*@
+    @if (@Model == null) {
+<br /><br /><label>Error Rendering Document</label>
+    }
+    else {
+        <div id="print-menu-bar" class="hidden-print">
+            <label style="float:left;font-weight:bold;"> View Document Screen</label>
+            <a style="float:right;" href="javascript:window.print()"><img style="margin-right:10px;" src="~/Content/Images/Print.png" /></a>
+        </div>  
+        <div class="display-message-content">
+            @Model
+        </div>      
+    } 
+@*</pre>*@

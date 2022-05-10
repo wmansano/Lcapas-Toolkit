@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+<br />
+@*this is to prevent CSRF attack*@
+@Html.ValidationSummary(true)
+<fieldset>
+    <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li id="addInfo" class="disabled" data-toggle="tab">1. Additional Information<img class="ui-icon-check" src="~/Content/Images/check.png" /></li>
+        <li id="agreement" class="disabled" data-toggle="tab">2. Agreement<img class="ui-icon-check" src="~/Content/Images/check.png" /></li>
+        <li id="payment" class="active" data-toggle="tab">3. Payment</li>
+    </ul>
+    <div class="tab-content">
+        <div class="page start row tab-pane active">
+            <div>
+                <h4>Application Payment</h4>
+                <p class="warning">It appears you have cancelled your payment.</p>
+                <p>Your application will not be complete without payment. To complete your application, please click the payment button below. </p>
+                <div id="payApplication" class="buttoncontainer">
+                    <div class="paylogo">
+                        <a class="pplogo" href="@Url.Action("MakePayment", "Payment", new { uuid = @ViewBag.UUID })"></a>
+                    </div>
+                </div>
+
+                <p class="warning center">Once payment is complete, you will be redirected back to this site.</p>
+            </div>
+        </div>
+    </div>
+</fieldset>

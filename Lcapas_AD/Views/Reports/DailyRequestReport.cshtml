@@ -1,0 +1,276 @@
+﻿@model Lcapas.Core.Library.DailyRequestReportViewObj
+
+@section JavaScriptVariables {
+<script type="text/javascript">
+    var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+</script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>@Model.PageTitle</h2>
+        <div class="paging">
+            @if (Model.ReportSearchFilter != null)
+            {
+                <div class="page-print">
+                    <input id="excelDailyRequestReportBtn" type="button" value="Export to Excel" class="button" />
+                </div>
+                <div class="page-print">
+                    <input id="prntRepBtn" type="button" value="Print Reports" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            @using (Html.BeginForm("DailyRequest", "Reports", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+            {
+                <table id="data-tbl" class="TFtable display">
+                    <thead class="tableHeader">
+                        <tr class="tableHeader">
+                            <th></th>
+                            <th class="col-xw-20">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Qty, new { @class = "control-label col-xw-10" })
+                            </th>
+                            <th class="col-xw-140">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Fromdate, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-140">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Todate, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.ReportSearchFilter.StuID, new { @class = "control-label col-xw-50 " })
+                            </th>
+                            <th class="col-xw 100">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Fullname, new { @class = "control-label col-xw-100" })
+                            </th>
+                            <th class="col-xw-10">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Type, new { @class = "control-label col-xw-10" })
+                            </th>
+                            <th class="col-xw-10">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Del, new { @class = "control-label col-xw-10" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Comments, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.ReportSearchFilter.RecpFullName, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-80">
+                                @Html.LabelFor(m => m.ReportSearchFilter.RecpID, new { @class = "control-label col-xw-80" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Street, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-30">
+                                @Html.LabelFor(m => m.ReportSearchFilter.City, new { @class = "control-label col-xw-30" })
+                            </th>
+                            <th class="col-xw-10">
+                                @Html.LabelFor(m => m.ReportSearchFilter.Prv, new { @class = "control-label col-xw-10" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.ReportSearchFilter.PCode, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.ReportSearchFilter.AddOpr, new { @class = "control-label col-xw-50" })
+                            </th>
+                            <th class="col-xw-140">
+                                @Html.LabelFor(m => m.ReportSearchFilter.AddDt, new { @class = "control-label" })
+                            </th>
+                            <th colspan="2" />
+                        </tr>
+                        <tr class="tableHeader hide-scroll">
+                            <th id="selectAll" title="Select All">
+                                <input id="SelectAll" type="checkbox" class="text" checked>
+                            </th>
+                            <th title="Qty" class="col-xw-10">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Qty, new { @id = "Qty", @class = "text ui-widget-content ui-corner-all searchfield col-xw-10" })
+                            </th>
+                            <th title="FromDate" class="col-xw-160">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Fromdate, "{0:yyyy-MM-dd}", new { @id = "Fromdate", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                            </th>
+                            <th title="ToDate" class="col-xw-160">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Todate, "{0:yyyy-MM-dd}", new { @id = "Todate", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                            </th>
+                            <th title="StuID" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.StuID, new { @id = "StuID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="LName" class="col-xw-100">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Fullname, new { @id = "Fullname", @class = "text ui-widget-content ui-corner-all searchfield col-xw-100" })
+                            </th>
+                            <th title="Type" class="col-xw-20">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Type, new { @id = "Type", @class = "text ui-widget-content ui-corner-all searchfield col-xw-20" })
+                            </th>
+                            <th title="Del" class=" col-xw-20">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Del, new { @id = "Del", @class = "text ui-widget-content ui-corner-all searchfield col-xw-20" })
+                            </th>
+                            <th title="Comments" id="APAS" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Comments, new { @id = "Comments", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Recepient Last Name" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.RecpFullName, new { @id = "RecpFullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Recepient ID" class="col-xw-80">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.RecpID, new { @id = "RecpID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Street" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Street, new { @id = "Street", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="City" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.City, new { @id = "City", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="Prv" class="col-xw-10">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.Prv, new { @id = "Prv", @class = "text ui-widget-content ui-corner-all searchfield col-xw-10" })
+                            </th>
+                            <th title="PCode" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.PCode, new { @id = "PCode", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="AddOpr" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.AddOpr, new { @id = "AddOpr", @class = "text ui-widget-content ui-corner-all searchfield col-xw-50" })
+                            </th>
+                            <th title="AddDt" class="col-xw-160">
+                                @Html.TextBoxFor(m => m.ReportSearchFilter.AddDt, new { @id = "AddDt", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                            </th>
+                            <th title="Clear">
+                                <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("Reports", "Reports")';return false;" />
+                            </th>
+                            <th title="Search">
+                                <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                                @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                                @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                                @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                                @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.ReportSearchResultsFilter.Count > 0)
+                        {
+                            foreach (var item in Model.ReportSearchResultsFilter)
+                            {
+                                <tr class="tableBody-student-daily-request">
+                                    <td>
+                                        <input type="checkbox" name="@item.LogID" checked>
+                                    </td>
+                                    <td class="col-xw-10">
+                                        @item.Qty
+                                    </td>
+                                    <td class="col-xw-140">
+                                        @if (item.Fromdate != null)
+                                        {
+                                            @item.Fromdate.Value.ToString("yyyy/MM/dd")
+                                        }
+                                    </td>
+                                    <td class="col-xw-140">
+                                        @if (item.Todate != null)
+                                        {
+                                            @item.Todate.Value.ToString("yyyy/MM/dd")
+                                        }
+                                    </td>
+                                    <td class="col-xw-50">
+                                        @item.StuID
+                                    </td>
+                                    <td class="col-xw-100">
+                                        @item.Fullname
+                                    </td>
+                                    <td class="col-xw-20">
+                                        @item.Type
+                                    </td>
+                                    <td class="col-xw-20">
+                                        @item.Del
+                                    </td>
+                                    <td class="col-xw-100 report-comments">
+                                        @item.Comments
+                                    </td>
+                                    <td class="col-xw-200">
+                                        @item.RecpFullName
+                                    </td>
+                                    <td class="col-xw-80">
+                                        @item.RecpID
+                                    </td>
+                                    <td class="col-xw-200">
+                                        @item.Street
+                                    </td>
+                                    <td class="col-xw-80">
+                                        @item.City
+                                    </td>
+                                    <td class="col-xw-10">
+                                        @item.Prv
+                                    </td>
+                                    <td class="col-xw-20">
+                                        @item.PCode
+                                    </td>
+                                    <td class="col-xw-140">
+                                        @item.AddOpr
+                                    </td>
+                                    <td class="col-xw-140">
+                                        @item.AddDt.Value.ToString("yyyy/MM/dd")
+                                    </td>
+                                    <td colspan="2" />
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="20" style="color:red;text-align:center;">
+                                    <br />No records found.
+                                    <br />Please enter search parameters and click 'Search'. <br />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div id="bottom_anchor"></div>
+        <br />
+      </div>

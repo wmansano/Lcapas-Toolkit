@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Lethbridge College - MyCreds";
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_MyCredsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+<ul>
+    <li>@Html.LcActionLink("Home", "Index", "Home")</li>
+    <li>@Html.LcActionLink("MyCreds Home", "Index", "MyCreds")</li>
+    <li>@Html.LcActionLink("Generate Transcript Batch", "GenerateTranscriptBatch", "MyCreds")</li>
+    <li>@Html.LcActionLink("Bulk Send", "BulkSend", "MyCreds")</li>
+</ul>

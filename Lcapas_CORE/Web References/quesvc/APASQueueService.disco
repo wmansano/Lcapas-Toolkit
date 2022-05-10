@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://apasp.lethbridgecollege.ab.ca/apasproxyinternal/APASQueueService.asmx?wsdl" docRef="https://apasp.lethbridgecollege.ab.ca/apasproxyinternal/APASQueueService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://apasp.lethbridgecollege.ab.ca/apasproxyinternal/APASQueueService.asmx" xmlns:q1="http://APASProxy.ServiceContracts/2007/04" binding="q1:APASQueueService" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://apasp.lethbridgecollege.ab.ca/apasproxyinternal/APASQueueService.asmx" xmlns:q2="http://APASProxy.ServiceContracts/2007/04" binding="q2:APASQueueService1" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

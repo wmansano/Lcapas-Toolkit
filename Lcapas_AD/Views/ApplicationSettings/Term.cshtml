@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Lcapas.Core.Models.Lcappsdb.ProgramTerm>
+
+@{
+    ViewBag.Title = "Terms";
+}
+
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var createItemUrl = '@Url.Action("TermCreate", "ApplicationSettings")';
+        var activateItemUrl = '@Url.Action("TermActivate", "ApplicationSettings")';
+        var deleteItemUrl = '@Url.Action("TermDelete", "ApplicationSettings")';
+        var orderItemUrl = '@Url.Action("TermOrder", "ApplicationSettings")';
+    </script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-applications.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+
+@section Menu {
+    @RenderPage("~/Views/Menu/_ApplicationSettingsMenu.cshtml")
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    <div class="form-horizontal">
+        <div class="row">
+            <input type="button" value="Create Term" class="btn btn-default button create-item"> |
+            <input type="button" value="Alphabetical Order" class="btn btn-default button order-item">
+        </div>
+
+        <div id="form-container" class="form-group row">
+            <div class="col-md-12">
+                <div class="list-group">
+                    <a href="#list-item" class="list-group-item arrow" data-toggle="collapse">Terms</a>
+                    <ul id="list-item" class="list-group" item-type="term">
+                        @foreach (var item in Model.OrderBy(p => p.TermOrder))
+                        {
+                            <li id="@item.ProgramTermId" class="list-group-item ui-state-default @(!item.Active ? "pct-disabled":null)">
+                                <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                                <div class="pull-right" style="margin-right: -10px;">
+                                    <input type="image" class="icon-delete delete-item" item="@item.ProgramTermId" code="@item.TermCode" desc="@item.TermDesc" src="~/Content/Images/error.png" width="15" height="15" title="Delete term" />
+                                </div>
+                                <div class="pull-right">
+                                    <input type="image" class="icon-delete activate-item" item="@item.ProgramTermId" code="@item.TermCode" desc="@item.TermDesc" active-item="@item.Active.ToString()" src="~/Content/Images/@(!item.Active ? "disable":"check").png" width="15" height="15" title="@(!item.Active ? "Inactive":"Active") term" />
+                                </div>
+                                <span class="item-content">@Html.DisplayFor(modelItem => item.TermDesc) (@Html.DisplayFor(modelItem => item.TermCode))</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+@section CreateDialog {
+    @using (Html.BeginForm("TermCreate", "ApplicationSettings", FormMethod.Post, new { DefaultButton = "search-btn", @id = "item-form", showActive = "true" }))
+    {
+        @RenderPage("~/Views/ApplicationSettings/_CreateDialog.cshtml")
+    }
+}
+
+</div>

@@ -1,0 +1,273 @@
+﻿@model Lcapas.Core.Library.TRRQRequestListViewObj
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-transcripts.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var ExportTranscriptBatchPath = '@Url.Action("ExportTranscriptBatch", "MyCreds")';
+        var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+        var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    </script>
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_MyCredsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+    <div class="container">
+        <h2>@ViewBag.Title</h2>
+        <div class="paging">
+            @if (Model.TranscriptRequests.Any())
+            {
+                <div class="page-print">
+                    <input id="excelMyCredsBatchTransReportBtn" type="button" value="Export to Excel" class="button" />
+                </div>
+                <div class="page-print">
+                    <input id="prntMyCredsTransReportBtn" type="button" value="Print Report" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            <table id="data-tbl" class="display">
+                <thead class="columnScrolling">
+                    @using (Html.BeginForm("GenerateTranscriptBatch", "MyCreds", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+                    {
+                    <tr class="tableHeader">
+                        <th></th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.RequestID, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.StudentRecord.FullName, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.StudentRecord.Snumber, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.StudentRecord.Email, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.FromRequestDate, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.ToRequestDate, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.HoldType, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.FromDateProduced, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.ToDateProduced, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.Operator, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.Comments, new { @class = "control-label" })
+                        </th>
+                        <th title="Clear"></th>
+                    </tr>
+                    <tr class="tableHeader hide-scroll">
+                        <th id="selectAll" title="Select All" class="text-right col-xw-20">
+                            <input type="checkbox" id="SelectAll" class="text" checked>
+                        </th>
+                        <th title="RequestID" class="col-xw-70">
+                            @Html.TextBoxFor(m => m.SearchFilter.RequestID, new { @id = "RequestID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-70" })
+                        </th>
+                        <th title="Student Name" class="col-xw-150">
+                            @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.FullName, new { @id = "FullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-150" })
+                        </th>
+                        <th title="sNumber" class="col-xw-60">
+                            @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.Snumber, new { @id = "Snumber", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                        </th>
+                        <th title="sNumber" class="col-xw-150">
+                            @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.Email, new { @id = "Email", @class = "text ui-widget-content ui-corner-all searchfield col-xw-150" })
+                        </th>
+                        <th title="List Type" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.SearchFilter.FromRequestDate, "{0:yyyy/MM/dd}", new { @id = "FromRequestDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                        </th>
+                        <th title="List Type" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.SearchFilter.ToRequestDate, "{0:yyyy/MM/dd}", new { @id = "toRequestDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                        </th>
+                        <th title="Hold Type" class="col-fw-80">
+                            @Html.DropDownListFor(m => m.SearchFilter.HoldType, Model.Holdtypes, "", new { @id = "HoldType", @class = "text ui-widget-content ui-corner-all searchfield" })
+                        </th>
+                        <th title="Hold Type Notes" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.SearchFilter.FromDateProduced, "{0:yyyy/MM/dd}", new { @id = "FromDateProduced", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                        </th>
+                        <th title="Hold Type Notes" class="col-fw-100">
+                            @Html.TextBoxFor(m => m.SearchFilter.ToDateProduced, "{0:yyyy/MM/dd}", new { @id = "ToDateProduced", @class = "text ui-widget-content ui-corner-all datepicker date-mask col-md-7" })
+                        </th>
+                        <th title="Operator" class="col-xw-80">
+                            @Html.TextBoxFor(m => m.SearchFilter.Operator, new { @id = "Operator", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                        </th>
+                        <th title="Comments" class="col-xw-250">
+                            @Html.TextBoxFor(m => m.SearchFilter.Comments, new { @id = "Comments", @class = "text ui-widget-content ui-corner-all searchfield col-xw-250" })
+                        </th>
+                        <th title="Clear" class="col-fw-80">
+                            <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("GenerateTranscriptBatch", "MyCreds")';return false;" />
+                            <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                            @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                            @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                            @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                            @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                        </th>
+                    </tr>
+                    }
+                </thead>
+                <tbody>
+                    @if (Model.TranscriptRequests.Count > 0)
+                    {
+                        foreach (var requestObj in Model.TranscriptRequests)
+                        {
+                            string newRequestClass = (requestObj.DateProduced == null ? "text-bold yellow" : "");
+
+                            <tr id="requestLine-@requestObj.RequestID" class="pad-left-tr-25 @newRequestClass" onmouseover="style.backgroundColor='lightblue';style.cursor='default';" onmouseout="style.backgroundColor=@(string.IsNullOrWhiteSpace(newRequestClass) ? "'white'" : "'#ffff78'");">
+                                <td>
+                                    <input type="checkbox" name="@requestObj.RequestID" checked>
+                                </td>
+                                <td>
+                                    @requestObj.RequestID
+                                </td>
+                                <td>
+                                    @requestObj.FullName
+                                </td>
+                                <td>
+                                    @requestObj.sNumber
+                                </td>
+                                <td>
+                                    @requestObj.Email
+                                </td>
+                                <td colspan="2" class="text-center">
+                                    @if (requestObj.RequestDate != null && requestObj.RequestDate.HasValue)
+                                    { 
+                                        @requestObj.RequestDate.Value.ToString("yyyy/MM/dd")
+                                    }
+                                </td>
+                                <td>
+                                    @requestObj.HoldType
+                                </td>
+                                <td colspan="2" class="text-center">
+                                    @if (requestObj.DateProduced != null && requestObj.DateProduced.HasValue)
+                                    {
+                                        @requestObj.DateProduced.Value.ToString("yyyy/MM/dd")
+                                    }
+                                </td>
+                                <td>
+                                    @requestObj.Operator
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrWhiteSpace(requestObj.Comments))
+                                    {
+                                        @requestObj.Comments.ToString().Replace('ý', ' ')
+                                    }
+                                </td>
+                                <td>
+                                    @if (requestObj.AcadCoursesCount == null || requestObj.AcadCoursesCount == 0)
+                                    {
+                                        <img src="~/Content/Images/bullet_ball_glass_red.png" class="request-status pull-right" title="No Acad. Courses/Transcript" />
+                                    }
+                                    else
+                                    {
+                                        if (!string.IsNullOrWhiteSpace(requestObj.Restriction))
+                                        {
+                                            <img src="~/Content/Images/bullet_ball_glass_yellow.png" class="request-status pull-right" title="Student Restriction" />
+                                        }
+                                        else
+                                        {
+                                            if (requestObj.InvalidEmail)
+                                            {
+                                                <img src="~/Content/Images/bullet_ball_glass_grey.png" class="request-status pull-right" title="Invalid Personal Email" />
+                                            }
+}
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="10" style="color:red;text-align:center;">
+                                <br />No records found.
+                                <br />Please enter search parameters and click 'Search'. <br />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="ajax-loader">
+            <div class="ajax-loader-content">
+                <center>
+                    <h3>Please wait, generating transcript batch...</h3>
+                    <img src="~/Content/images/ajax-loader.gif" class="img-responsive" />
+                </center>
+            </div>
+        </div>
+
+        <div id="bottom_anchor"></div>
+        <br />
+        <div class="request-legend" style="width: auto;">
+            <label>Legend: </label>
+            <img src="~/Content/Images/bullet_ball_glass_grey.png" class="request-status" />
+            <label class="legend-item">Invalid Personal Email</label>
+            <img src="~/Content/Images/bullet_ball_glass_yellow.png" class="request-status" />
+            <label class="legend-item">Student Restriction</label>
+            <img src="~/Content/Images/bullet_ball_glass_red.png" class="request-status" />
+            <label class="legend-item">No Acad. Courses/Transcript</label>
+        </div>
+        <div class="pull-right batch-button" style="padding-bottom: 10px;">
+            <input id="generateMyCredsTransBatch" type="button" value="Generate Transcript Batch" key="Request" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+
+            <span class="batch-option-group">
+                <label class="control-label" for="uploadMyCredsAPI">Upload with MyCreds API:</label>
+                <input type="checkbox" id="uploadMyCredsAPI" name="uploadMyCredsAPI">
+            </span>
+            &nbsp;&nbsp;
+            <span class="batch-option-group">
+                <label class="control-label" for="useMyCredsXsl">Use MyCreds Stylesheet:</label>
+                <input type="checkbox" id="useMyCredsXsl" name="useMyCredsXsl" checked>
+            </span>
+        </div>
+
+    </div>

@@ -1,0 +1,11 @@
+﻿
+<div class="navigation row">
+    <div class="left-nav col-md-12">
+        <ul>
+            <li class="@Html.ActivePage("Index", "Home")">@Html.LcActionLink("Home", "Index", "Home")</li>
+            <li class="@Html.ActivePage("Index", "MyCreds")">@Html.LcActionLink("MyCreds Home", "Index", "MyCreds")</li>
+            <li class="@Html.ActivePage("GenerateTranscriptBatch", "MyCreds")">@Html.LcActionLink("Generate Transcript Batch", "GenerateTranscriptBatch", "MyCreds")</li>
+            <li class="@Html.ActivePage("BulkSend", "MyCreds")">@Html.LcActionLink("Bulk Send", "BulkSend", "MyCreds")</li>
+        </ul>
+    </div>
+</div>

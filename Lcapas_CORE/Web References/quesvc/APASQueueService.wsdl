@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://APASProxy.ServiceContracts/2007/04" xmlns:s1="http://APASProxy.DataTypes/2007/04" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://microsoft.com/wsdl/types/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://APASProxy.ServiceContracts/2007/04" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://APASProxy.ServiceContracts/2007/04">
+      <s:import namespace="http://APASProxy.DataTypes/2007/04" />
+      <s:element name="GetSentTransferRequests">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:sentTransferRequestsFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSentTransferRequestsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSentTransferRequestsResult" type="tns:ArrayOfSentTransferRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSentTransferRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SentTransferRequest" nillable="true" type="s1:SentTransferRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSentTranscripts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:sentTranscriptsFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSentTranscriptsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSentTranscriptsResult" type="tns:ArrayOfSentTranscript" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSentTranscript">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SentTranscript" nillable="true" type="s1:SentTranscript" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReceivedTranscripts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:receivedTranscriptsFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReceivedTranscriptsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReceivedTranscriptsResult" type="tns:ArrayOfReceivedTranscript" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReceivedTranscript">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReceivedTranscript" nillable="true" type="s1:ReceivedTranscript" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReceivedTransferRequests">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:receivedTransferRequestsFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReceivedTransferRequestsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReceivedTransferRequestsResult" type="tns:ArrayOfReceivedTransferRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReceivedTransferRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReceivedTransferRequest" nillable="true" type="s1:ReceivedTransferRequest" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendTrancript">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:transcriptToSend" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendTrancriptResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:SendTrancriptResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendTransferRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:transferRequestToSend" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendTransferRequestResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:SendTransferRequestResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendApplication">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:applicationToSend" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendApplicationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:SendApplicationResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetHostInstitution">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetHostInstitutionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:GetHostInstitutionResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDecompressedDecodedMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDecompressedDecodedMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDecompressedDecodedMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrepareCompressedEncodedMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PrepareCompressedEncodedMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PrepareCompressedEncodedMessageResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReceivedApplications">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:receivedApplicationsFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetReceivedApplicationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReceivedApplicationsResult" type="tns:ArrayOfReceivedApplication" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReceivedApplication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReceivedApplication" nillable="true" type="s1:ReceivedApplication" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSentApplications">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:sentApplicationsFilter" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSentApplicationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSentApplicationsResult" type="tns:ArrayOfSentApplication" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfSentApplication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="SentApplication" nillable="true" type="s1:SentApplication" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRegisteredEducationalInstitutions">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetRegisteredEducationalInstitutionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRegisteredEducationalInstitutionsResult" type="tns:ArrayOfRegisteredEducationalInstitution" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfRegisteredEducationalInstitution">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RegisteredEducationalInstitution" nillable="true" type="s1:RegisteredEducationalInstitution" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReceivedErrors">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetReceivedErrorsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReceivedErrorsResult" type="tns:ArrayOfReceivedError" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfReceivedError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ReceivedError" nillable="true" type="s1:ReceivedError" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://APASProxy.DataTypes/2007/04">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="sentTransferRequestsFilter" type="s1:SentTransferRequestsFilter" />
+      <s:complexType name="SentTransferRequestsFilter">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseRecieved" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecipientSourceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentFrom" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestTrackingId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentTo" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SentTransferRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransferRequestBody" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestTrackingId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecipientSourceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sent" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseBody" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorOccurred" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="sentTranscriptsFilter" type="s1:SentTranscriptsFilter" />
+      <s:complexType name="SentTranscriptsFilter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestTrackingId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecipientSourceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentFrom" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentTo" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="SentTranscript">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RespondingToRequestUUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sent" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecipientSourceId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Transcript" type="s1:Transcript" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseBody" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestTrackingId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorOccurred" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Transcript">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TranscriptBody" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="receivedTranscriptsFilter" type="s1:ReceivedTranscriptsFilter" />
+      <s:complexType name="ReceivedTranscriptsFilter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestTrackingId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewMessagesOnly" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="EducationalInstitutionSourceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceivedFrom" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceivedTo" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReceivedTranscript">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Received" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EducationalInstitutionSourceId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Transcript" type="s1:Transcript" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestTrackingId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="receivedTransferRequestsFilter" type="s1:ReceivedTransferRequestsFilter" />
+      <s:complexType name="ReceivedTransferRequestsFilter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestTrackingId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewMessagesOnly" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseSent" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="EducationalInstitutionSourceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceivedFrom" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceivedTo" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReceivedTransferRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestBody" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RequestTrackingId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EducationalInstitutionSourceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Received" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="transcriptToSend" type="s1:SentTranscript" />
+      <s:element name="SendTrancriptResult" type="s1:Acknowledgment" />
+      <s:complexType name="Acknowledgment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Originator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OriginatorAPASCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsSuccessful" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AcknowledgmentValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="transferRequestToSend" type="s1:SentTransferRequest" />
+      <s:element name="SendTransferRequestResult" type="s1:Acknowledgment" />
+      <s:element name="applicationToSend" type="s1:SentApplication" />
+      <s:complexType name="SentApplication">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UUID" type="s2:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sent" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseBody" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecipientSourceId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Application" type="s1:Application" />
+          <s:element minOccurs="1" maxOccurs="1" name="ErrorOccurred" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Application">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ApplicationBody" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedId" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendApplicationResult" type="s1:Acknowledgment" />
+      <s:element name="GetHostInstitutionResult" type="s1:RegisteredEducationalInstitution" />
+      <s:complexType name="RegisteredEducationalInstitution">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SourceId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EducationalInstitutionName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="receivedApplicationsFilter" type="s1:ReceivedApplicationsFilter" />
+      <s:complexType name="ReceivedApplicationsFilter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="NewMessagesOnly" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EducationalInstitutionSourceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceivedFrom" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceivedTo" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReceivedApplication">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UUID" type="s2:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedID" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Received" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="EducationalInstitutionSourceId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Application" type="s1:Application" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="sentApplicationsFilter" type="s1:SentApplicationsFilter" />
+      <s:complexType name="SentApplicationsFilter">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UUID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AgencyAssignedId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ApplicationId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecipientSourceId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentFrom" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="SentTo" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ReceivedError">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UUID" type="s2:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="OriginalMessagePayloadType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OriginalMessageBody" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessage" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Received" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetSentTransferRequestsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSentTransferRequests" />
+  </wsdl:message>
+  <wsdl:message name="GetSentTransferRequestsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSentTransferRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSentTranscriptsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSentTranscripts" />
+  </wsdl:message>
+  <wsdl:message name="GetSentTranscriptsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSentTranscriptsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedTranscriptsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReceivedTranscripts" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedTranscriptsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReceivedTranscriptsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedTransferRequestsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReceivedTransferRequests" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedTransferRequestsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReceivedTransferRequestsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendTrancriptSoapIn">
+    <wsdl:part name="parameters" element="tns:SendTrancript" />
+  </wsdl:message>
+  <wsdl:message name="SendTrancriptSoapOut">
+    <wsdl:part name="parameters" element="tns:SendTrancriptResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendTransferRequestSoapIn">
+    <wsdl:part name="parameters" element="tns:SendTransferRequest" />
+  </wsdl:message>
+  <wsdl:message name="SendTransferRequestSoapOut">
+    <wsdl:part name="parameters" element="tns:SendTransferRequestResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendApplicationSoapIn">
+    <wsdl:part name="parameters" element="tns:SendApplication" />
+  </wsdl:message>
+  <wsdl:message name="SendApplicationSoapOut">
+    <wsdl:part name="parameters" element="tns:SendApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetHostInstitutionSoapIn">
+    <wsdl:part name="parameters" element="tns:GetHostInstitution" />
+  </wsdl:message>
+  <wsdl:message name="GetHostInstitutionSoapOut">
+    <wsdl:part name="parameters" element="tns:GetHostInstitutionResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDecompressedDecodedMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDecompressedDecodedMessage" />
+  </wsdl:message>
+  <wsdl:message name="GetDecompressedDecodedMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDecompressedDecodedMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="PrepareCompressedEncodedMessageSoapIn">
+    <wsdl:part name="parameters" element="tns:PrepareCompressedEncodedMessage" />
+  </wsdl:message>
+  <wsdl:message name="PrepareCompressedEncodedMessageSoapOut">
+    <wsdl:part name="parameters" element="tns:PrepareCompressedEncodedMessageResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedApplicationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReceivedApplications" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedApplicationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReceivedApplicationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSentApplicationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSentApplications" />
+  </wsdl:message>
+  <wsdl:message name="GetSentApplicationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSentApplicationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRegisteredEducationalInstitutionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRegisteredEducationalInstitutions" />
+  </wsdl:message>
+  <wsdl:message name="GetRegisteredEducationalInstitutionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRegisteredEducationalInstitutionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedErrorsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReceivedErrors" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedErrorsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReceivedErrorsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="APASQueueService">
+    <wsdl:operation name="GetSentTransferRequests">
+      <wsdl:input message="tns:GetSentTransferRequestsSoapIn" />
+      <wsdl:output message="tns:GetSentTransferRequestsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSentTranscripts">
+      <wsdl:input message="tns:GetSentTranscriptsSoapIn" />
+      <wsdl:output message="tns:GetSentTranscriptsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedTranscripts">
+      <wsdl:input message="tns:GetReceivedTranscriptsSoapIn" />
+      <wsdl:output message="tns:GetReceivedTranscriptsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedTransferRequests">
+      <wsdl:input message="tns:GetReceivedTransferRequestsSoapIn" />
+      <wsdl:output message="tns:GetReceivedTransferRequestsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTrancript">
+      <wsdl:input message="tns:SendTrancriptSoapIn" />
+      <wsdl:output message="tns:SendTrancriptSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendTransferRequest">
+      <wsdl:input message="tns:SendTransferRequestSoapIn" />
+      <wsdl:output message="tns:SendTransferRequestSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendApplication">
+      <wsdl:input message="tns:SendApplicationSoapIn" />
+      <wsdl:output message="tns:SendApplicationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetHostInstitution">
+      <wsdl:input message="tns:GetHostInstitutionSoapIn" />
+      <wsdl:output message="tns:GetHostInstitutionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDecompressedDecodedMessage">
+      <wsdl:input message="tns:GetDecompressedDecodedMessageSoapIn" />
+      <wsdl:output message="tns:GetDecompressedDecodedMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="PrepareCompressedEncodedMessage">
+      <wsdl:input message="tns:PrepareCompressedEncodedMessageSoapIn" />
+      <wsdl:output message="tns:PrepareCompressedEncodedMessageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedApplications">
+      <wsdl:input message="tns:GetReceivedApplicationsSoapIn" />
+      <wsdl:output message="tns:GetReceivedApplicationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSentApplications">
+      <wsdl:input message="tns:GetSentApplicationsSoapIn" />
+      <wsdl:output message="tns:GetSentApplicationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRegisteredEducationalInstitutions">
+      <wsdl:input message="tns:GetRegisteredEducationalInstitutionsSoapIn" />
+      <wsdl:output message="tns:GetRegisteredEducationalInstitutionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedErrors">
+      <wsdl:input message="tns:GetReceivedErrorsSoapIn" />
+      <wsdl:output message="tns:GetReceivedErrorsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="APASQueueService" type="tns:APASQueueService">
+    <wsdl:documentation>
+      <wsi:Claim conformsTo="http://ws-i.org/profiles/basic/1.1" xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" />
+    </wsdl:documentation>
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSentTransferRequests">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetSentTransferRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentTranscripts">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetSentTranscripts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedTranscripts">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetReceivedTranscripts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedTransferRequests">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetReceivedTransferRequests" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTrancript">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/SendTrancript" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTransferRequest">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/SendTransferRequest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendApplication">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/SendApplication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHostInstitution">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetHostInstitution" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDecompressedDecodedMessage">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetDecompressedDecodedMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareCompressedEncodedMessage">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/PrepareCompressedEncodedMessage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedApplications">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetReceivedApplications" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentApplications">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetSentApplications" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegisteredEducationalInstitutions">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetRegisteredEducationalInstitutions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedErrors">
+      <soap:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetReceivedErrors" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="APASQueueService1" type="tns:APASQueueService">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSentTransferRequests">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetSentTransferRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentTranscripts">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetSentTranscripts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedTranscripts">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetReceivedTranscripts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedTransferRequests">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetReceivedTransferRequests" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTrancript">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/SendTrancript" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendTransferRequest">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/SendTransferRequest" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendApplication">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/SendApplication" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetHostInstitution">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetHostInstitution" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDecompressedDecodedMessage">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetDecompressedDecodedMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareCompressedEncodedMessage">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/PrepareCompressedEncodedMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedApplications">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetReceivedApplications" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSentApplications">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetSentApplications" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRegisteredEducationalInstitutions">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetRegisteredEducationalInstitutions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedErrors">
+      <soap12:operation soapAction="http://APASProxy.ServiceContracts/2007/04/GetReceivedErrors" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="APASQueueService">
+    <wsdl:port name="APASQueueService" binding="tns:APASQueueService">
+      <soap:address location="https://apasp.lethbridgecollege.ab.ca/apasproxyinternal/APASQueueService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="APASQueueService1" binding="tns:APASQueueService1">
+      <soap12:address location="https://apasp.lethbridgecollege.ab.ca/apasproxyinternal/APASQueueService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

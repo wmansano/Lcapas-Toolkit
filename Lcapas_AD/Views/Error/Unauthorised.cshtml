@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Lethbridge College - APAS Transcript and Applications";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-generic.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/AdminSite.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_HomeMenu.cshtml")
+}
+
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+<div style="min-width:99%;margin-top:50px;text-align:center;">
+    <p><b>Either your session has expired or you do not permission to access this resource.</b></p><br />
+    <a href="javascript:history.back(-2)">Click here to return to the previous page</a><br /><br />
+    <a href='@Url.Action("Index", "Login")'>Click here to return to the login page,</a><br /><br />
+    <p>...or contact the Registrar's Office to review your access/permission to this site.</p>
+</div>

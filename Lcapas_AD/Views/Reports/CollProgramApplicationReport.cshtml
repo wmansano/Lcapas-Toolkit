@@ -1,0 +1,274 @@
+﻿@model Lcapas.Core.Library.CollProgramApplicationReportViewObj
+
+@section JavaScriptVariables {
+<script type="text/javascript">
+    var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+    var PrintQueryPath = '@Url.Action("PrintQuery", "Reports")';
+</script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+ 
+@Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>@Model.PageTitle</h2>
+        <div class="paging">
+            @if (Model.CollProgramApplicationReportSearchFilter != null)
+            {
+                <div class="page-print">
+                    <input id="excelProgramApplicationReportBtn" type="button" value="Export to Excel" class="button" />
+                </div>
+                <div class="page-print">
+                    <input id="prntProgramApplicationReportBtn" type="button" value="Print Reports" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-print">
+                    <input id="prntProgramApplicationQueryReportBtn" type="button" value="Query Report" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            @using (Html.BeginForm("CollProgramApplicationReport", "Reports", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+            {
+                <table id="data-tbl" class="TFtable display">
+                    <thead class="tableHeader">
+                        <tr class="tableHeader">
+                            <th></th>
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.ID, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.PID, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th class="col-xw-120">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.FullName, new { @class = "control-label col-xw-120" })
+                            </th>
+                            <th class="col-xw-270">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.EmailAddress, new { @class = "control-label col-xw-270" })
+                            </th>
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.ASN, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th class="col-xw-80">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.Program, new { @class = "control-label col-xw-80" })
+                            </th>
+                            <th class="col-xw-40">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.StudyLoad, new { @class = "control-label col-xw-40" })
+                            </th>
+                            <th class="col-xw-80">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.Term, new { @class = "control-label col-xw-80" })
+                            </th>
+                            <th class="col-xw-70">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.Location, new { @class = "control-label col-xw-70" })
+                            </th>
+                            @*<th class="col-xw-100">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.VisaStatus, new { @class = "control-label col-xw-100" })
+                            </th>*@
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.Citizenship, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.Ethnic, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.AdmitStatus, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.AlienStatus, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.ApplicationStatus, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th class="col-xw-60">
+                                @Html.LabelFor(m => m.CollProgramApplicationReportSearchFilter.OrgCountry, new { @class = "control-label col-xw-60" })
+                            </th>
+                            <th colspan="2" />
+                        </tr>
+                        <tr class="tableHeader hide-scroll">
+                            <th id="selectAll" title="Select All" class="col-xw-20">
+                                <input type="checkbox" id="SelectAll" class="text" checked>
+                            </th>
+                            <th title="Application ID" class="col-xw-60">
+                                @Html.TextBoxFor(m => m.CollProgramApplicationReportSearchFilter.ID, new { @id = "ID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Person ID" class="col-xw-60">
+                                @Html.TextBoxFor(m => m.CollProgramApplicationReportSearchFilter.PID, new { @id = "PID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Full Name" class="col-xw-150">
+                                @Html.TextBoxFor(m => m.CollProgramApplicationReportSearchFilter.FullName, new { @id = "FullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-150" })
+                            </th>
+                            <th title="Email Address" class="col-xw-270">
+                                @Html.TextBoxFor(m => m.CollProgramApplicationReportSearchFilter.EmailAddress, new { @id = "EmailAddress", @class = "text ui-widget-content ui-corner-all searchfield col-xw-270" })
+                            </th>
+                            <th title="ASN" class="col-xw-60">
+                                @Html.TextBoxFor(m => m.CollProgramApplicationReportSearchFilter.ASN, new { @id = "ASN", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Program" class="col-xw-130">
+                                @Html.DropDownListFor(m => m.CollProgramApplicationReportSearchFilter.Program, Model.ColleagueProgramSelectedList, string.Empty, new { @id = "Program", @class = "searchfield col-xw-120" })
+                            </th>
+                            <th title="Study Load" class="col-xw-40">
+                                @Html.TextBoxFor(m => m.CollProgramApplicationReportSearchFilter.StudyLoad, new { @id = "StudyLoad", @class = "text ui-widget-content ui-corner-all searchfield col-xw-40" })
+                            </th>
+                            <th title="Term" class="col-xw-80">
+                                @Html.ListBoxFor(m => m.CollProgramApplicationReportSearchFilter.Term, Model.ColleagueTermSelectedList, new { @id = "Term", @class = "multi-select col-xw-80" })
+                            </th>
+                            <th title="Location" class="col-xw-70">
+                                @Html.DropDownListFor(m => m.CollProgramApplicationReportSearchFilter.Location, Model.ColleagueLocationSelectedList, new { @id = "Location", @class = "searchfield col-xw-70" })
+                            </th>
+                            @*<th title="VisaStatus" class="col-xw-80">
+                                @Html.TextBoxFor(m => m.CollProgramApplicationReportSearchFilter.VisaStatus, new { @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                            </th>*@
+                            <th title="Citizenship" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.CollProgramApplicationReportSearchFilter.Citizenship, Model.ColleagueCitizenshipCountrySelectedList, new { @id = "Citizenship", @class = "multi-select col-xw-60" })
+                            </th>
+                            <th title="Ethnic" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.CollProgramApplicationReportSearchFilter.Ethnic, Model.ColleagueEthnicSelectedList, new { @id = "Ethnic", @class = "multi-select col-xw-60" })
+                            </th>
+                            <th title="Admit Status" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.CollProgramApplicationReportSearchFilter.AdmitStatus, Model.ColleagueAdmissionStatusSelectedList, new { @id = "AdmitStatus", @class = "multi-select col-xw-60" })
+                            </th>
+                            <th title="Alien Status" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.CollProgramApplicationReportSearchFilter.AlienStatus, Model.ColleagueAlienStatusSelectedList, new { @id = "AlienStatus", @class = "multi-select col-xw-60" })
+                            </th>
+                            <th title="Application Status" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.CollProgramApplicationReportSearchFilter.ApplicationStatus, Model.ColleagueApplicationStatusSelectedList, new { @id = "ApplicationStatus", @class = "multi-select col-xw-60" })
+                            </th>
+                            <th title="Residence Country" class="col-xw-60">
+                                @Html.ListBoxFor(m => m.CollProgramApplicationReportSearchFilter.OrgCountry, Model.ColleagueResidenceCountrySelectedList, new { @id = "OrgCountry", @class = "multi-select col-xw-60" })
+                            </th>
+
+                            <th title="Clear">
+                                <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("CollProgramApplicationReport", "Reports")';return false;" />
+                            </th>
+                            <th title="Search">
+                                <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                                @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                                @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                                @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                                @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.CollProgramApplicationReportSearchResultsFilter.Count > 0)
+                        {
+                            foreach (var item in Model.CollProgramApplicationReportSearchResultsFilter)
+                            {
+                                <tr class=" tableBody">
+                                    <td>
+                                        <input type="checkbox" name="@item.ID" checked>
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @item.ID
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @item.PID
+                                    </td>
+                                    <td class="col-xw-120">
+                                        @item.FullName
+                                    </td>
+                                    <td class="col-xw-270">
+                                        @item.EmailAddress
+                                    </td>
+                                    <td class="col-xw-30">
+                                        @item.ASN
+                                    </td>
+                                    <td class="col-xw-80">
+                                        @item.Program
+                                    </td>
+                                    <td class="col-xw-40">
+                                        @item.StudyLoad
+                                    </td>
+                                    <td class="col-xw-40">
+                                        @item.Term
+                                    </td>
+                                    <td class="col-xw-70">
+                                        @item.Location
+                                    </td>
+                                    @*<td class="col-xw-60">
+                                        @item.VisaStatus
+                                    </td>*@
+                                    <td class="col-xw-60">
+                                        @item.Citizenship
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @item.Ethnic
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @item.AdmitStatus
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @item.AlienStatus
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @item.ApplicationStatus
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @item.OrgCountry
+                                    </td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="35" style="color:red;text-align:center;">
+                                    <br />No records found.
+                                    <br />Please enter search parameters and click 'Search'. <br />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            </div>
+        <div id="bottom_anchor"></div>
+        <br />
+        </div>

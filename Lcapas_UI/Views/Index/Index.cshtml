@@ -1,0 +1,38 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoadingLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/check-js.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/loading.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/Loading.css" rel="stylesheet" type="text/css" />
+}
+<div id="msg" style="display:block;">
+    <p style="width:100%;text-align:left;margin-top:50px;">
+        This site requires javascript which appears to be disabled in your browser. To complete your application, you will need to enable javascript and then return to Apply Alberta to complete your application. <a href="http://www.wikihow.com/Enable-JavaScript-on-Your-Computer" target="_blank">click here for instructions on how to enable javascript.</a>
+    </p>
+</div>
+<div id="content">
+
+    @using (Html.BeginForm("Landing", "Landing", FormMethod.Post, new { @id = "IndexForm" }))
+    {
+        @Html.ValidationSummary(true)
+
+        <input type="hidden" name="Uuid" id="Uuid" value="@ViewBag.Uuid" />
+        <input type="hidden" name="UserName" id="UserName" value="@ViewBag.UserName" />
+        <input type="hidden" name="SessionId" id="SessionId" value="@ViewBag.SessionId" />
+        <input type="hidden" name="SecurityToken" id="SecurityToken" value="@ViewBag.SecurityToken" />
+
+        <div id="overlay">
+            <div>
+                <p>Loading your application...</p>
+                <img src="~/Content/Images/loading.gif" />
+            </div>
+        </div>
+     } 
+
+</div>
+
+
+

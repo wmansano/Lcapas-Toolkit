@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Settings - Admission Application ";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-generic.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ApplicationSettingsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>@Html.LcActionLink("Settings Home", "Index", "Settings")</li>
+    <li>@Html.LcActionLink("Application Settings", "Index", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("Relationships", "ProgramDetail", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("Programs", "Program", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("Campuses", "Campus", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("Terms", "Term", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("Create Program Terms", "CreateProgramTerm", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("Deactivate Program Terms", "DeactivateProgramTerm", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("References Types", "ReferenceType", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("Application Fees", "ApplicationFee", "ApplicationSettings")</li>
+    <li>@Html.LcActionLink("Parameters", "Parameters", "ApplicationSettings")</li>
+</ul>

@@ -1,0 +1,95 @@
+﻿@model Lcapas.Core.Models.Lcappsdb.ProgramDetail
+
+@{
+    ViewBag.Title = "Program, Campus and Term Relationships";
+}
+
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var GetProgramDetailsPath = '@Url.Action("GetProgramDetails", "ApplicationSettings")';
+        var SaveProgramDetailsPath = '@Url.Action("SaveProgramDetails", "ApplicationSettings")';
+        var DeleteProgramDetailsPath = '@Url.Action("DeleteProgramDetails", "ApplicationSettings")';
+        var orderTermUrl = '@Url.Action("TermOrder", "ApplicationSettings")';
+        var orderCampusUrl = '@Url.Action("CampusOrder", "ApplicationSettings")';
+        var orderProgramDetailUrl = '@Url.Action("ProgramDetailOrder", "ApplicationSettings")';
+        var activateItemUrl = '@Url.Action("ProgramDetailActivate", "ApplicationSettings")';
+    </script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-applications.js?<?=time()?>")" type="text/javascript"></script>
+    @*<script src="@Url.Content("~/Scripts/admin-program-detail.js")" type="text/javascript"></script>*@
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+
+@section Menu {
+    @RenderPage("~/Views/Menu/_ApplicationSettingsMenu.cshtml")
+}
+
+<h2>@ViewBag.Title</h2>
+
+@*@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()*@
+    
+    <div class="form-horizontal">
+        <div class="row">
+            <input type="button" value="Expand All" class="btn btn-default button expand-all" /> |
+            <input type="button" value="Collapse All" class="btn btn-default button collapse-all" />
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div id="form-container" class="form-group row">
+            <div class="row">
+                @Html.DropDownListFor(model => model.ApplicationProgram, new SelectList(ViewBag.Programs, "ApplicationProgramId", "Description"), "Select Program", new { @class = "col-md-12" })
+                @Html.ValidationMessageFor(model => model.ApplicationProgram, "", new { @class = "text-danger" })
+            </div>
+
+            <div id="main-campus-list" class="col-md-6">
+                @foreach (var campus in new SelectList(ViewBag.Campuses, "ProgramCampusId", "CampusDesc"))
+                {
+                    <div id="@campus.Value" class="list-group campusOptions">
+                        <a href="#list-@campus.Value" class="list-group-item arrow collapsed" data-toggle="collapse">
+                            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                            @Html.Label(campus.Value, campus.Text)
+                        </a>
+                    
+                        <ul id="list-@campus.Value" class="list-group collapse termOptions">
+                            @*  Jquery generated when a program is loaded
+                            @foreach (var term in new SelectList(ViewBag.Terms, "ProgramTermId", "TermDesc"))
+                            {
+                                <li id="@term.Value" class="term-@term.Value list-group-item ui-state-default">
+                                    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                                    @Html.Label(term.Value, term.Text)
+                                </li>
+                            }*@
+                        </ul>
+                    </div>
+                }
+            </div>
+            <div class="col-md-6">
+                <div class="term-list list-group">
+                    <a href="#list-term" class="list-group-item arrow collapsed" data-toggle="collapse">Terms</a>
+                    <ul id="list-term" class="list-group termOptions collapse">
+                        @{
+                            var Terms = (List<Lcapas.Core.Models.Lcappsdb.ProgramTerm>)ViewBag.Terms;
+                        }
+                        @*@foreach (var term in new SelectList (ViewBag.Terms, "ProgramTermId", "TermDesc"))*@
+                        @foreach (var term in Terms.OrderBy(p => p.TermOrder))
+                        {
+                            <li id="@term.ProgramTermId" class="term-@term.ProgramTermId list-group-item ui-state-default add">
+                                <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                                @Html.Label(term.TermDesc, new { @class = "descLabel" }) (@Html.Label(term.TermCode, new { @class = "codeLabel" }))
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+@*}*@
+

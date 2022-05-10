@@ -1,0 +1,219 @@
+﻿@model Lcapas.Core.Library.ProgramDetailViewObj
+
+@{
+    ViewBag.Title = "Program, Campus and Term Relationships";
+}
+
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var activateItemUrl = '@Url.Action("ProgramDetailActivate", "ApplicationSettings")';
+    </script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-applications.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+
+@section Menu {
+    @RenderPage("~/Views/Menu/_ApplicationSettingsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+    @using (Html.BeginForm("DeactivateProgramTerm", "ApplicationSettings", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+    {
+    <h2>@*@Model.PageTitle*@</h2>
+    <div class="paging">
+        @if (Model.ProgramDetailSearchFilter != null)
+        {
+            <div class="ProgramTermLeft">
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <div id="table-container">
+        <table id="data-tbl" class="TFtable display">
+            <thead class="tableHeader">
+                <tr class="tableHeader">
+                    <th></th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ProgramDetailSearchFilter.ApplicationProgramDescription, new { @class = "control-label" })
+                    </th>
+                    <th class="col-fw-100">
+                        @Html.LabelFor(m => m.ProgramDetailSearchFilter.StartDate, new { @class = "control-label" })
+                    </th>
+                    <th class="col-xw-120">
+                        @Html.LabelFor(m => m.ProgramDetailSearchFilter.Active, new { @class = "control-label" })
+                    </th>
+                    <th class="col-xw-80">
+                        @Html.LabelFor(m => m.ProgramDetailSearchFilter.CreatedBy, new { @class = "control-label" })
+                    </th>
+                    <th class="col-xw-80">
+                        @Html.LabelFor(m => m.ProgramDetailSearchFilter.CreatedDateTime, new { @class = "control-label" })
+                    </th>
+                    <th class="col-xw-80">
+                        @Html.LabelFor(m => m.ProgramDetailSearchFilter.ModifiedBy, new { @class = "control-label" })
+                    </th>
+                    <th class="col-xw-80">
+                        @Html.LabelFor(m => m.ProgramDetailSearchFilter.ModifiedDateTime, new { @class = "control-label" })
+                    </th>
+                    <th colspan="2" />
+                </tr>
+                <tr class="tableHeader hide-scroll">
+                    <th title="Select All">
+                        <input type="checkbox" id="SelectAll" class="text" checked>
+                    </th>
+                    <th title="ApplicationPrograms" class="col-fw-100">
+                        @Html.TextBoxFor(m => m.ProgramDetailSearchFilter.ApplicationProgramDescription, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="User Full Name" class="col-fw-50">
+                        @Html.TextBoxFor(m => m.ProgramDetailSearchFilter.StartDate, new { @class = "text ui-widget-content ui-corner-all searchfield" })
+                    </th>
+                    <th title="Active" class="col-xw-120">
+                        @Html.DropDownListFor(m => m.ProgramDetailSearchFilter.Active, Model.ActiveSelectedList, "", new { @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })
+                    </th>
+                    <th title="CreatedBy" class="col-xw-80">
+                        @Html.TextBoxFor(m => m.ProgramDetailSearchFilter.CreatedBy, new { @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                    </th>
+                    <th title="CreatedDateTime" class="col-xw-120">
+                        @Html.TextBoxFor(m => m.ProgramDetailSearchFilter.CreatedDateTime, new { @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                    </th>
+                    <th title="Modified By" class="col-xw-80">
+                        @Html.TextBoxFor(m => m.ProgramDetailSearchFilter.ModifiedBy, new { @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                    </th>
+                    <th title="Modified By Date" class="col-xw-120">
+                        @Html.TextBoxFor(m => m.ProgramDetailSearchFilter.ModifiedDateTime, new { @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                    </th>
+                    <th title="Clear">
+                        <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("DeactivateProgramTerm", "ApplicationSettings")';return false;" />
+                    </th>
+                    <th title="Search">
+                        <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                        @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                        @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                        @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                        @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                    </th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td colspan="7">
+                        <div>
+                            <fieldset id="group1">
+                                <label>Active</label>
+                                @Html.RadioButtonFor(m => m.ProgramDetailSearchFilter.Active, "Active", new { @id = "RActive", @class = "activate_selection" })
+                                <label>Deactive</label>
+                                @Html.RadioButtonFor(m => m.ProgramDetailSearchFilter.Active, "Deactive", new { @id = "RDeactive", @class = "activate_selection" })
+
+                                <input id="btn-active" type="button" value="Save" onclick="javascript:ProgramDetailActivate();" />
+                            </fieldset>
+                        </div>
+                        <div>
+                            <br />
+                            <div class="row">
+
+                                <div>@Html.LabelFor(m => m.ProgramDetailSearchFilter.ProgramTerm_ProgramTermId, new { @class = "control-label" })</div>
+                                <div>@Html.DropDownListFor(m => m.ProgramDetailSearchFilter.ProgramTerm_ProgramTermId, Model.TermSelectedList.Select(m => new SelectListItem { Text = m.TermDesc, Value = m.ProgramTermId.ToString() }), string.Empty, new { @id = "termId", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })</div>
+                            </div>
+                            <div class="row">
+                                <div>@Html.LabelFor(m => m.ProgramDetailSearchFilter.ProgramCampus_ProgramCampusId, new { @class = "control-label" })</div>
+                                <div>@Html.DropDownListFor(m => m.ProgramDetailSearchFilter.ProgramCampus_ProgramCampusId, Model.CampusSelectedList.Select(m => new SelectListItem { Text = m.CampusDesc, Value = m.ProgramCampusId.ToString() }), string.Empty, new { @id = "campusId", @class = "text ui-widget-content ui-corner-all searchfield col-md-7" })</div>
+                            </div>
+                            </div>
+                    </td>
+                    <td colspan="2"></td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ProgramDetailSearchResultsFilter.Count > 0)
+                {
+                       
+                    foreach (var item in Model.ProgramDetailSearchResultsFilter)
+                    {
+                <tr class=" tableBody">
+                    <td>
+                        <input type="checkbox" name="@item.ApplicationProgram_ApplicationProgramId" checked>
+                    </td>
+                    <td class="col-fw-20">
+                        @item.ApplicationProgramDescription
+                    </td>
+                    <td class="col-fw-20">
+                        @item.StartDate.Value.ToString("yyyy/MM/dd")
+                    </td>
+                    <td class="col-fw-30">
+                        @item.Active
+                    </td>
+                    <td class="col-fw-50">
+                        @item.CreatedBy
+                    </td>
+                    <td class="col-fw-120">
+                        @item.CreatedDateTime.Value.ToString("yyyy/MM/dd")
+                    </td>
+                    <td class="col-fw-20">
+                        @item.ModifiedBy
+                    </td>
+                    <td class="col-fw-120">
+                        @item.ModifiedDateTime.Value.ToString("yyyy/MM/dd")
+                    </td>
+                    <td colspan="2"></td>
+
+                </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="20" style="color:red;text-align:center;">
+                            <br />No records found.
+                            <br />Please enter search parameters and click 'Search'. <br />
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <div id="bottom_anchor"></div>
+    }
+    <br />
+</div>

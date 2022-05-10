@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+<br />
+<div style="text-align:center;width:100%;">
+    <h2>@ViewBag.Title</h2>
+    <h4>
+        @ViewBag.SubTitle
+    </h4>
+</div>
+<div class="area">
+    <p>@Html.Raw(ViewBag.Body)</p>
+</div><br />
+<div style="text-align:center;width:100%;">
+    <p>Thank you for applying at Lethbridge College.</p>
+    <div id="submitApplication" class="buttoncontainer">
+        <a href="@ViewBag.ApasReturnPath" class="button submit">Click here to return to ApplyAlberta</a>
+    </div>
+</div>

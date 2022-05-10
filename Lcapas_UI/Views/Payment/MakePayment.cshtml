@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "MakePayment";
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+
+<h2>MakePayment</h2>
+
+
+<iframe src="@ViewBag.src" name="test" scrolling="no" width="100%" height="540px" frameborder="0">
+    <p>Your browser does not support iframes.</p>
+</iframe>
+

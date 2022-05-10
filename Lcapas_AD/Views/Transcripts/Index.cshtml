@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Lethbridge College - APAS Transcripts";
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_TranscriptsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+<ul>
+    <li>@Html.LcActionLink("Home", "Index", "Home")</li>
+    <li>@Html.LcActionLink("Transcript Home", "Index", "Transcripts")</li>
+    <li>@Html.LcActionLink("Request Transcript", "RequestTranscript", "Transcripts", new Lcapas.Core.Library.CreateMsgViewObj { DestAction = Lcapas.Core.Library.Structs.DestActions.CreateRequest }, null)</li>
+    <li>@Html.LcActionLink("Send Unsolicited Transcript", "SendUnsolicitedTranscript", "Transcripts", new Lcapas.Core.Library.CreateMsgViewObj { DestAction = Lcapas.Core.Library.Structs.DestActions.CreateTranscript }, null)</li>
+    <li>@Html.LcActionLink("Admissions Inbox", "AdmissionsInbox", "Transcripts") </li>
+    <li>@Html.LcActionLink("Admissions Outbox", "AdmissionsOutbox", "Transcripts") </li>
+    <li>@Html.LcActionLink("Records Inbox", "RecordsInbox", "Transcripts") </li>
+    <li>@Html.LcActionLink("Records Outbox", "RecordsOutbox", "Transcripts") </li>
+    <li>@Html.LcActionLink("Unsolicited Transcript Batch", "UnsolicitedBatchTranscript", "Transcripts") </li>
+</ul>

@@ -1,0 +1,85 @@
+﻿@model Lcapas.Core.Library.PermissionsViewObj
+
+<div id="dialog-form" title="Create Controller Type">
+    @Html.AntiForgeryToken()
+    <fieldset>
+        @*Controller Type Form*@
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ControllerType">Type Enum:</label>
+            <div class="col-md-10">
+                @*@Html.Editor("ControllerType", new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("ControllerType", Model.EnumControllerType.OrderBy(o => o.Text), string.Empty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("ControllerType", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ControllerDesc">Description:</label>
+            <div class="col-md-10">
+                @Html.Editor("ControllerDesc", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("ControllerDesc", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*Action Type Form*@
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ActionType">Type Enum:</label>
+            <div class="col-md-10">
+@*                @Html.Editor("ActionType", new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("ActionType", Model.EnumActionType.OrderBy(o => o.Text), string.Empty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("ActionType", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ActionDesc">Description:</label>
+            <div class="col-md-10">
+                @Html.Editor("ActionDesc", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("ActionDesc", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ControllerId">Controller:</label>
+            <div class="col-md-10">
+                @Html.DropDownList("ControllerId", Model.ControllerTypes.OrderBy(o => o.ControllerDesc).Select(x => new SelectListItem() { Value = x.ControllerTypeType.ToString(), Text = x.ControllerDesc }), string.Empty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("ControllerId", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="pull-right col-md-3">
+                @Html.CheckBox("ExternalAction", true, new { htmlAttributes = new { @class = "form-control" } })
+                <label class="control-label" for="ExternalAction">External Action</label>
+                @Html.ValidationMessage("ExternalAction", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*Permission Record Form*@
+        <div class="form-group">
+            <label class="control-label col-md-2" for="PermissionActionType">Action Type:</label>
+            <div class="col-md-10">
+                @*@Html.Editor("PermissionActionType", new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownList("PermissionActionType", Model.ActionTypes.OrderBy(o => o.ActionDesc).Select(x => new SelectListItem() { Value = x.ActionId.ToString(), Text = x.ActionDesc }), string.Empty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("PermissionActionType", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="PermissionDesc">Description:</label>
+            <div class="col-md-10">
+                @Html.Editor("PermissionDesc", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("PermissionDesc", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="PermissionAccessGroup">Access Group:</label>
+            <div class="col-md-10">
+                @Html.DropDownList("PermissionAccessGroup", Model.AccessGroupIds.OrderBy(o => o.Text), string.Empty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("PermissionAccessGroup", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="pull-right col-md-2">
+                @Html.CheckBox("PermissionEnable", true, new { htmlAttributes = new { @class = "form-control" } })
+                <label class="control-label" for="PermissionEnable">Enabled</label>
+                @Html.ValidationMessage("PermissionEnable", "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </fieldset>
+</div>

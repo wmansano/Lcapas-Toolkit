@@ -1,0 +1,57 @@
+﻿@{
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+<br />
+@using (Html.BeginForm("MakePayment", "Payment", FormMethod.Post))
+{
+    @*this is to prevent CSRF attack*@
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li id="addInfo" class="disabled" data-toggle="tab">1. Additional Information<img class="ui-icon-check" src="~/Content/Images/check.png" /></li>
+            <li id="agreement" class="disabled" data-toggle="tab">2. Agreement<img class="ui-icon-check" src="~/Content/Images/check.png" /></li>
+            <li id="payment" class="active" data-toggle="tab">3. Payment</li>
+        </ul>
+        <div class="tab-content">
+            <div class="page start row tab-pane active">
+                <div>
+                    <h4>Application Payment</h4>
+                    <p>It appears an error occured while making your payment, or the page timed out.</p>
+
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+                    {
+                        <p>PayPal returned the following error message:</p>
+                        <p class="validation-block"><span>@ViewBag.ErrorMessage</span></p>
+                    }
+
+                    <p class="justify">Your application will not be complete without payment. Please return to paypal to complete your payment or return to Apply Alberta via the PayPal Check out button below.</p>
+
+
+                    <div id="payApplication" class="buttoncontainer">
+                        <div class="paylogo">
+                            @*<a class="pplogo" href="@Url.Action("MakePayment", "Payment", new { uuid = @ViewBag.UUID })"></a>*@
+                            <input type="submit" class="pplogo" value="" />
+                        </div>
+                    </div>
+
+                    <p class="warning center">Once payment is complete, you will be redirected back to this site.</p>
+                    <br />
+                    <p class="validation-block"><span>If you continue to experience problems please contact our Admissions department at:</span><br /></p>
+                    <p class="validation-block" style="margin: 15px;">
+                        <span>
+                            <b>Phone:</b> 403-320-3200 and select option #3<br />
+                            <b>Toll-free:</b> 1-800-572-0103 and select option #3<br />
+                            <b>Email:</b> admissions@lethbridgecollege.ca
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}

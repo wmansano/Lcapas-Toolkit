@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Reports - Home";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-generic.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>@Html.LcActionLink("Home", "Index", "Home")</li>
+    <li>@Html.LcActionLink("Reports Home", "Index", "Reports")</li>
+    <br />
+    <li><b>ToolKit Reports:</b></li>
+    @if (@Html.LcAccessLink("ApplicationReport", "Reports"))
+    {
+        <ul>
+            <br />
+            <li><b>Admissions:</b></li>
+            <li>@Html.LcActionLink("Toolkit Application Report", "ApplicationReport", "Reports")</li>
+            <li>@Html.LcActionLink("Payment Report", "PaymentReport", "Reports")</li>
+            <li>@Html.LcActionLink("Hold Type Report", "HoldTypeReport", "Reports", new { destAction = "AdmissionsOutbox" })</li>
+        </ul>
+    }
+    @if (@Html.LcAccessLink("HoldTypeReport", "Reports"))
+    {
+        <ul>
+            <br />
+            <li><b>Records:</b></li>
+            <li>@Html.LcActionLink("Hold Type Report", "HoldTypeReport", "Reports")</li>
+        </ul>
+    }
+</ul>
+<ul>
+    <li><b>Colleague Reports:</b></li>
+    @if (@Html.LcAccessLink("CollProgramApplicationReport", "Reports"))
+    {
+        <ul>
+            <br />
+            <li><b>Admissions:</b></li>
+            <li>@Html.LcActionLink("Colleague Application Report", "CollProgramApplicationReport", "Reports")</li>
+            <li>@Html.LcActionLink("Wait List Report", "CollWaitListReport", "Reports")</li>
+            <li>@Html.LcActionLink("Non Course Testing Results Report", "CollTestingResultsReport", "Reports")</li>
+            <li>@Html.LcActionLink("Overdues Report", "CollOverduesReport", "Reports")</li>
+            <li>@Html.LcActionLink("Admissions Conditions Report", "CollAdmissionConditionsReport", "Reports")</li>
+        </ul>
+    }
+    @if (@Html.LcAccessLink("DailyRequest", "Reports"))
+    {
+        <ul>
+            <br />
+            <li><b>Records:</b></li>
+            <li>@Html.LcActionLink("Students Request Daily View", "DailyRequest", "Reports")</li>
+        </ul>
+    }
+    @if (@Html.LcAccessLink("LoginHistory", "Reports"))
+    {
+        <br />
+        <li><b>Admin:</b></li>
+        <li>@Html.LcActionLink("Login History Report", "LoginHistory", "Reports")</li>
+        <li>@Html.LcActionLink("Exception Errors Report", "ExceptionError", "Reports")</li>
+        <li>@Html.LcActionLink("Sent Email Report", "SentEmailReport", "Reports")</li>
+    }
+</ul>

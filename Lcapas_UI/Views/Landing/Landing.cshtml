@@ -1,0 +1,172 @@
+﻿@model Lcapas.Core.Library.LandingObj
+@{
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/check-js.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+<div id="msg" style="display:block;">
+    <p style="width:100%;text-align:left;margin-top:50px;">
+        This site requires javascript which appears to be disabled in your browser. To complete your application, you will need to enable javascript and then return to Apply Alberta to complete your application. <a href="http://www.wikihow.com/Enable-JavaScript-on-Your-Computer" target="_blank">click here for instructions on how to enable javascript.</a>
+    </p>
+</div>
+<div id="content" style="display:none;">
+    @using (Html.BeginForm("Agreement", "Landing", FormMethod.Post, new { @id = "ApplicationForm" }))
+    {
+        // this is to prevent CSRF attack
+        @Html.ValidationSummary(true)
+        <fieldset>
+            @*@Html.HiddenFor(model => model.UUID)*@
+            <input type="hidden" name="UUID" id="Uuid" value="@ViewBag.UUID" />
+
+            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                <li id="addInfo" class="active" data-toggle="tab">1. Additional Information</li>
+                <li id="agreement" class="disabled" data-toggle="tab">2. Agreement</li>
+                <li id="payment" class="disabled" data-toggle="tab">3. Payment</li>
+            </ul>
+            <div class="tab-content">
+                <div class="page start row tab-pane active">
+                    <div style="display:none;">
+                        <h4>Personal Information</h4>
+                        <div class="area">
+                            <div class="row">
+                                @Html.LabelFor(model => model.FirstName, new { @class = "label" })
+                                @Html.TextBoxFor(model => model.FirstName, new { @readonly = "readonly", @class = "collect input readonly" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.LastName, new { @class = "label" })
+                                @Html.TextBoxFor(model => model.LastName, new { @readonly = "readonly", @class = "collect input readonly" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(m => m.ASN, new { @class = "label" })
+                                @Html.TextBoxFor(m => m.ASN, new { @readonly = "readonly", @class = "collect input readonly" })
+                            </div>
+                        </div>
+                    </div>
+                    <h4>Please complete the following questions</h4>
+                    <div class="area">
+                        <div class="row">
+                            @Html.LabelFor(model => model.ProgramSelected, new { @class = "label" })
+                        </div>
+                        <div class="row alt">
+                            @Html.DropDownListFor(model => model.ProgramSelected, new SelectList(ViewBag.Programs, "ApplicationProgramId", "Description"), "Select Program", new { @class = "collect optgroup col-md-11" })
+                            @Html.ValidationMessageFor(model => model.ProgramSelected, "", new { @class = "validation-block" })
+                        </div>
+                        <div class="row">
+                            <div id="termOuter">
+                                @Html.LabelFor(model => model.AppliedSession, new { @class = "label" })<br />
+                                <div id="termOptions">
+                                    @foreach (var term in new SelectList(ViewBag.Terms, "ProgramTermId", "TermDesc"))
+                                    {
+                                        @Html.RadioButtonFor(model => model.AppliedSession, term.Value, new { @id = term.Value, @class = "collect rdobtn" })
+                                        @Html.Label(term.Value, term.Text, new { @class = "rdobtnlbl" }) <br />
+                                    }
+                                    @Html.ValidationMessageFor(model => model.AppliedSession, "", new { @class = "validation-block" })
+                                </div>
+                            </div>
+                            <div id="campusOuter">
+                                @Html.LabelFor(model => model.Campus, new { @class = "label" })<br />
+                                <div id="campusOptions">
+                                    @foreach (var campus in new SelectList(ViewBag.Campuses, "ProgramCampusId", "CampusDesc"))
+                                    {
+                                        @Html.RadioButtonFor(model => model.Campus, campus.Value, new { @id = campus.Value, @class = "collect rdobtn" })
+                                        @Html.Label(campus.Value, campus.Text, new { @class = "rdobtnlbl" }) <br />
+                                    }
+                                    @Html.ValidationMessageFor(model => model.Campus, "", new { @class = "validation-block" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.FullTime, new { @class = "label" })
+                            </div>
+                            <div class="row alt">
+                                <div class="rdobtngrp">
+                                    @Html.RadioButtonFor(model => model.FullTime, "F", new { @id = "fullPartTimeF", @class = "collect rdobtn" })
+                                    @Html.Label("fullPartTimeF", "Full time", new { @class = "rdobtnlbl" })
+                                    @Html.RadioButtonFor(model => model.FullTime, "P", new { @id = "fullPartTimeP", @class = "collect rdobtn" })
+                                    @Html.Label("fullPartTimeP", "Part time", new { @class = "rdobtnlbl" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.FullTime, "", new { @class = "validation-block right" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.StartingYear, new { @class = "label" })
+                            </div>
+                            <div class="row alt">
+                                @Html.DropDownListFor(model => model.StartingYear, new SelectList(ViewBag.StartingYears, "Value", "Text"), "Select Year", new { @class = "collect optgroup col-md-4" })
+                                @Html.ValidationMessageFor(model => model.StartingYear, "", new { @class = "validation-block" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(model => model.PreviouslyApplied)
+                            </div>
+                            <div class="row alt">
+                                <div id="previouslyApplied" class="rdobtngrp">
+                                    @Html.RadioButtonFor(model => model.PreviouslyApplied, true, new { @id = "previousApplicantY", @class = "collect rdobtn" })
+                                    @Html.Label("previousApplicantY", "Yes", new { @class = "rdobtnlbl" })
+                                    @Html.RadioButtonFor(model => model.PreviouslyApplied, false, new { @id = "previousApplicantN", @class = "collect rdobtn" })
+                                    @Html.Label("previousApplicantN", "No", new { @class = "rdobtnlbl" })
+                                    @Html.ValidationMessageFor(model => model.PreviouslyApplied, "", new { @class = "validation-block" })
+                                </div>
+                            </div>
+                            <div class="row hidePrevious">
+                                @Html.LabelFor(m => m.PreviousStuId)
+                            </div>
+                            <div class="row alt hidePrevious">
+                                <div id="support-wrap" class="rdobtngrp tooltip-wrap col-md-6">
+                                    @Html.TextBoxFor(model => model.PreviousStuId, new { @class = "collect input" })
+                                    <div id="snumber-content" class="tooltip-content tooltip">
+                                        <b>What is a sNumber?</b><br />It is a student identification number used by the Lethbridge College, which starts with an "s", ex.: s1234567.<br />It's not your ASN (Alberta Student Number).
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(m => m.AdditionalSupport)
+                            </div>
+                            <div class="row alt">
+                                <div id="support-wrap" class="rdobtngrp tooltip-wrap">
+                                    @Html.RadioButtonFor(model => model.AdditionalSupport, true, new { @id = "disabilityY", @class = "collect rdobtn" })
+                                    @Html.Label("disabilityY", "Yes", new { @class = "rdobtnlbl" })
+                                    @Html.RadioButtonFor(model => model.AdditionalSupport, false, new { @id = "disabilityN", @class = "collect rdobtn" })
+                                    @Html.Label("disabilityN", "No", new { @class = "rdobtnlbl" })
+                                    @Html.ValidationMessageFor(model => model.AdditionalSupport, "", new { @class = "validation-block" })
+                                    <div id="support-content" class="tooltip-content tooltip">
+                                        <b>Additional support</b>: consultation, accommodations, and/or support from our Accessibility Services office which supports individuals with learning or physical disabilities, sensory impairments, ADD or ADHD, and chronic or mental health conditions.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(m => m.ContactName, new { @class = "label" })
+                            </div>
+                            <div class="row alt">
+                                @Html.TextBoxFor(m => m.ContactName, new { @class = "collect input" })
+                                @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "validation-block" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(m => m.ContactPhone, new { @class = "label" })
+                            </div>
+                            <div class="row alt">
+                                @Html.TextBoxFor(m => m.ContactPhone, new { @class = "collect input fullwidth" })
+                                @Html.ValidationMessageFor(model => model.ContactPhone, "", new { @class = "validation-block" })
+                            </div>
+                            <div class="row">
+                                @Html.LabelFor(m => m.ReferenceSource)
+                            </div>
+                            <div class="row alt">
+                                @Html.DropDownListFor(model => model.ReferenceSource, new SelectList(ViewBag.ReferenceTypes, "ReferenceTypeName", "ReferenceTypeDesc"), "Select", new { @class = "collect optgroup" })
+                                @*@Html.ValidationMessageFor(model => model.ReferenceSource, "", new { @class = "validation-block" })*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="width:90%;text-align:right;">
+                        <input type="submit" value="Continue" class="button submit continue" />
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
+
+
+

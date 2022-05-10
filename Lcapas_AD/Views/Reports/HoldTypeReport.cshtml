@@ -1,0 +1,350 @@
+﻿@model Lcapas.Core.Library.HoldTypeReportViewObj
+
+@section JavaScriptVariables {
+<script type="text/javascript">
+    var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+</script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+    <h2>@Model.Pagination.PageTitle @if (@Model.DestAction != null && Model.DestAction.Contains("Admissions"))
+    {<span>(Admissions)</span> }
+    else
+    { <span>(Records)</span>}</h2>
+    <div class="paging">
+        @if (Model.TranscriptRequests.Any())
+        {
+            <div class="page-print">
+                <input id="excelHoldTypeReportBtn" type="button" value="Export to Excel" class="button" />
+            </div>
+            <div class="page-print">
+                <input id="prntHoldTypeReportBtn" type="button" value="Print Reports" onclick="return false" class="btn btn-default button pull-right hor-pad" />
+            </div>
+            <div class="page-last">
+                @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                {
+                    <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                }
+            </div>
+            <div class="page-next">
+                @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                {
+                    <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                }
+            </div>
+            <div class="page-num">
+                @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+            </div>
+            <div class="page-prev">
+                @if (Model.Pagination.PageIndex > 1)
+                {
+                    <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                }
+            </div>
+            <div class="page-first">
+                @if (Model.Pagination.PageIndex > 1)
+                {
+                    <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                }
+            </div>
+            <div class="page-size">
+                @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+            </div>
+            <div class="page-results">
+                @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+            </div>
+        }
+    </div>
+    <br />
+    <div id="table-container">
+        @using (Html.BeginForm("HoldTypeReport", "Reports", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+        {
+            <table id="data-tbl" class="display">
+                <thead class="columnScrolling">
+                    <tr class="tableHeader">
+                        <th></th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.StudentRecord.Snumber, new { @class = "control-label" })
+                        </th>
+                        <th class="col-xw-160">
+                            @Html.LabelFor(m => m.SearchFilter.StudentRecord.FullName, new { @class = "control-label col-xw-160" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.StudentRecord.ASN, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @if (Model.DestAction == Lcapas.Core.Library.Structs.DestActions.AdmissionsOutbox)
+                            {
+                                <label class="control-label">To Fulfilling Institution</label>
+                            }
+                            else
+                            {
+                                <label class="control-label">From Requesting Institution</label>
+                            }
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.ListType, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.HoldType, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.HoldTypeData, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.Status, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.Operator, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.FromStatusDate, new { @class = "control-label" })
+                        </th>
+                        <th>
+                            @Html.LabelFor(m => m.SearchFilter.ToStatusDate, new { @class = "control-label" })
+                        </th>
+                        @if (Model.DestAction == Lcapas.Core.Library.Structs.DestActions.RecordsInbox)
+                        {
+                            <th>
+                                @Html.Label("TRRQ", new { @class = "control-label" })
+                            </th>
+                        }
+                        <th colspan="2"></th>
+                    </tr>
+                    <tr class="tableHeader hide-scroll">
+                        <th id="selectAll" title="Select All" class="text-right col-xw-30">
+                            <input id="SelectAll" type="checkbox" class="text" checked>
+                        </th>
+                        <th title="sNumber" class="col-xw-80">
+                            @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.Snumber, new { @id = "Snumber", @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                        </th>
+                        <th title="Student Name" class="col-xw-160">
+                            @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.FullName, new { @id = "FullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-160  " })
+                        </th>
+                        <th title="ASN" class="col-xw-80">
+                            @Html.TextBoxFor(m => m.SearchFilter.StudentRecord.ASN, new { @id = "ASN", @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                        </th>
+                        <th title="Destination Organization" class="col-xw-200">
+                            @Html.DropDownListFor(m => m.SearchFilter.DestinationOrganization, Model.Institutions, "", new { @id = "DestinationOrganization", @class = "text ui-widget-content ui-corner-all searchfield col-xw-200" })
+                        </th>
+                        <th title="List Type" class="col-xw-50">
+                            @Html.EnumDropDownListFor(m => m.SearchFilter.ListType, new { @id = "ListType", @class = "text ui-widget-content ui-corner-all searchfield" })
+                        </th>
+                        <th title="Hold Type" class="col-xw-100">
+                            @Html.DropDownListFor(m => m.SearchFilter.HoldType, Model.ReportViewHoldTypes, "", new { @id = "HoldType", @class = "text ui-widget-content ui-corner-all searchfield" })
+                        </th>
+                        <th title="Hold Type Notes" class="col-xw-100">
+                            @Html.TextBoxFor(m => m.SearchFilter.HoldTypeData, new { @id = "HoldTypeData", @class = "text ui-widget-content ui-corner-all searchfield col-xw-80" })
+                        </th>
+                        <th title="Status" class="col-xw-100">
+                            @Html.DropDownListFor(m => m.SearchFilter.Status, Model.Statuses, "", new { @id = "Status", @class = "text ui-widget-content ui-corner-all searchfield" })
+                        </th>
+                        <th title="Operator" class="col-xw-60">
+                            @Html.TextBoxFor(m => m.SearchFilter.Operator, new { @id = "Operator", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                        </th>
+                        <th title="From Status Date" class="col-xw-120">
+                            @Html.TextBoxFor(m => m.SearchFilter.FromStatusDate, "{0:yyyy/MM/dd}", new { @id = "FromStatusDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                        </th>
+                        <th title="To Status Date" class="col-xw-120">
+                            @Html.TextBoxFor(m => m.SearchFilter.ToStatusDate, "{0:yyyy/MM/dd}", new { @id = "ToStatusDate", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                        </th>
+                        @if (Model.DestAction == Lcapas.Core.Library.Structs.DestActions.RecordsInbox)
+                        {
+                            <th title="Sent to Colleague (TRRQ)" class="col-xw-30">
+                            </th>
+                        }
+                        <th title="Clear">
+                            <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("HoldTypeReport", "Reports", new { destAction = Model.DestAction })';return false;" />
+                        </th>
+                        <th title="Search">
+                            <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                            @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                            @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                            @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                            @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                            @Html.HiddenFor(m => m.DestAction, new { id = "destAction" })
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.TranscriptRequests.Count > 0)
+                    {
+                        foreach (var requestObj in Model.TranscriptRequests)
+                        {
+                            string newRequestClass = (requestObj.Request.TransmissionData.ExportedDateTime == null && requestObj.Request.ViewedDateTime == null /*&& Model.DestAction == Lcapas.Core.Library.Structs.DestActions.RecordsInbox*/ ? "text-bold yellow" : "");
+                            //string classColor = (requestObj.TranscriptCount > 0 ? "green" : (requestObj.ResponseCount > 0 ? "yellow" : (requestObj.ErrorMessageCount > 0 ? "red" : "")));
+
+                            foreach (var recipient in requestObj.Request.Recipients)
+                            {
+
+                                @*<tr id="requestLine-@recipient.Request.TransmissionData.Uuid" class="pad-left-tr-25 @newRequestClass @classColor" onmouseover="style.backgroundColor='lightblue';style.cursor='default';" onmouseout="style.backgroundColor=@(requestObj.TranscriptCount > 0 ? "'#BBFED4'" : (requestObj.ResponseCount > 0 ? "'lightyellow'" : (requestObj.ErrorMessageCount > 0 ? "'#FEB1B4'" : "'white'")));">
+                                *@
+                                <tr id="requestLine-@recipient.Request.TransmissionData.Uuid" class="pad-left-tr-25 @newRequestClass" onmouseover="style.backgroundColor='lightblue';style.cursor='default';" onmouseout="style.backgroundColor=@(string.IsNullOrWhiteSpace(newRequestClass) ? "'white'" : "'#ffff78'");">
+                                    <td class="col-xw-20">
+                                        <input type="checkbox" name="@recipient.Request.TransmissionData.Uuid" checked>
+                                    </td>
+                                    <td class="col-xw-80">
+                                        @if (recipient.Request.RequestedStudent.sNumbers.Any())
+                                        {
+                                            @recipient.Request.RequestedStudent.sNumbers.OrderByDescending(x => x.CreatedDateTime).Select(y => y.sNumVal).FirstOrDefault()
+                                        }
+                                    </td>
+                                    <td class="col-xw-160">
+                                        @if (recipient.Request.RequestedStudent.Person.Names.Any())
+                                        {
+                                            @recipient.Request.RequestedStudent.Person.Names.Where(y => y.NameType == Lcapas.Core.Library.Structs.Name.PersonalNameType).OrderByDescending(x => x.CreatedDateTime).FirstOrDefault().LastName@:, @recipient.Request.RequestedStudent.Person.Names.Where(y => y.NameType == Lcapas.Core.Library.Structs.Name.PersonalNameType).OrderByDescending(x => x.CreatedDateTime).FirstOrDefault().FirstName
+                                        }
+                                    </td>
+                                    <td class="col-xw-80">
+                                        @if (recipient.Request.RequestedStudent.ASNs.Any())
+                                        {
+                                            @recipient.Request.RequestedStudent.ASNs.OrderByDescending(x => x.CreatedDateTime).Select(y => y.AgencyAssignedID).FirstOrDefault()
+                                        }
+                                    </td>
+                                    <td class="col-xw-210">
+                                        @if (@Model.DestAction == @Lcapas.Core.Library.Structs.DestActions.AdmissionsOutbox)
+                                        {
+                                            if (recipient.Request.TransmissionData.DestinationInstitution.InstitutionNames.Any())
+                                            {
+                                                @recipient.Request.TransmissionData.DestinationInstitution.InstitutionNames.OrderByDescending(x => x.CreatedDateTime).Select(s => s.Name).FirstOrDefault()
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (recipient.Request.TransmissionData.SourceInstitution.InstitutionNames.Any())
+                                            {
+                                                @recipient.Request.TransmissionData.SourceInstitution.InstitutionNames.OrderByDescending(x => x.CreatedDateTime).Select(s => s.Name).FirstOrDefault()
+                                            }
+                                        }
+
+                                    </td>
+                                    <td class="col-xw-50 @(recipient.Request.TransmissionData.ExportedDateTime != null ? "color-green col-fw-130" : "color-gray")">
+                                        @(recipient.Request.TransmissionData.ExportedDateTime != null ? recipient.Request.TransmissionData.ExportedDateTime.Value.ToString("yyyy/MM/dd hh:mm tt") : "New" )
+                                    </td>
+                                    <td class="col-xw-100">
+                                        @if (recipient.TranscriptHolds.Any())
+                                        {
+                                            @recipient.TranscriptHolds.OrderByDescending(x => x.CreatedDateTime).Select(s => s.HoldType).FirstOrDefault()
+                                        }
+                                    </td>
+                                    <td class="col-xw-100">
+                                        @if (recipient.TranscriptHolds.Any())
+                                        {
+                                            switch (recipient.TranscriptHolds.OrderByDescending(x => x.CreatedDateTime).Select(s => s.HoldType).FirstOrDefault())
+                                            {
+                                                case Lcapas.Core.Library.Apas.AcademicRecord.HoldTypeType.AfterSpecifiedTerm:
+                                                case Lcapas.Core.Library.Apas.AcademicRecord.HoldTypeType.AfterGradesPosted:
+                                                    @recipient.TranscriptHolds.OrderByDescending(x => x.CreatedDateTime).FirstOrDefault().SessionDesignator;
+                                                    break;
+                                                case Lcapas.Core.Library.Apas.AcademicRecord.HoldTypeType.AfterSpecifiedDate:
+                                                    @recipient.TranscriptHolds.OrderByDescending(x => x.CreatedDateTime).FirstOrDefault().ReleaseDate.Value.ToString("yyyy/MM/dd");
+                                                    break;
+                                            }
+                                        }
+                                    </td>
+                                    <td class="col-xw-100">
+                                        @if (requestObj.ResponseStatus != null)
+                                        {
+                                            @requestObj.ResponseStatus
+                                        }
+                                        else
+                                        {
+                                            if (requestObj.ResponseCount > 0)
+                                            {
+                                                if (Model.DestAction == Lcapas.Core.Library.Structs.DestActions.AdmissionsOutbox)
+                                                {
+                                                    <label style="color:gray;"><em>Transcript Received</em></label>
+                                                }
+                                                else
+                                                {
+                                                    <label style="color:gray;"><em>Transcript Sent</em></label>
+                                                }
+                                            }
+                                        }
+                                    </td>
+                                    <td class="col-xw-60">
+                                        @if (!string.IsNullOrWhiteSpace(requestObj.Operator))
+                                        {
+                                            @requestObj.Operator
+                                        }
+                                    </td>
+                                    <td class="col-xw-120 text-center">
+                                        @if (recipient.CreatedDateTime != null)
+                                        {
+                                            @recipient.CreatedDateTime.ToString("yyyy/MM/dd");
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (requestObj.TranscriptCount > 0 ||
+                                            (requestObj.ResponseCount > 0 &&
+                                                (requestObj.ResponseStatus == Lcapas.Core.Library.Apas.AcademicRecord.ResponseStatusType.Canceled ||
+                                                 requestObj.ResponseStatus == Lcapas.Core.Library.Apas.AcademicRecord.ResponseStatusType.OfflineRecordSent)))
+                                        {
+                                            <img src="~/Content/Images/bullet_ball_glass_green.png" class="request-status pull-right" />
+                                        }
+                                        else if (requestObj.ResponseCount > 0)
+                                        {
+                                            <img src="~/Content/Images/bullet_ball_glass_yellow.png" class="request-status pull-right" />
+                                        }
+                                        else if (requestObj.ErrorMessageCount > 0)
+                                        {
+                                            <img src="~/Content/Images/bullet_ball_glass_red.png" class="request-status pull-right" />
+                                        }
+                                    </td>
+                                    @if (Model.DestAction == Lcapas.Core.Library.Structs.DestActions.RecordsInbox)
+                                    {
+                                        <td class="col-xw-40 sendToTRRQ text-center">
+
+                                            @if (requestObj.Request.SentToColleagueTRRQ != null)
+                                            {
+                                                <img src="~/Content/Images/check.png" class="request-status pull-right" />
+                                            }
+                                        </td>
+                                    }
+                                    <td colspan="2"></td>
+                                </tr>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="10" style="color:red;text-align:center;">
+                                <br />No records found.
+                                <br />Please enter search parameters and click 'Search'. <br />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+    <div id="bottom_anchor"></div>
+    <br />
+    <div class="request-legend">
+        <label>Legend: </label>
+        <img src="~/Content/Images/bullet_ball_glass_green.png" class="request-status" />
+        <label class="legend-item">Transcript Sent</label>
+        <img src="~/Content/Images/bullet_ball_glass_yellow.png" class="request-status" />
+        <label class="legend-item">Response Sent</label>
+        <img src="~/Content/Images/bullet_ball_glass_red.png" class="request-status" />
+        <label class="legend-item">Error Message</label>
+    </div>
+
+</div>

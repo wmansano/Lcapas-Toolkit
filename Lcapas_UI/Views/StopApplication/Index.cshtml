@@ -1,0 +1,26 @@
+﻿@{
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+
+<h2>Thank you for considering Lethbridge College.</h2>
+
+<div class="list-sfs-holder">
+    <div class="alert alert-error" style="text-align:center;">
+        <p>
+            Your application has been stopped and our Admissions department has been notified.<br />
+        </p>
+        <p>
+            Please click the link below to return to ApplyAlberta.<br />
+        </p>
+        <p>
+            <a class="button" href="@ViewBag.ApasReturnPath">Return to ApplyAlberta</a><br />
+        </p>
+    </div>
+</div>
+

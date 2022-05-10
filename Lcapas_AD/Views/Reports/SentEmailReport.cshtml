@@ -1,0 +1,205 @@
+﻿@model Lcapas.Core.Library.SentEmailReportViewObj
+
+@section JavaScriptVariables {
+<script type="text/javascript">
+    var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+</script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>@Model.PageTitle</h2>
+        <div class="paging">
+            @if (Model.SentEmailReportSearchFilter != null)
+            {
+                <div class="page-print">
+                    <input id="prntSentEmailReportBtn" type="button" value="Print Report" onclick="return false" class="button pull-right" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            @using (Html.BeginForm("SentEmailReport", "Reports", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+            {
+                <table id="data-tbl" class="TFtable display">
+                    <thead class="tableHeader">
+                        <tr class="tableHeader">
+                            <th></th>
+                            <th class="col-fw-100">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.EmailType, new { @class = "control-label" })
+                            </th>
+                            <th class="col-fw-100">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.Subject, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-50">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.Body, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-70">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.From, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-120">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.To, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-80">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.CreatedBy, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-80">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.CreatedDateTime, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-80">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.ModifiedBy, new { @class = "control-label" })
+                            </th>
+                            <th class="col-xw-80">
+                                @Html.LabelFor(m => m.SentEmailReportSearchFilter.ModifiedDateTime, new { @class = "control-label" })
+                            </th>
+                            <th colspan="2" />
+                        </tr>
+                        <tr class="tableHeader hide-scroll">
+                            <th id="selectAll" title="Select All">
+                                <input id="SelectAll" type="checkbox" class="text" checked>
+                            </th>
+                            <th title="Action Description" class="col-fw-120">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.EmailType, new { @id = "EmailType", @class = "text ui-widget-content ui-corner-all searchfield col-xw-120" })
+                            </th>
+                            <th title="User Full Name" class="col-fw-50">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.Subject, new { @id = "Subject", @class = "text ui-widget-content ui-corner-all searchfield" })
+                            </th>
+                            <th title="User ID" class="col-xw-50">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.Body, new { @id = "Body", @class = "text ui-widget-content ui-corner-all searchfield col-xw-40" })
+                            </th>
+                            <th title="Created By" class="col-xw-70">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.From, new { @id = "From", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Created Date" class="col-xw-120">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.To, new { @id = "To", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                            </th>
+                            <th title="Modified By" class="col-xw-80">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.CreatedBy, new { @id = "CreatedBy", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Modified By Date" class="col-xw-120">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.CreatedDateTime, new { @id = "CreatedDateTime", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                            </th>
+                            <th title="Modified By" class="col-xw-80">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.ModifiedBy, new { @id = "ModifiedBy", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Modified By Date" class="col-xw-120">
+                                @Html.TextBoxFor(m => m.SentEmailReportSearchFilter.ModifiedDateTime, new { @id = "ModifiedDateTime", @class = "text ui-widget-content ui-corner-all datepicker date-mask searchfield col-md-7" })
+                            </th>
+                            <th title="Clear">
+                                <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("SentEmailReport", "Reports")';return false;" />
+                            </th>
+                            <th title="Search">
+                                <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                                @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                                @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                                @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                                @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.SentEmailReportSearchResultsFilter.Count > 0)
+                        {
+                            foreach (var item in Model.SentEmailReportSearchResultsFilter)
+                            {
+                                <tr class=" tableBody">
+                                    <td>
+                                        <input type="checkbox" name="@item.SentEmailId" checked>
+                                    </td>
+                                    <td class="col-fw-20">
+                                        @item.EmailType
+                                    </td>
+                                    <td class="col-fw-50">
+                                        @item.Subject
+                                    </td>
+                                    <td class="col-fw-50">
+                                        @item.Body
+                                    </td>
+                                    <td class="col-fw-30">
+                                        @item.From
+                                    </td>
+                                    <td class="col-fw-50">
+                                        @item.To
+                                    </td>
+                                    <td class="col-fw-50">
+                                        @item.CreatedBy
+                                    </td>
+                                    <td class="col-fw-120">
+                                        @item.CreatedDateTime.Value.ToString("yyyy/MM/dd")
+                                    </td>
+                                    <td class="col-fw-20">
+                                        @item.ModifiedBy
+                                    </td>
+                                    <td class="col-fw-120">
+                                        @item.ModifiedDateTime.Value.ToString("yyyy/MM/dd")
+                                    </td>
+                                    <td colspan="2"></td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="20" style="color:red;text-align:center;">
+                                    <br />No records found.
+                                    <br />Please enter search parameters and click 'Search'. <br />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div id="bottom_anchor"></div>
+        <br />
+
+
+        </div>

@@ -1,0 +1,302 @@
+﻿@model Lcapas.Core.Library.CreateMsgViewObj
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-transcripts.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var CheckTransCompletePath = '@Url.Action("CheckTransactionTranscriptComplete", "Transcripts")';
+        var DisplayTranscriptMessagePath = '@Url.Action("DisplayMessage", "Transcripts")';
+        var DisplayIframeDocumentPath = '@Url.Action("DisplayIframeDocument", "Transcripts")';
+    </script>
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_TranscriptsMenu.cshtml")
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="col-xw-600">
+
+    @using (Html.BeginForm("CreateMessage", "Transcripts", FormMethod.Post, new { @id = "createMessageForm", @class = "max-width:990px;" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.DestAction, new { @id = "destAction" })
+        @Html.HiddenFor(m => m.TransDataID, new { @id = "transDataId" })
+        @Html.HiddenFor(m => m.TransactionTranscriptUuid, new { @id = "transactionTranscriptUuid" })
+        @Html.HiddenFor(m => m.TransmissionDataUUID, new { @id = "transmissionDataUUID", @Value = Model.TransmissionDataUUID })
+        @Html.HiddenFor(m => m.PreviewMessageIndicator, new { @id = "previewMessageIndicator" })
+        @Html.HiddenFor(m => m.StudentRestriction, new { @id = "studentRestriction" })
+        @Html.HiddenFor(m => m.StudentMissingASN, new { @id = "studentMissingASN" })
+        @Html.HiddenFor(m => m.StudentRecord.StudentId, new { @id = "studentId" })
+        <div class="card card-body">
+            <div id="StudIdDiv" class="row">
+                <h4 class="row">Student</h4>
+                <div class="list-header col-md-12 pad-left">
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.Snumber, new { @class = "control-label" })</div>
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.ASN, new { @class = "control-label" })</div>
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.BirthDate, new { @class = "control-label" })</div>
+                    <div class="col-md-2">@Html.LabelFor(m => m.StudentRecord.Gender, new { @class = "control-label margin-left" })</div>
+                </div>
+                <div class="col-md-12 pad-left">
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.Snumber, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.Snumber) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.ASN, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.ASN) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.BirthDate, new { @class = "text ui-widget-content ui-corner-all datepicker date-mask" })
+                        @Html.HiddenFor(m => m.StudentRecord.BirthDate) &nbsp;
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DisplayFor(m => m.StudentRecord.Gender, string.Empty, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.Gender) &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div id="StudNameDiv" class="row">
+                <div class="list-header col-md-12 pad-left">
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.LastName, new { @class = "control-label" })</div>
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.FirstName, new { @class = "control-label" })</div>
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.MiddleName, new { @class = "control-label" })</div>
+                </div>
+                <div id="NamesDiv" class="col-md-12 pad-left">
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.LastName, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.LastName) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.FirstName, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.FirstName) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.MiddleName, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.MiddleName) &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div id="StudEmailDiv" class="row">
+                <div class="list-header col-md-12 pad-left">
+                    <div>@Html.LabelFor(m => m.StudentRecord.Email, new { @class = "control-label" })</div>
+                </div>
+                <div id="EmailDiv" class="col-md-12 pad-left">
+                    <div>
+                        @Html.DisplayFor(m => m.StudentRecord.Email, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.Email)
+                    </div>
+                </div>
+            </div>
+            @if (Model.StudentRecord.FormerNames.Any())
+            {
+                <div id="FormerNamesDiv" class="row">
+                    <h4 class="row">Former Names</h4>
+                    <div class="list-header col-md-12 pad-left">
+                        <div class="col-md-3"><label>Last Name</label></div>
+                        <div class="col-md-3"><label>First Name</label></div>
+                        <div class="col-md-3"><label>Middle Name</label></div>
+                    </div>
+                    <div id="formernames-partial" class="col-md-12 pad-left">
+                        @for (int i = 0; i < Model.StudentRecord.FormerNames.Count(); i++)
+                        {
+                            <div class="col-md-3">
+                                @Html.DisplayFor(m => m.StudentRecord.FormerNames[i].LastName, new { @class = "text ui-widget-content ui-corner-all" })
+                                @Html.HiddenFor(m => m.StudentRecord.FormerNames[i].LastName) &nbsp;
+                            </div>
+                            <div class="col-md-3">
+                                @Html.DisplayFor(m => m.StudentRecord.FormerNames[i].FirstName, new { @class = "text ui-widget-content ui-corner-all" })
+                                @Html.HiddenFor(m => m.StudentRecord.FormerNames[i].FirstName) &nbsp;
+                            </div>
+                            <div class="col-md-3">
+                                @Html.DisplayFor(m => m.StudentRecord.FormerNames[i].MiddleName, new { @class = "text ui-widget-content ui-corner-all" })
+                                @Html.HiddenFor(m => m.StudentRecord.FormerNames[i].MiddleName) &nbsp;
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            <div id="AddressesDiv" class="row">
+                <h4 class="row">Address</h4>
+
+                <div class="list-header col-md-12 pad-left">
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.City, new { @class = "control-label" })</div>
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.State, new { @class = "control-label" })</div>
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.Phone, new { @class = "control-label" })</div>
+                </div>
+                <div id="NamesDiv" class="row pad-left">
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.City, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.City) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.State, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.State) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.Phone, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.Phone) &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div id="AddressesDiv2" class="row pad-left">
+                <div class="list-header col-md-12">
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.Addr1, new { @class = "control-label" })</div>
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.Addr2, new { @class = "control-label" })</div>
+                    <div class="col-md-3">@Html.LabelFor(m => m.StudentRecord.Zip, new { @class = "control-label" })</div>
+                    <div class="col-md-2">@Html.LabelFor(m => m.StudentRecord.Country, new { @class = "control-label" })</div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.Addr1, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.Addr1) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        <label>@Html.DisplayFor(m => m.StudentRecord.Addr2, new { @class = "text ui-widget-content ui-corner-all" })&nbsp;</label>
+                        @Html.HiddenFor(m => m.StudentRecord.Addr2) &nbsp;
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(m => m.StudentRecord.Zip, new { @class = "text ui-widget-content ui-corner-all zip-mask" })
+                        @Html.HiddenFor(m => m.StudentRecord.Zip) &nbsp;
+                    </div>
+                    <div class="col-md-2">
+                        @Html.DisplayFor(m => m.StudentRecord.Country, new { @class = "text ui-widget-content ui-corner-all" })
+                        @Html.HiddenFor(m => m.StudentRecord.Country) &nbsp;
+                    </div>
+                </div>
+            </div>
+            <div id="DestinationsDiv">
+                <div class="row">
+                    <div class=@(Model.DestAction != Lcapas.Core.Library.Structs.DestActions.CreateTranscript ? "col-md-10" : "col-md-4")>
+                        <h4 style="margin-bottom:0px;">Destinations</h4>
+                    </div>
+                    @if (Model.RequestTrackingId == null)
+                    {
+                        <div class="col-md-1 @(Model.DestAction != Lcapas.Core.Library.Structs.DestActions.CreateTranscript ? "" : "text-center pad-left")" style="margin-top:15px;">
+                            <a id="add-dest-btn" href="javascript:void(0);" class="dest-icon" title="Add Destination"><img src="~/Content/Images/add.png" style="margin:1px 0px -2px 0px; width:16px; height:16px;" /></a>
+                        </div>
+                    }
+                </div>
+                <div class="list-header">
+                    <div class="col-md-4 pad-left"><label>Destination Institution</label></div>
+                    <div class="col-md-2 pad-left">
+                        <label>Hold Type</label>
+                        @*@switch (Model.DestAction)
+                            {
+                                case Lcapas.Core.Library.Structs.DestActions.CreateRequest:
+                                    <label>Hold Type</label>
+                                    break;
+                                case Lcapas.Core.Library.Structs.DestActions.CreateResponse:
+                                    <label>Status Type</label>
+                                    break;
+                            }*@
+                    </div>
+                    <div class="col-md-3 pad-left">
+                        <label>Hold Details</label>
+                        @*@switch (Model.DestAction)
+                            {
+                                case Lcapas.Core.Library.Structs.DestActions.CreateRequest:
+                                    <label>Hold Details</label>
+                                    break;
+                                case Lcapas.Core.Library.Structs.DestActions.CreateResponse:
+                                    <label>Status Details</label>
+                                    break;
+                            }*@
+                    </div>
+                </div>
+                <div id="destinations-partial">
+                    <ul id="destinations-list" class="list">
+                        @for (int i = 0; i < Model.DestinationDetails.Count(); i++)
+                        {
+                            <li class="row">
+                                <div class="col-md-4">
+                                    @if (Model.RequestTrackingId != null)
+                                    {
+                                        @Html.DisplayFor(x => x.DestinationDetails[i].Destination.InstitutionName, new { @class = "text ui-widget-content ui-corner-all" })
+                                        @Html.HiddenFor(x => x.DestinationDetails[i].Destination.InstitutionID)
+                                        @Html.HiddenFor(x => x.DestinationDetails[i].Destination.InstitutionName)
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownListFor(x => x.DestinationDetails[i].Destination.InstitutionID, Model.Destinations, string.Empty, new { @class = "text ui-widget-content ui-corner-all" })
+                                    }
+                                </div>
+                                <div class="col-md-2 pad-left">
+                                    @switch (Model.DestAction)
+                                    {
+                                        case Lcapas.Core.Library.Structs.DestActions.CreateRequest:
+                                            @*@Html.EnumDropDownListFor(m => m.DestinationDetails[i].HoldTypeType, new { @class = "text ui-widget-content ui-corner-all hold-type" })*@
+
+                                            <select name="@Html.NameFor(m => m.DestinationDetails[i].HoldTypeType)" id="@Html.IdFor(m => m.DestinationDetails[i].HoldTypeType)" class="text ui-widget-content ui-corner-all hold-type">
+                                                @foreach (Lcapas.Core.Library.Apas.AcademicRecord.HoldTypeType item in Enum.GetValues(typeof(Lcapas.Core.Library.Apas.AcademicRecord.HoldTypeType)))
+                                                {
+                                                    <option value="@item.GetHashCode()" data-type="@Lcapas.Core.Library.EnumExtensions.GetDataType(item)" selected="@(Model != null && item == Model.DestinationDetails[i].HoldTypeType)">@Lcapas.Core.Library.EnumExtensions.GetDisplayName(item)</option>
+                                                }
+                                            </select>
+
+                                            break;
+                                        case Lcapas.Core.Library.Structs.DestActions.CreateResponse:
+                                            @Html.EnumDropDownListFor(m => m.DestinationDetails[i].ResponseStatusType, new { @class = "text ui-widget-content ui-corner-all" })
+                                            break;
+                                    }
+                                </div>
+
+                                <div class="col-md-3 pad-left">
+                                    @if (Model.DestAction != Lcapas.Core.Library.Structs.DestActions.CreateTranscript)
+                                    {
+                                        @Html.TextBoxFor(m => m.DestinationDetails[i].HoldTypeData, new { @class = "text ui-widget-content ui-corner-all hold-detail" })
+                                    }
+                                </div>
+                                @if (Model.RequestTrackingId == null)
+                                {
+                                    <div class="col-md-1 pad-left text-center">
+                                        <a href="javascript:void(0);" onclick="removeli(this, @i);" class="dest-icon" style="width:100%; text-align:center;"><img src="~/Content/Images/error.png" style="margin:1px 0px -2px 0px; width:20px; height:20px;" /></a>
+                                    </div>
+                                }
+                            </li>
+                        }
+                    </ul>
+
+                    @Html.HiddenFor(m => m.RequestTrackingId, new { id = "reqTrackId" })
+                </div>
+            </div>
+            <div id="SendInfoDiv" class="col-md-12">
+                <div class="list-header pad-left"></div>
+                <div class="row">
+                    <div class="col-md-10 text-right">
+                        @if (Model.DestAction == Lcapas.Core.Library.Structs.DestActions.CreateRequest)
+                        {
+                            <input id="preview-btn" type="submit" value="Generate" class="submit-btn submit-form" formnovalidate />
+                        }
+                        else
+                        {
+                            <input id="preview-btn" type="submit" value="Generate/Preview" class="submit-btn submit-form" formnovalidate />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="collapseVerification" class="collapse">
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md-7 text-right">
+                        @Html.LabelFor(m => m.ReleaseAuthorizedIndicator, new { @class = "control-label" })
+                        <span class="checkboxContent">@Html.CheckBoxFor(m => m.ReleaseAuthorizedIndicator, new { @class = "input" })</span>
+                        @Html.ValidationMessageFor(x => x.ReleaseAuthorizedIndicator, string.Empty, new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3 text-right">
+                        <input id="modify-btn" type="button" value="Modify" class="submit-btn submit-form" />
+                        <input id="submit-btn" type="submit" value="Submit" class="submit-btn submit-form disabled-btn" formnovalidate disabled="disabled" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+
+

@@ -1,0 +1,16 @@
+﻿
+<div class="navigation row">
+    <div class="left-nav col-md-12">
+        <ul>
+            <li class="@Html.ActivePage("Index", "Home")">@Html.LcActionLink("Home", "Index", "Home")</li>
+            <li class="@Html.ActivePage("Index", "Transcripts")">@Html.LcActionLink("Transcript Home", "Index", "Transcripts")</li>
+            <li class="@Html.ActivePage("RequestTranscript", "Transcripts")">@Html.LcActionLink("Request Transcript", "RequestTranscript", "Transcripts", new Lcapas.Core.Library.CreateMsgViewObj { DestAction = Lcapas.Core.Library.Structs.DestActions.CreateRequest })</li>
+            <li class="@Html.ActivePage("SendUnsolicitedTranscript", "Transcripts")">@Html.LcActionLink("Send Unsolicited Transcript", "SendUnsolicitedTranscript", "Transcripts", new Lcapas.Core.Library.CreateMsgViewObj { DestAction = Lcapas.Core.Library.Structs.DestActions.CreateTranscript })</li>
+            <li class="@Html.ActivePage("AdmissionsInbox", "Transcripts")">@Html.LcActionLink("Admissions Inbox", "AdmissionsInbox", "Transcripts")</li>
+            <li class="@Html.ActivePage("AdmissionsOutbox", "Transcripts")">@Html.LcActionLink("Admissions Outbox", "AdmissionsOutbox", "Transcripts")</li>
+            <li class="@Html.ActivePage("RecordsInbox", "Transcripts")">@Html.LcActionLink("Records Inbox", "RecordsInbox", "Transcripts")</li>
+            <li class="@Html.ActivePage("RecordsOutbox", "Transcripts")">@Html.LcActionLink("Records Outbox", "RecordsOutbox", "Transcripts")</li>
+            <li class="@Html.ActivePage("UnsolicitedBatchTranscript", "Transcripts")">@Html.LcActionLink("Unsolicited Transcript Batch", "UnsolicitedBatchTranscript", "Transcripts")</li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="lc_transcript_stylesheet.xsl"?>
+<CollegeTranscript xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:ca:applyalberta:message:CollegeTranscript:v1.0.0a">
+	<TransmissionData xmlns="">
+		<DocumentID>MHC-4TW7P5ZR33Q4-910303502</DocumentID>
+		<CreatedDateTime>2015-09-24T15:21:06.346102-06:00</CreatedDateTime>
+		<DocumentTypeCode>Response</DocumentTypeCode>
+		<TransmissionType>Original</TransmissionType>
+		<Source>
+			<Organization>
+				<ESIS>48028000</ESIS>
+				<LocalOrganizationID>
+					<LocalOrganizationIDCode>48028000</LocalOrganizationIDCode>
+					<LocalOrganizationIDQualifier>AB</LocalOrganizationIDQualifier>
+				</LocalOrganizationID>
+				<OrganizationName>Medicine Hat College</OrganizationName>
+				<Contacts>
+					<Email>
+						<EmailAddress>ApasInquiries@mhc.ab.ca</EmailAddress>
+					</Email>
+				</Contacts>
+			</Organization>
+		</Source>
+		<Destination>
+			<Organization>
+				<ESIS>48027000</ESIS>
+				<LocalOrganizationID>
+					<LocalOrganizationIDCode>48027000</LocalOrganizationIDCode>
+					<LocalOrganizationIDQualifier>AB</LocalOrganizationIDQualifier>
+				</LocalOrganizationID>
+				<OrganizationName>Lethbridge College</OrganizationName>
+			</Organization>
+		</Destination>
+		<RequestTrackingID>20150924151710-48027000-24332</RequestTrackingID>
+	</TransmissionData>
+	<Student xmlns="">
+		<Person>
+			<SchoolAssignedPersonID>199906567</SchoolAssignedPersonID>
+			<AgencyAssignedID>910303502</AgencyAssignedID>
+			<Birth>
+				<BirthDate>1991-03-26</BirthDate>
+			</Birth>
+			<Name>
+				<FirstName>Kathleen</FirstName>
+				<LastName>Williams</LastName>
+			</Name>
+			<Gender>
+				<GenderCode>Female</GenderCode>
+			</Gender>
+		</Person>
+		<AcademicRecord>
+			<AcademicSession>
+				<AcademicSessionDetail>
+					<SessionDesignator>2009-09</SessionDesignator>
+					<SessionName>Fall 2009 - Credit</SessionName>
+					<SessionType>Semester</SessionType>
+					<SessionBeginDate>2009-09-01</SessionBeginDate>
+					<SessionEndDate>2009-12-31</SessionEndDate>
+				</AcademicSessionDetail>
+				<AcademicProgram>
+					<AcademicProgramName>Environmental Science</AcademicProgramName>
+					<NoteMessage>22.00</NoteMessage>
+					<NoteMessage>22.00</NoteMessage>
+					<NoteMessage>33.90</NoteMessage>
+				</AcademicProgram>
+				<Course>
+					<CourseCreditBasis>Regular</CourseCreditBasis>
+					<CourseCreditValue>4.00</CourseCreditValue>
+					<CourseCreditEarned>4.00</CourseCreditEarned>
+					<CourseAcademicGradeScaleCode>05</CourseAcademicGradeScaleCode>
+					<CourseAcademicGrade>C-</CourseAcademicGrade>
+					<CourseQualityPointsEarned>6.80</CourseQualityPointsEarned>
+					<CourseSubjectAbbreviation>BIOL</CourseSubjectAbbreviation>
+					<CourseNumber>254</CourseNumber>
+					<CourseTitle>Plant Taxonomy</CourseTitle>
+					<NoteMessage>Environmental Science</NoteMessage>
+				</Course>
+				<Course>
+					<CourseCreditBasis>Regular</CourseCreditBasis>
+					<CourseCreditValue>4.00</CourseCreditValue>
+					<CourseCreditEarned>4.00</CourseCreditEarned>
+					<CourseAcademicGradeScaleCode>05</CourseAcademicGradeScaleCode>
+					<CourseAcademicGrade>C+</CourseAcademicGrade>
+					<CourseQualityPointsEarned>9.20</CourseQualityPointsEarned>
+					<CourseSubjectAbbreviation>BIOL</CourseSubjectAbbreviation>
+					<CourseNumber>259</CourseNumber>
+					<CourseTitle>Aquatic Ecology</CourseTitle>
+					<NoteMessage>Environmental Science</NoteMessage>
+				</Course>
+				<Course>
+					<CourseCreditBasis>Regular</CourseCreditBasis>
+					<CourseCreditValue>3.00</CourseCreditValue>
+					<CourseCreditEarned>3.00</CourseCreditEarned>
+					<CourseAcademicGradeScaleCode>05</CourseAcademicGradeScaleCode>
+					<CourseAcademicGrade>D+</CourseAcademicGrade>
+					<CourseQualityPointsEarned>3.90</CourseQualityPointsEarned>
+					<CourseSubjectAbbreviation>CJLS</CourseSubjectAbbreviation>
+					<CourseNumber>166</CourseNumber>
+					<CourseTitle>Introduction to Natural Resource Law</CourseTitle>
+					<NoteMessage>Environmental Science</NoteMessage>
+				</Course>
+				<Course>
+					<CourseCreditBasis>Regular</CourseCreditBasis>
+					<CourseCreditValue>3.00</CourseCreditValue>
+					<CourseCreditEarned>3.00</CourseCreditEarned>
+					<CourseAcademicGradeScaleCode>05</CourseAcademicGradeScaleCode>
+					<CourseAcademicGrade>C</CourseAcademicGrade>
+					<CourseQualityPointsEarned>6.00</CourseQualityPointsEarned>
+					<CourseSubjectAbbreviation>ENGL</CourseSubjectAbbreviation>
+					<CourseNumber>155</CourseNumber>
+					<CourseTitle>Scientific and Technical Writing</CourseTitle>
+					<NoteMessage>Environmental Science</NoteMessage>
+				</Course>
+				<Course>
+					<CourseCreditBasis>Regular</CourseCreditBasis>
+					<CourseCreditValue>4.00</CourseCreditValue>
+					<CourseCreditEarned>4.00</CourseCreditEarned>
+					<CourseAcademicGradeScaleCode>05</CourseAcademicGradeScaleCode>
+					<CourseAcademicGrade>D</CourseAcademicGrade>
+					<CourseQualityPointsEarned>4.00</CourseQualityPointsEarned>
+					<CourseSubjectAbbreviation>EREC</CourseSubjectAbbreviation>
+					<CourseNumber>230</CourseNumber>
+					<CourseTitle>Water Fundamentals</CourseTitle>
+					<NoteMessage>Environmental Science</NoteMessage>
+				</Course>
+				<Course>
+					<CourseCreditBasis>Regular</CourseCreditBasis>
+					<CourseCreditValue>4.00</CourseCreditValue>
+					<CourseCreditEarned>4.00</CourseCreditEarned>
+					<CourseAcademicGradeScaleCode>05</CourseAcademicGradeScaleCode>
+					<CourseAcademicGrade>D</CourseAcademicGrade>
+					<CourseQualityPointsEarned>4.00</CourseQualityPointsEarned>
+					<CourseSubjectAbbreviation>GEOG</CourseSubjectAbbreviation>
+					<CourseNumber>201</CourseNumber>
+					<CourseTitle>The Physical Environment</CourseTitle>
+					<NoteMessage>Environmental Science</NoteMessage>
+				</Course>
+				<AcademicSummary>
+					<GPA>
+						<CreditHoursAttempted>22.00</CreditHoursAttempted>
+						<CreditHoursEarned>22.00</CreditHoursEarned>
+						<GradePointAverage>1.5400</GradePointAverage>
+						<TotalQualityPoints>33.90</TotalQualityPoints>
+						<CreditHoursforGPA>1.5400</CreditHoursforGPA>
+					</GPA>
+					<NoteMessage>Environmental Science</NoteMessage>
+					<Delinquencies>ProbationGPA</Delinquencies>
+				</AcademicSummary>
+			</AcademicSession>
+			<AcademicSession>
+				<AcademicSessionDetail>
+					<SessionDesignator>2010-01</SessionDesignator>
+					<SessionName>Winter 2010 - Credit</SessionName>
+					<SessionType>Semester</SessionType>
+					<SessionBeginDate>2010-01-01</SessionBeginDate>
+					<SessionEndDate>2010-04-30</SessionEndDate>
+				</AcademicSessionDetail>
+				<AcademicProgram>
+					<AcademicProgramName>College Preparation</AcademicProgramName>
+					<NoteMessage>8.00</NoteMessage>
+					<NoteMessage>4.00</NoteMessage>
+					<NoteMessage>12.00</NoteMessage>
+				</AcademicProgram>
+				<Course>
+					<CourseCreditBasis>Regular</CourseCreditBasis>
+					<CourseCreditValue>4.00</CourseCreditValue>
+					<CourseCreditEarned>4.00</CourseCreditEarned>
+					<CourseAcademicGradeScaleCode>05</CourseAcademicGradeScaleCode>
+					<CourseAcademicGrade>B</CourseAcademicGrade>
+					<CourseQualityPointsEarned>12.00</CourseQualityPointsEarned>
+					<CourseSubjectAbbreviation>BIOL</CourseSubjectAbbreviation>
+					<CourseNumber>030</CourseNumber>
+					<CourseTitle>Matriculation Biology</CourseTitle>
+					<NoteMessage>College Preparation</NoteMessage>
+				</Course>
+				<Course>
+					<CourseCreditBasis>Regular</CourseCreditBasis>
+					<CourseCreditValue>4.00</CourseCreditValue>
+					<CourseCreditEarned>0.00</CourseCreditEarned>
+					<CourseAcademicGradeScaleCode>05</CourseAcademicGradeScaleCode>
+					<CourseAcademicGrade>F</CourseAcademicGrade>
+					<CourseQualityPointsEarned>0.00</CourseQualityPointsEarned>
+					<CourseSubjectAbbreviation>CHEM</CourseSubjectAbbreviation>
+					<CourseNumber>030</CourseNumber>
+					<CourseTitle>Matriculation Chemistry</CourseTitle>
+					<NoteMessage>College Preparation</NoteMessage>
+				</Course>
+				<AcademicSummary>
+					<GPA>
+						<CreditHoursAttempted>8.00</CreditHoursAttempted>
+						<CreditHoursEarned>4.00</CreditHoursEarned>
+						<GradePointAverage>1.5000</GradePointAverage>
+						<TotalQualityPoints>12.00</TotalQualityPoints>
+						<CreditHoursforGPA>1.5000</CreditHoursforGPA>
+					</GPA>
+					<NoteMessage>College Preparation</NoteMessage>
+					<Delinquencies>ProbationGPA</Delinquencies>
+				</AcademicSummary>
+			</AcademicSession>
+		</AcademicRecord>
+	</Student>
+</CollegeTranscript>

@@ -1,0 +1,10 @@
+﻿
+<div class="navigation row">
+    <div class="left-nav col-md-12">
+        <ul>
+            <li class="@Html.ActivePage("Index", "Home")">@Html.LcActionLink("Home", "Index", "Home")</li>
+            <li class="@Html.ActivePage("Index", "TransferCredits")">@Html.LcActionLink("Transfer Credits Home", "Index", "TransferCredits")</li>
+           <li class="@Html.ActivePage("GenerateTransferCreditXML", "TransferCredits") " >@Html.LcActionLink("Generate Transfer Credit XML", "GenerateTransferCreditXML", "TransferCredits", new { onclick = "javascript:return false;" })</li>
+        </ul>
+    </div>
+</div>

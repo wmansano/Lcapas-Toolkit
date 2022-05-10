@@ -1,0 +1,15 @@
+﻿
+<div class="navigation row">
+    <div class="left-nav col-md-12">
+        <ul>
+            <li class="@Html.ActivePage("Index", "Home")">@Html.LcActionLink("Home", "Index", "Home")</li>
+            <li class="@Html.ActivePage("Index", "Settings")">@Html.LcActionLink("Settings Home", "Index", "Settings")</li>
+            <li class="@Html.ActivePage("Index", "ApplicationSettings")">@Html.LcActionLink("Application Settings", "Index", "ApplicationSettings")</li>
+            @*<li class="@Html.ActivePage("Index", "TranscriptSettings")">@Html.LcActionLink("Transcript Settings", "Index", "TranscriptSettings")</li>*@
+            <li class="@Html.ActivePage("Index", "Users")">@Html.LcActionLink("Users Settings", "Index", "Users")</li>
+            <li class="@Html.ActivePage("Permissions", "Settings")">@Html.LcActionLink("Permissions", "Permissions", "Settings")</li>
+            <li class="@Html.ActivePage("SystemSettings", "Settings")">@Html.LcActionLink("System Settings", "SystemSettings", "Settings")</li>
+            <li class="@Html.ActivePage("ServerStatus", "Settings")">@Html.LcActionLink("Server Status", "ServerStatus", "Settings")</li>
+        </ul>
+    </div>
+</div>

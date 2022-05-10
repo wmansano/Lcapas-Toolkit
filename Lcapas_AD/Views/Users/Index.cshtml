@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Users - Home";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-generic.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_UsersMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>@Html.LcActionLink("Settings Home", "Index", "Settings")</li>
+    <li>@Html.LcActionLink("Users Home", "Index", "Users")</li>
+    <li>@Html.LcActionLink("Users View", "User", "Users")</li>
+    <li>@Html.LcActionLink("Users Access Groups", "UserAccessGroup", "Users")</li>
+</ul>

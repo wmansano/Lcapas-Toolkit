@@ -1,0 +1,1013 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5D3AAF7F-2DDB-4F3A-A3ED-E69F6B26B27F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lcapas.Core</RootNamespace>
+    <AssemblyName>LcapasCore</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <!--<IISExpressSSLPort>59265</IISExpressSSLPort>-->
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+    <IISExpressSSLPort>59265</IISExpressSSLPort>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Colleague.Configuration">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Colleague.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Colleague.Domain">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Colleague.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Colleague.Legacy">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Colleague.Legacy.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Colleague.Property">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Colleague.Property.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Data.Colleague">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Data.Colleague.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Dmi.Client">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Dmi.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Dmi.Runtime">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Dmi.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Web.Cache">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Web.Cache.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Web.License">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Web.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Web.Security">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Web.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.Web.Utility">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.Web.Utility.dll</HintPath>
+    </Reference>
+    <Reference Include="Ellucian.WebServices.Core.Config">
+      <HintPath>..\packages\Ellucian\lib\Ellucian.WebServices.Core.Config.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.3\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NReco.PdfGenerator, Version=1.2.0.0, Culture=neutral, PublicKeyToken=231663d50a41b451, processorArchitecture=MSIL">
+      <HintPath>..\packages\NReco.PdfGenerator.1.2.0\lib\net45\NReco.PdfGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="slf4net">
+      <HintPath>..\packages\Ellucian\lib\slf4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.CodeDom, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.CodeDom.6.0.0\lib\net461\System.CodeDom.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Concurrent" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UNCAccessWithCredentials, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UNCAccessWithCredentials.1.0.0\lib\UNCAccessWithCredentials.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CsvExport.cs" />
+    <Compile Include="Library\Apas\StatData.cs" />
+    <Compile Include="Library\Applications\ApplicationObjects.cs" />
+    <Compile Include="Library\MyCreds\MyCredsObjects.cs" />
+    <Compile Include="Library\Settings\SettingsObjects.cs" />
+    <Compile Include="Library\Transcripts\TranscriptObjects.cs" />
+    <Compile Include="Library\Transcripts\TranscriptsManager.cs" />
+    <Compile Include="Library\TransferCredits\TransferCreditsObjects.cs" />
+    <Compile Include="Library\Utility\UtilityObjects.cs" />
+    <Compile Include="Logic\ApasLogic.cs" />
+    <Compile Include="Logic\ColleagueLogic.cs" />
+    <Compile Include="Logic\LcapasLogic.cs" />
+    <Compile Include="Library\Apas\AcademicRecord.cs" />
+    <Compile Include="Library\Apas\Acknowledgement.cs" />
+    <Compile Include="Library\Apas\AdmissionsApplication.cs" />
+    <Compile Include="Library\Apas\AdmissionRecord.cs" />
+    <Compile Include="Library\Apas\CollegeTranscript.cs" />
+    <Compile Include="Library\Apas\CoreMain.cs" />
+    <Compile Include="Library\Apas\ErrorMessage.cs" />
+    <Compile Include="Library\Apas\HighSchoolTranscript.cs" />
+    <Compile Include="Library\Apas\TranscriptRequest.cs" />
+    <Compile Include="Library\Apas\TranscriptResponse.cs" />
+    <Compile Include="Models\Colldb\ACAD_CREDENTIALS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\ACAD_CREDENTIALS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\ACAD_PROGRAMS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\ACAD_PROGRAMS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\ADDRESSES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\ADDRESS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\ADR_PHONES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\APPLICATION.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\APPLICATIONS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\APPLICATION_STATUSES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\APPL_LOCATION_INFO.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\APPL_STATUSES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\CC_COMMENTS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\CH_CORR.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\colldb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>colldb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\colldb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\colldb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>colldb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\COURSE_SECTIONS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\COURSE_SECTIONS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\COURSE_SEC_FACULTY.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\DEPT.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\EXTERNAL_NOTES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\EXTERNAL_TRANSCRIPTS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\EXTERNAL_TRANSCRIPTS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\FOREIGN_PERSON.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\GRADE.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\GRADE_SCHEMES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\GRADE_SCHEMES_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\INSTITUTION.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\MAILING.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\NAMEHISTS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\PEOPLE.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\PEOPLE_EMAIL.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\PERPHONE.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\PERSON_ALT.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\PERSON_ST.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\PERSON_ST_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\RESTRICTION.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\RESTRICTIONS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\RULES_CHECK.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STC_STATUSES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STPR_DATES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STPR_STATUSES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_ACAD_CRED.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_ACAD_CRED_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_COURSE_SEC.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_EQUIV_EVALS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_EQUIV_EVALS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_NON_COURSES.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_PROGRAMS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_REQUEST_LOGS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_REQUEST_LOGS_LS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_RESTRICTIONS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_STANDINGS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\STUDENT_TERMS.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Utility\Enums.cs" />
+    <Compile Include="Library\Applications\ApplicationsManager.cs" />
+    <Compile Include="Library\Utility\Structs.cs" />
+    <Compile Include="Models\Colldb\TERM.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Colldb\VAL.cs">
+      <DependentUpon>colldb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CollWebApi\DataContracts.cs" />
+    <Compile Include="Models\CollWebApi\MainDriver.cs" />
+    <Compile Include="Models\CollWebApi\TransactionInvoker.cs" />
+    <Compile Include="Models\Lcappsdb\AcademicAward.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\AcademicRecord.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\AcademicSession.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\AccessGroup.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Acknowledgement.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ActionType.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Address.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\AdmissionOfflineSearchRespons.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\AdmissionOutstandingRequest.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ApasCode.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ApasMessage.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ApplicationFee.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ApplicationMessage.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ApplicationProgram.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ASN.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\BooleanValue.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\BulkSendTranscript.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Citizenship.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\CodeType.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ContactEmail.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ContactPerson.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ContactPhone.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ControllerType.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Course.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\CourseTitle.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\DateTimeValue.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Disability.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\DoubleValue.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Email.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ExceptionRecord.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Gender.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\History.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Immigration.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Institution.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\InstitutionName.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\IntegerValue.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\KeyValueTempCache.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\lcapasdb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lcapasdb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\lcapasdb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\lcapasdb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>lcapasdb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\MyCredsMessage.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\NoteMessage.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\PayPalResponse.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\PermissionRecord.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Person.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\PersonName.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Phone.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ProgramCampus.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ProgramDetail.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ProgramTerm.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ReceivedError.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Recipient.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\RecordsHoldRespons.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\RecordsOutstandingRequest.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ReferenceType.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ReportQuery.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Request.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\RequestorReceiver.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Requests_Alberta_Education.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Residency.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Response.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ResponseHold.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ResponseStatus.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\SentEmail.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Setting.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\SettingCategory.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ShortStringValue.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\sNumber.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Status.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Student.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\StudentAlias.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\StudentApplication.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\SvcJob.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\SvcLog.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\SvcSched.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\TransactionCourse.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\TransactionRequestLog.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\TransactionTranscript.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\Transcript.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\TranscriptHold.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\TranscriptJob.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\TranscriptRestriction.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\TranscriptTermDesc.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\TransmissionData.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\User.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ValCode.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lcappsdb\ValCodeLookup.cs">
+      <DependentUpon>lcapasdb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Library\Utility\Functions.cs" />
+    <Compile Include="Web References\distsvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\instsvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\quesvc2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\quesvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\toksvc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <Content Include="Library\Queries\Delete_ParsedMsgs.sql" />
+    <Content Include="Library\Queries\ImportProgramDetails.sql" />
+    <Content Include="Library\Schemas\lctran.xml" />
+    <Content Include="Library\Schemas\lc_transcript_stylesheet.xsl" />
+    <Content Include="Library\Scripts\CloneLcapasDbScript.sql" />
+    <Content Include="Library\Scripts\GetSettingsScript.sql" />
+    <Content Include="Models\Colldb\colldb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>colldb.edmx</DependentUpon>
+      <LastGenOutput>colldb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Colldb\colldb.edmx.sql" />
+    <Content Include="Models\Colldb\colldb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>colldb.edmx</DependentUpon>
+      <LastGenOutput>colldb.cs</LastGenOutput>
+    </Content>
+    <None Include="Library\Schemas\AcademicRecord_v1.9.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Library\Schemas\AdmissionsApplication_v1.3.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Library\Schemas\AdmissionsRecord_v1.3.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Library\Schemas\ErrorMessage_v1.0.1_CustomMade.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Library\Schemas\CollegeTranscript_v1.6.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Library\Schemas\CoreMain_v1.16.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Library\Schemas\HighSchoolTranscript_v1.5.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Models\Colldb\colldb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>colldb.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Lcapas.Core.Models.Colldb</CustomToolNamespace>
+    </EntityDeploy>
+    <Content Include="Models\Colldb\colldb.edmx.diagram">
+      <DependentUpon>colldb.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Colldb\usp\usp_get_stu_grades.txt" />
+    <None Include="Library\Schemas\StatisticalData_v1.0.1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Models\Lcappsdb\lcapasdb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>lcapasdb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Lcappsdb\lcapasdb.edmx.diagram">
+      <DependentUpon>lcapasdb.edmx</DependentUpon>
+    </Content>
+    <None Include="Library\Schemas\TranscriptRequest_v1.4.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Library\Schemas\TranscriptResponse_v1.4.0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\AdmissionsApplication.pubxml" />
+    <None Include="Properties\PublishProfiles\ApasApplicationsDev.pubxml" />
+    <None Include="Properties\PublishProfiles\LcapasAdmin_dev.pubxml" />
+    <None Include="Properties\PublishProfiles\Lcapas_dev.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Models\Lcappsdb\lcapasdb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>lcapasdb.edmx</DependentUpon>
+      <LastGenOutput>lcapasdb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Lcappsdb\Lcapasdb.edmx.sql" />
+    <None Include="Web References\distsvc\DistributedSessionService.disco" />
+    <Content Include="Library\Queries\ImportApplicationMessages.sql" />
+    <Content Include="Models\Lcappsdb\lcapasdb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>lcapasdb.edmx</DependentUpon>
+      <LastGenOutput>lcapasdb.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web References\distsvc\UserInfo1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\instsvc\InstitutionDetails.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\instsvc\InstitutionInformationAndCodesServices.disco" />
+    <Content Include="Web References\instsvc\InstitutionList.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\quesvc2\APASQueueServiceExt2.disco" />
+    <None Include="Web References\quesvc2\APASQueueServiceExt2.wsdl" />
+    <Content Include="Web References\quesvc2\ReceivedApplication1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc2\ReceivedError1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc2\ReceivedTranscript1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc2\ReceivedTransferRequest1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\quesvc2\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\quesvc\Acknowledgment.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\quesvc\APASQueueService.disco" />
+    <None Include="Web References\toksvc\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\toksvc\RefreshTokenServices.disco" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <None Include="Web References\distsvc\DistributedSessionService.wsdl" />
+    <None Include="Web References\distsvc\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\instsvc\InstitutionInformationAndCodesServices.wsdl" />
+    <None Include="Web References\instsvc\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\quesvc\APASQueueService.wsdl" />
+    <Content Include="Web References\quesvc\ReceivedApplication.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc\ReceivedError.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc\ReceivedTranscript.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc\ReceivedTransferRequest.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <None Include="Web References\quesvc\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\toksvc\RefreshTokenServices.wsdl" />
+    <Content Include="Web References\quesvc\RegisteredEducationalInstitution.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc\SentApplication.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc\SentTranscript.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\quesvc\SentTransferRequest.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://apasp.lethbridgecollege.ab.ca/apasproxyinternal/APASQueueService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\quesvc\</RelPath>
+      <UpdateFromURL>https://apasp.lethbridgecollege.ab.ca/apasproxyinternal/APASQueueService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LcapasCore_quesvc_APASQueueService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://apasp.lethbridgecollege.ab.ca/APASProxyInternal/APASQueueServiceExt2.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\quesvc2\</RelPath>
+      <UpdateFromURL>https://apasp.lethbridgecollege.ab.ca/APASProxyInternal/APASQueueServiceExt2.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LcapasCore_quesvcext2_APASQueueServiceExt2</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://applyalberta.ca/APAS.WebServices/DistributedSessionService.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\distsvc\</RelPath>
+      <UpdateFromURL>https://applyalberta.ca/APAS.WebServices/DistributedSessionService.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LcapasCore_distsesssvc_DistributedSessionService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://applyalberta.ca/APAS.WebServices/InstitutionInformationAndCodesServices.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\instsvc\</RelPath>
+      <UpdateFromURL>https://applyalberta.ca/APAS.WebServices/InstitutionInformationAndCodesServices.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LcapasCore_instsvc_InstitutionInformationAndCodesServices</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://applyalberta.ca/APAS.WebServices/RefreshTokenServices.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\toksvc\</RelPath>
+      <UpdateFromURL>https://applyalberta.ca/APAS.WebServices/RefreshTokenServices.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>LcapasCore_reftokensvc_RefreshTokenServices</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <SaveServerSettingsInUserFile>True</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.2\build\System.Text.Json.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

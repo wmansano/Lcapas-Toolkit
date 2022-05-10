@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+@using (Html.BeginForm("MakePayment", "Payment", FormMethod.Post))
+{
+    @*this is to prevent CSRF attack*@
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <input type="hidden" name="UUID" id="Uuid" value="@ViewBag.UUID" />
+
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li id="addInfo" class="disabled" data-toggle="tab">1. Additional Information<img class="ui-icon-check" src="~/Content/Images/check.png" /></li>
+            <li id="agreement" class="disabled" data-toggle="tab">2. Agreement<img class="ui-icon-check" src="~/Content/Images/check.png" /></li>
+            <li id="payment" class="active" data-toggle="tab">3. Payment</li>
+        </ul>
+        <div class="tab-content">
+            <div class="page start row tab-pane active">
+                <div>
+                    <h4>Application Payment</h4>
+                    @if (!string.IsNullOrWhiteSpace(ViewBag.ApplicationFee) && ViewBag.ApplicationFee == "0")
+                    {
+                        <p>Lethbridge College Open House October 21st 10:00am - 6:00pm:</p>
+                        <p class="warning">
+                            <ul class="list_spacing">
+                                <li>
+                                    During this time application fees will be waived
+                                </li>
+                                <li>
+                                    Click the button below to submit your completed application
+                                </li>
+                            </ul>
+                        </p>
+                        <div id="payApplication" class="buttoncontainer">
+                            <div class="paylogo">
+                                @*<a class="pplogo" href="@Url.Action("MakePayment", "Payment", new { uuid = @ViewBag.UUID })"></a>*@
+                                <input type="submit" class="button" value="Complete Application" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>The final step to completing your application to Lethbridge College is submitting the payment.</p>
+                        if (!string.IsNullOrWhiteSpace(ViewBag.ApplicationFeeMessage))
+                        {
+                            @Html.Raw(@ViewBag.ApplicationFeeMessage);
+                        }
+                        @*<p class="justify">Click the below checkout to submit your application fee.</p>
+                    <p>Congratulations, your application has been submitted successfully!</p>
+            <p class="justify">A non-refundable $@ViewBag.ApplicationFee processing payment with Visa or Mastercard is required to process your payment.</p>*@
+                        @*<p class="warning">
+                            <b>Spring Open House</b>
+                            <p class="alert alert-danger"><b>REDUCED APPLICATION FEE of $50.00 in effect from 9:30am March 11th, 2021 to 1:00pm on March13th, 2021.</b></p>
+                            <p class="alert alert-danger"><b>***ONLY ONE Application per person can be submitted during this event at this reduced fee.</b></p>
+                        </p>*@
+                        <p class="warning">
+                            <b>Please Note: </b>
+                            <ul class="list_spacing">
+                                <li>
+                                    You will be returned to this site once you have made payment<br />
+                                </li>
+                                @*<li>
+                        Visa and Mastercard <b><u>debit cards will not be accepted</u></b>
+                    </li>*@
+                                <li>
+                                    Click the button below to pay your application fee
+                                </li>
+                            </ul>
+                        </p>
+                        <div id="payApplication" class="buttoncontainer">
+                            <div class="paylogo">
+                                @*<a class="pplogo" href="@Url.Action("MakePayment", "Payment", new { uuid = @ViewBag.UUID })"></a>*@
+                                <input type="submit" class="pplogo" value="" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}

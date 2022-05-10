@@ -1,0 +1,41 @@
+﻿@{
+    Layout = "~/Views/Shared/_LandingLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+
+@using (Html.BeginForm("Payment", "Landing", FormMethod.Post))
+{
+    // this is to prevent CSRF attack
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <input type="hidden" name="UUID" id="Uuid" value="@ViewBag.UUID" />
+
+        <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+            <li id="addInfo" class="disabled" data-toggle="tab">1. Additional Information<img class="ui-icon-check" src="~/Content/Images/check.png" /></li>
+            <li id="agreement" class="active" data-toggle="tab">2. Agreement</li>
+            <li id="payment" class="disabled" data-toggle="tab">3. Payment</li>
+        </ul>
+        <div class="tab-content">
+            <div class="page start row tab-pane active">
+                <div>
+                    <h4>Submit the Application</h4>
+                    <p>Your application has not yet been submitted.</p>
+                    <p class="justify">By submitting my application, I certify that I have read and understood all the instructions and information accompanying this application form.  I declare that the information given in this application and that all statements made in connection with this application are true and complete.  I understand that falsifying documents or information on this application may result in not being admitted into the program or the College, or permanent dismissal from the College.  If admitted, I agree to comply with the rules and regulations in existence or as amended from time to time by the Board of Governors of Lethbridge College.</p>
+
+                    <p class="center warning"><input id="certify" type="checkbox" name="read" value="read"> I certify that I have read and understood all the instructions and information accompanying this application form.</p>
+
+                    <div class="buttoncontainer">
+                        <input type="button" class="button submit" value="Back" onclick='javascript:location.href="@Url.Action("Landing", "Landing", new { uuid = ViewBag.UUID })"'/>
+                        <input id="AgreementSubmit" type="submit" class="button submit disabled" value="Continue" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+

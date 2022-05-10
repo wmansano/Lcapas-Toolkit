@@ -1,0 +1,60 @@
+﻿
+<div class="navigation row dropdown">
+    <div class="left-nav col-md-12">
+        <ul>
+            <li class="@Html.ActivePage("Index", "Home")">@Html.LcActionLink("Home", "Index", "Home")</li>
+            <li class="@Html.ActivePage("Index", "Reports")">@Html.LcActionLink("Reports Home", "Index", "Reports")</li>
+
+            @if (@Html.LcAccessLink("ApplicationReport", "Reports"))
+            {
+                <span>
+                    <li title="View Options" class="dropdown-toggle" id="dropdownAdmission" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a>Admissions</a></li>
+                    <div class="dropdown-menu" aria-labelledby="dropdownAdmission">
+                        <a class="dropdown-item @Html.ActivePage("ApplicationReport", "Reports")" href="@Url.Action("ApplicationReport", "Reports")">
+                            <span class="dropdown-item-content-menu">Application Report (Toolkit)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("PaymentReport", "Reports")" href="@Url.Action("PaymentReport", "Reports")">
+                            <span class="dropdown-item-content-menu">Payment Report (Toolkit)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("CollProgramApplicationReport", "Reports")" href="@Url.Action("CollProgramApplicationReport", "Reports")">
+                            <span class="dropdown-item-content-menu">Application Report (Colleague)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("CollWaitListReport", "Reports")" href="@Url.Action("CollWaitListReport", "Reports")">
+                            <span class="dropdown-item-content-menu">Wait List Report (Colleague)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("CollTestingResultsReport", "Reports")" href="@Url.Action("CollTestingResultsReport", "Reports")">
+                            <span class="dropdown-item-content-menu">Non Course Testing Results Report (Colleague)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("CollOverduesReport", "Reports")" href="@Url.Action("CollOverduesReport", "Reports")">
+                            <span class="dropdown-item-content-menu">Overdues Report (Colleague)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("CollAdmissionConditionsReport", "Reports")" href="@Url.Action("CollAdmissionConditionsReport", "Reports")">
+                            <span class="dropdown-item-content-menu">Admission Conditions Report (Colleague)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("CollMissingGradeReport", "Reports")" href="@Url.Action("CollMissingGradeReport", "Reports")">
+                            <span class="dropdown-item-content-menu">Missing Grades Report (Colleague)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("HoldTypeReport", "Reports")" href="@Url.Action("HoldTypeReport", "Reports", new { destAction = "AdmissionsOutbox" })">
+                            <span class="dropdown-item-content-menu">HoldType Report (Toolkit)</span>
+                        </a>
+                    </div>
+                </span>
+            }
+
+            @if (@Html.LcAccessLink("HoldTypeReport", "Reports"))
+            {
+                <span>
+                    <li title="View Options" class="dropdown-toggle" id="dropdownRecords" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a>Records</a></li>
+                    <div class="dropdown-menu" aria-labelledby="dropdownRecords">
+                        <a class="dropdown-item @Html.ActivePage("HoldTypeReport", "Reports")" href="@Url.Action("HoldTypeReport", "Reports")">
+                            <span class="dropdown-item-content-menu">HoldType Report (Toolkit)</span>
+                        </a>
+                        <a class="dropdown-item @Html.ActivePage("DailyRequest", "Reports")" href="@Url.Action("DailyRequest", "Reports")">
+                            <span class="dropdown-item-content-menu">Students Request Daily View Report (Colleague)</span>
+                        </a>
+                    </div>
+                </span>
+            }
+        </ul>
+    </div>
+</div>

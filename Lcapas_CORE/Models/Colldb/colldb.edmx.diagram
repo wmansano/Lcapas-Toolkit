@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="db7be6324bfe479ab8f259753600ab8c" Name="Diagram1" ZoomLevel="38">
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.ADDRESSES" Width="1.5" PointX="5.5" PointY="50.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.ADDRESS_LS" Width="1.5" PointX="12.625" PointY="43.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.ADR_PHONES" Width="1.5" PointX="7.625" PointY="45" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.APPL_STATUSES" Width="1.5" PointX="9.125" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.APPLICATION" Width="1.5" PointX="6.875" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.COURSE_SECTIONS" Width="1.5" PointX="9.875" PointY="33.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.GRADE" Width="1.5" PointX="4.375" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.NAMEHISTS" Width="1.5" PointX="6.875" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.PEOPLE_EMAIL" Width="1.5" PointX="6.875" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.PEOPLE" Width="1.5" PointX="4.75" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.PERSON_ALT" Width="1.5" PointX="6.875" PointY="41.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STC_STATUSES" Width="1.875" PointX="9.375" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STPR_DATES" Width="1.875" PointX="17" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STPR_STATUSES" Width="1.75" PointX="17.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_ACAD_CRED" Width="2" PointX="6.875" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_COURSE_SEC" Width="2.375" PointX="12.125" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_STANDINGS" Width="1.5" PointX="6.875" PointY="60.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_TERMS" Width="2.375" PointX="17.625" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ADDRESS_ADDRESS_LS" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ADDRESS_ADR_PHONES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_PREFERRED_ADDRESS_ADDRESS" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_PREFERRED_RESIDENCE_ADDRESS" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ADDRESS_LS_FORMER_RESIDENTS_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ADDRESS_LS_RESIDENTS_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_STATUSES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_ADMISSIONS_REP_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_ADMIT_INSTITUTION_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_APPLICANT_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_COURSE_SECTION_COURSE_SECTIONS" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_GRADES_GRD_AUDIT_GRADE_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_GRADES_GRD_COMPARISON_GRADE_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_GRADES_GRD_INCOMPLETE_GRADE_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_GRADES_GRD_PASS_NOPASS_GRADE_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_GRADES_GRD_WITHDRAW_GRADE_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_FINAL_GRADE_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_VERIFIED_GRADE_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_MID_TERM_GRADE1_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_MID_TERM_GRADE2_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_MID_TERM_GRADE3_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_MID_TERM_GRADE4_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_MID_TERM_GRADE5_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_MID_TERM_GRADE6_GRADES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_NAMEHIST" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_PEOPLE_EMAIL" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_AARS_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_PERSON_ALT" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_SPOUSE_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_PERSON_ID_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_STUDENT_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_STANDINGS_STS_STUDENT_PERSON" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_STATUSES" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_STUDENT_COURSE_SEC_STUDENT_COURSE_SEC" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_STUDENT_ACAD_CRED_STUDENT_ACAD_CRED" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.APPLICATIONS_LS" Width="1.5" PointX="12.125" PointY="29.25" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.EXTERNAL_NOTES" Width="1.5" PointX="21.75" PointY="30.5" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.EXTERNAL_TRANSCRIPTS" Width="1.5" PointX="16.875" PointY="33.375" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.EXTERNAL_TRANSCRIPTS_LS" Width="1.5" PointX="15.125" PointY="26.625" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.GRADE_SCHEMES" Width="1.5" PointX="1.125" PointY="24.125" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.GRADE_SCHEMES_LS" Width="2.125" PointX="11.875" PointY="18.25" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.PERSON_ST" Width="1.5" PointX="9.875" PointY="67.375" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.PERSON_ST_LS" Width="1.5" PointX="21.75" PointY="34.25" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_EQUIV_EVALS" Width="1.5" PointX="15.125" PointY="48.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_EQUIV_EVALS_LS" Width="1.5" PointX="9.5" PointY="12.875" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_ADMISSIONS_REP_PERSON_ST" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPLICATIONS_LS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_LS_EXTL_APPLICATIONS_APPLICATIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_REP_APPLICATIONS_APPLICATIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_LS_APPL_EXTERNAL_TRANSCRIPTS_EXTERNAL_TRANSCRIPTS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SECTIONS_SEC_GRADE_SCHEME_GRADE_SCHEMES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_EXTERNAL_NOTES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_EXTERNAL_TRANSCRIPTS_LS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_EXTL_GRADE_GRADES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_EXTL_GRADE_SCHEME_GRADE_SCHEMES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_EXTL_INTERIM_GRADE_GRADES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_EXTL_PERSON_ID_PERSON_ST" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_EXTL_STUDENT_EQUIV_EVAL_STUDENT_EQUIV_EVALS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_EXTERNAL_TRANSCRIPTS_EXTERNAL_TRANSCRIPTS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_LS_STE_EXTERNAL_TRANSCRIPTS_EXTERNAL_TRANSCRIPTS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_GRADE_SCHEMES_GRADE_SCHEMES_LS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_GRADE_SCHEME_GRADE_SCHEMES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_GRADE_SCHEMES_LS_GRS_GRADES_GRADES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PERSON_ST_ID_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_PERSON_ST_ID_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_STE_INSTITUTION_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_STE_PERSON_ID_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_PERSON_ST_LS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_PERSON_ID_PERSON_ST" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_COURSE_SEC_SCS_STUDENT_PERSON_ST" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_STE_PERSON_ID_PERSON_ST" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_COF_STUDENT_ACAD_CRED_STUDENT_ACAD_CRED" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_STUDENT_ACAD_CRED_STUDENT_ACAD_CRED" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_STUDENT_COURSE_SEC_STUDENT_COURSE_SEC" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_STUDENT_EQUIV_EVALS_STUDENT_EQUIV_EVALS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_STUDENT_EQUIV_EVAL_STUDENT_EQUIV_EVALS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_LS_STE_COURSE_ACAD_CRED_STUDENT_ACAD_CRED" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_LS_STE_GENERAL_ACAD_CRED_STUDENT_ACAD_CRED" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_LS_STE_STUDENT_ACAD_CRED_STUDENT_ACAD_CRED" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_STUDENT_EQUIV_EVALS_LS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.RESTRICTION" Width="2.125" PointX="21.375" PointY="2.125" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.RESTRICTIONS_LS" Width="2.125" PointX="24.25" PointY="4.625" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_RESTRICTIONS" Width="2.125" PointX="24.625" PointY="34.25" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_RESTRICTIONS_STR_STUDENT_PERSON_ST" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_RESTRICTIONS_STUDENT_RESTRICTIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_RESTRICTIONS_LS_RESTRICTIONS_ID_RESTRICTIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_RESTRICTIONS_RESTRICTIONS_ID_RESTRICTIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_RESTRICTIONS_RESTRICTIONS_LS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_RESTRICTIONS_STR_RESTRICTION_RESTRICTIONS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.RULES_CHECK" Width="2.125" PointX="24.25" PointY="7.25" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.INSTITUTION" Width="1.5" PointX="7" PointY="68.25" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_ADMIT_INSTITUTION_INSTITUTIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_EXTERNAL_TRANSCRIPTS_EXTL_INSTITUTION_INSTITUTIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_INSTITUTIONS_INST_BOARD_ID_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_INSTITUTIONS_INSTITUTIONS_ID_PERSON" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_REQUEST_LOGS" Width="1.5" PointX="12.75" PointY="33.875" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_REQUEST_LOGS_STRL_ADDRESS_ID_ADDRESS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_REQUEST_LOGS_STRL_STUDENT_PERSON" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_REQUEST_LOGS_LS" Width="1.5" PointX="15" PointY="44.375" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_REQUEST_LOGS_STUDENT_REQUEST_LOGS_LS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.APPL_LOCATION_INFO" Width="1.5" PointX="9.125" PointY="29.75" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_LOCATION_INFO" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.CH_CORR" Width="1.5" PointX="9.25" PointY="23.125" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.FOREIGN_PERSON" Width="1.5" PointX="7" PointY="83" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_NON_COURSES" Width="1.5" PointX="19.375" PointY="34.75" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_CH_CORR_MAILING_ID_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_FOREIGN_PERSON_FOREIGN_PERSON_ID_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_NON_COURSES_STNC_GRADE_SCHEME_GRADE_SCHEMES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_NON_COURSES_STNC_GRADE_GRADES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_NON_COURSES_STNC_PERSON_ID_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_NON_COURSES_STNC_PERSON_ID_PERSON_ST" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_ADMISSIONS_TESTS_STUDENT_NON_COURSES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_OTHER_TESTS_STUDENT_NON_COURSES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_PLACEMENT_TESTS_STUDENT_NON_COURSES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_ST_LS_PST_STUDENT_NON_COURSES_STUDENT_NON_COURSES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_EQUIV_EVALS_STE_STUDENT_NON_COURSE_STUDENT_NON_COURSES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_NON_COURSES_STNC_STUDENT_EQUIV_EVAL_STUDENT_EQUIV_EVALS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.PERPHONE" Width="1.5" PointX="7" PointY="0.75" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_PERSON_PERPHONE" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.MAILING" Width="1.5" PointX="7" PointY="78.125" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_MAILING_CH_CORR" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_MAILING_MAILING_ID_PERSON" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.CC_COMMENTS" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.APPLICATION_STATUSES" Width="1.5" PointX="0.75" PointY="5.125" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPL_STATUSES_APPL_STATUS_APPLICATION_STATUSES" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.ACAD_PROGRAMS" Width="1.5" PointX="3.375" PointY="91.25" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.ACAD_PROGRAMS_LS" Width="1.5" PointX="5.625" PointY="93.375" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ACAD_PROGRAMS_ACAD_PROGRAMS_LS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ACAD_PROGRAMS_ACPG_GRADE_SCHEME_GRADE_SCHEMES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ACAD_PROGRAMS_LS_ACPG_RELATED_PROGRAMS_ACAD_PROGRAMS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_ACAD_PROGRAM_ACAD_PROGRAMS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.TERM" Width="1.5" PointX="0.75" PointY="11.375" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_APPLICATIONS_APPL_START_TERM_TERMS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SECTIONS_SEC_TERM_TERMS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_REPORTING_TERM_TERMS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STC_TERM_TERMS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_STANDINGS_STS_TERM_TERMS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_PROGRAMS" Width="1.5" PointX="3" PointY="52.125" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_PROGRAMS_STPR_DATES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_PROGRAMS_STPR_STATUSES" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_PROGRAMS_STPR_INTG_ANT_CMPL_TERM_TERMS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_PROGRAMS_STPR_INTG_START_TERM_TERMS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.STUDENT_ACAD_CRED_LS" Width="1.5" PointX="9.625" PointY="5.125" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_LS_STC_REPEATED_ACAD_CRED_STUDENT_ACAD_CRED" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_STUDENT_ACAD_CRED_LS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.DEPT" Width="1.5" PointX="9.25" PointY="74.25" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ACAD_PROGRAMS_LS_ACPG_DEPTS_DEPTS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_DEPTS_DEPTS_ID_DEPTS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_DEPTS_DEPTS_INSTITUTIONS_ID_INSTITUTIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_LS_STC_DEPTS_DEPTS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_PROGRAMS_STPR_DEPT_DEPTS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.VAL" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.ACAD_CREDENTIALS" Width="1.5" PointX="12.25" PointY="48.375" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.ACAD_CREDENTIALS_LS" Width="1.5" PointX="14.5" PointY="56.625" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ACAD_CREDENTIALS_ACAD_CREDENTIALS_LS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ACAD_CREDENTIALS_ACAD_INSTITUTIONS_ID_INSTITUTIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_ACAD_CREDENTIALS_ACAD_PERSON_ID_PERSON" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_STUDENT_ACAD_CRED_LS_STC_MARK_ACAD_CREDENTIALS_ACAD_CREDENTIALS" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.COURSE_SEC_FACULTY" Width="1.5" PointX="12.125" PointY="61.375" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Colldb.COURSE_SECTIONS_LS" Width="1.5" PointX="24.25" PointY="23.875" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SEC_FACULTY_CSF_COURSE_SECTION_COURSE_SECTIONS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SECTIONS_LS_SEC_FACULTY_COURSE_SEC_FACULTY" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SECTIONS_COURSE_SECTIONS_LS" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SECTIONS_LS_SEC_ACTIVE_STUDENTS_STUDENT_COURSE_SEC" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SECTIONS_LS_SEC_SCAN_GRADE_STU_CRS_SEC_STUDENT_COURSE_SEC" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SECTIONS_LS_SEC_STUDENTS_STUDENT_COURSE_SEC" />
+        <AssociationConnector Association="Lcapas.Core.Models.Colldb.FK_COURSE_SECTIONS_LS_SEC_WITHDRAWN_STUDENTS_STUDENT_COURSE_SEC" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

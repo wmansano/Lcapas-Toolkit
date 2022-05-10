@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://applyalberta.ca/APAS.WebServices/DistributedSessionService.asmx?wsdl" docRef="http://applyalberta.ca/APAS.WebServices/DistributedSessionService.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://applyalberta.ca/APAS.WebServices/DistributedSessionService.asmx" xmlns:q1="http://applyalberta.ca/" binding="q1:DistributedSessionServiceSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://applyalberta.ca/APAS.WebServices/DistributedSessionService.asmx" xmlns:q2="http://applyalberta.ca/" binding="q2:DistributedSessionServiceSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

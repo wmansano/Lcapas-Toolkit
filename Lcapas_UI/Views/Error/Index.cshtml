@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_PaymentLayout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/landing.js?<?=time()?>")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/redirect.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/LandingSite.css" rel="stylesheet" type="text/css" />
+}
+
+<h2>Oops, an error has occured</h2>
+
+<div class="list-sfs-holder">
+    <div class="alert alert-error" style="text-align:center;">
+        <p>
+            Please try again later. If you continue to see this error, please contact us (information below) Thank-you!
+        </p>
+        <p>
+            <a class="button" href="https://applyalberta.ca/">Click here to return to Apply Alberta</a>
+        </p>
+        <p>
+            Our system will now automatically redirect you back to Apply Alberta.
+        </p>
+    </div>
+</div>
+

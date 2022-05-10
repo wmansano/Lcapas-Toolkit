@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Admissions Applications Home";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-generic.js?<?=time()?>")" type="text/javascript"></script>
+}
+@section Styles {
+    <link href="~/Content/AdminSite.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ApplicationsMenu.cshtml")
+}
+
+@Html.AntiForgeryToken()
+<h2>@ViewBag.Title</h2>
+
+<ul>
+    <li>@Html.LcActionLink("Home", "Index", "Home")</li>
+    <li>@Html.LcActionLink("Applications Home", "Index", "Applications")</li>
+    <li>@Html.LcActionLink("View Applications", "Applications", "Applications")</li>
+    <li>@Html.LcActionLink("Application Settings", "Index", "ApplicationSettings")</li>
+</ul>

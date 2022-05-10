@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Lcapas.Core.Models.Lcappsdb.Setting>
+
+@{
+    ViewBag.Title = "Parameters";
+}
+@section JavaScriptVariables {
+    <script type="text/javascript">
+        var orderItemUrl = '@Url.Action("SettingOrder", "ApplicationSettings")';
+        var orderCategorygUrl = '@Url.Action("SettingCategoryOrder", "ApplicationSettings")';
+    </script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-applications.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+
+@section Menu {
+    @RenderPage("~/Views/Menu/_ApplicationSettingsMenu.cshtml")
+}
+
+<div class="container">
+    <h2>@ViewBag.Title</h2>
+
+    <div class="form-horizontal">
+        <div class="row">
+            <input type="button" value="Expand All" class="btn btn-default button expand-all" /> |
+            <input type="button" value="Collapse All" class="btn btn-default button collapse-all" /> |
+            <input type="button" value="Alphabetical Order" class="btn btn-default button order-parameter">
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div id="form-container" class="form-group row">
+            <div id="main-setting-list" class="col-md-12">
+                @foreach (var category in Model.Select(c => c.SettingCategory).Distinct().OrderBy(c => c.CategoryOrder))
+                {
+                    <div id="@category.CategoryId" class="list-group categoryOptions">
+                        <a href="#list-@category.CategoryId" class="list-group-item arrow" data-toggle="collapse">
+                            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                            @Html.Label(category.CategoryId.ToString(), category.CategoryName)
+                        </a>
+
+                        <ul id="list-@category.CategoryId" class="list-group collapse settingOptions">
+                            @foreach (var setting in Model.Where(c => c.SettingCategory == category).OrderBy(s => s.SettingOrder))
+                            {
+                                <li id="@setting.SettingsId" class="setting-@setting.SettingsId list-group-item ui-state-default">
+                                    <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                                    @{  string settingValue = "";
+                                        if (setting.ShortStringValues.Count > 0) { settingValue = setting.ShortStringValues.OrderByDescending(x => x.ModifiedDateTime).FirstOrDefault().Value; };
+                                        if (setting.IntegerValues.Count > 0) { settingValue = setting.IntegerValues.OrderByDescending(x => x.ModifiedDateTime).FirstOrDefault().Value.ToString(); };
+                                        if (setting.DoubleValues.Count > 0) { settingValue = setting.DoubleValues.OrderByDescending(x => x.ModifiedDateTime).FirstOrDefault().Value.ToString(); };
+                                        if (setting.DateTimeValues.Count > 0) { settingValue = setting.DateTimeValues.OrderByDescending(x => x.ModifiedDateTime).FirstOrDefault().Value.ToString(); };
+                                        if (setting.BooleanValues.Count > 0) { settingValue = setting.BooleanValues.OrderByDescending(x => x.ModifiedDateTime).FirstOrDefault().Value.ToString(); };
+                                    }
+                                    <span class="setting-content"><strong>@setting.Name:</strong> @String.Concat(settingValue.Take(48))</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,36 @@
+﻿@model Lcapas.Core.Library.LoginModel
+
+<h2>Please Login:</h2>
+<div>
+    @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+    {
+        //this is to create form tag
+        @Html.AntiForgeryToken()
+
+        // this is to prevent CSRF attack
+        @Html.ValidationSummary(true)
+        if (@ViewBag.Message != null)
+        {
+            <div class="error-login-message">
+                @ViewBag.Message
+            </div>
+        }
+        <table class="login-table">
+            <tr>
+                <td>@Html.LabelFor(a => a.sNumber):</td>
+                <td>@Html.TextBoxFor(a => a.sNumber, new { @class = "col-md-11", @autofocus = "true" })</td>
+                <td>@Html.ValidationMessageFor(a => a.sNumber)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(a => a.Password):</td>
+                <td>@Html.PasswordFor(a => a.Password, new { @class = "col-md-11" })</td>
+                <td>@Html.ValidationMessageFor(a => a.Password)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="pull-right"><input type="submit" value="Login" /></td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="def3e04160d94b5f8081b6bdf018cf68" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.AcademicAward" Width="2.625" PointX="0.5" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.AcademicRecord" Width="2.875" PointX="3.625" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.AcademicSession" PointX="6.125" PointY="29.375" Width="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.AccessGroup" Width="1.875" PointX="12.375" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Acknowledgement" Width="3.25" PointX="13.25" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ActionType" Width="2.25" PointX="12.5" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Address" Width="2" PointX="6.625" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ApasCode" Width="1.625" PointX="10.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ApasMessage" Width="1.875" PointX="4.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ApplicationFee" Width="1.875" PointX="1.25" PointY="51.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ApplicationMessage" Width="2.75" PointX="9.375" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ApplicationProgram" Width="1.5" PointX="1.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ASN" Width="2.125" PointX="5" PointY="75.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.BooleanValue" Width="1.625" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.CodeType" Width="1.5" PointX="10.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ContactEmail" Width="1.5" PointX="7.5" PointY="90.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ContactPerson" Width="1.5" PointX="5.25" PointY="92.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ContactPhone" Width="1.5" PointX="7.5" PointY="94.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ControllerType" Width="2.125" PointX="9.875" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Course" Width="2.75" PointX="5.25" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.CourseTitle" Width="1.5" PointX="12" PointY="58.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.DateTimeValue" Width="1.75" PointX="8" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.DoubleValue" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Email" Width="1.875" PointX="3.25" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ExceptionRecord" Width="2" PointX="3.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.InstitutionName" Width="2" PointX="2.875" PointY="58.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Institution" Width="2.125" PointX="0.75" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.IntegerValue" Width="1.5" PointX="8.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.KeyValueTempCache" Width="2" PointX="15.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.PayPalResponse" Width="3.375" PointX="13.125" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.PermissionRecord" Width="2.875" PointX="15" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.PersonName" Width="1.75" PointX="3.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Person" Width="2" PointX="0.625" PointY="27.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Phone" Width="1.875" PointX="2.625" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ProgramCampus" Width="2.5" PointX="1.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ProgramDetail" Width="3" PointX="0.5" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ProgramTerm" Width="1.875" PointX="0.875" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ReceivedError" Width="2" PointX="3.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Recipient" Width="2.5" PointX="7.5" PointY="51.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ReferenceType" Width="1.5" PointX="1.5" PointY="55" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Request" Width="2.75" PointX="4.125" PointY="52.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ResponseStatus" Width="2" PointX="10.625" PointY="54.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ResponseHold" Width="2.25" PointX="8.375" PointY="72.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Response" Width="2.75" PointX="5.25" PointY="69.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.SettingCategory" Width="1.75" PointX="3.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Setting" Width="2.25" PointX="5.375" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ShortStringValue" Width="1.5" PointX="7.75" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Status" Width="2.5" PointX="5.25" PointY="84" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.StudentApplication" Width="3.375" PointX="0.75" PointY="45.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Student" Width="1.875" PointX="2.375" PointY="76.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.SvcJob" Width="1.5" PointX="12.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.SvcLog" Width="1.5" PointX="15" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.SvcSched" Width="1.5" PointX="15" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.TranscriptHold" Width="2.25" PointX="8.125" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Transcript" Width="1.5" PointX="5.25" PointY="87.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.TransmissionData" Width="2.5" PointX="2" PointY="69.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.User" Width="2.125" PointX="15" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ValCodeLookup" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.ValCode" Width="1.5" PointX="10.75" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_AcademicRecordCourses" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_InstitutionAcademicRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ResponseAcademicRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_AccessGroupPermissionRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ActionTypePermissionRecord" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ControllerTypeActionType" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_InstitutionAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_PersonAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ApasCodeValCodeLookup" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ApplicationFeeStudentApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ApplicationMessagePayPalResponse" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_InstitutionReceivedApplications" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_InstitutionSentApplications" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_StudentApplicationApplicationMessage" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ApplicationProgramProgramDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_StudentASN" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SettingBooleanValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_CodeTypeValCodeLookup" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ContactPersonContactEmail" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ContactPersonContactPhone" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_StudentContactPersons" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_TranscriptHoldCourseTitle" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SettingDateTimeValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SettingDoubleValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_InstitutionEmail" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_PersonEmail" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_InstitutionInstitutionName" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_DestinationInstitutionTransmissionData" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_InstitutionPhone" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SourceInstitutionTransmissionData" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SettingIntegerValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_PersonName" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_PersonPhone" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_StudentPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ProgramCampusProgramDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ProgramDetailsStudentApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ProgramTermProgramDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_HoldTypes_Recipients" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_RecipientResponseStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_RequestRecipient" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ReferenceTypeStudentApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_StudentRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_TransmissionDataRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ResponseResponseHold" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_StudentResponse" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_TransmissionDataResponse" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SettingCategorySetting" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SettingShortStringValue" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_TransmissionDataStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_StudentStudentApplication" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SvcJobSvcLog" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_SvcSchedSvcJob" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_TransmissionDataTranscript" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ValCodeValCodeLookup" ManuallyRouted="false" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.AccessGroupUser" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Citizenship" Width="2.125" PointX="5.875" PointY="23.875" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.PersonCitizenship" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Residency" Width="2.125" PointX="9.25" PointY="27.25" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.PersonResidency" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Gender" Width="2.125" PointX="8.875" PointY="21.25" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Disability" Width="2.125" PointX="8.875" PointY="23.875" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.PersonGender" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.PersonDisability" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Immigration" Width="2.375" PointX="11.875" PointY="27.125" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.PersonImmigration" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.AcademicRecordAcademicSession" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.AcademicRecordAcademicAward" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.TranscriptJob" Width="2.875" PointX="18.125" PointY="1.25" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.RequestorReceiver" Width="2.25" PointX="11.5" PointY="51.5" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.RecipientRequestorReceiver" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_StudentAcademicRecord" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.CourseOverrideSchool" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.NoteMessage" Width="2.25" PointX="8.375" PointY="75.875" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_TransmissionData" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.TransactionTranscript" Width="2.875" PointX="24.75" PointY="5.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.TransactionRequestLog" Width="2.875" PointX="16.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.TransactionCourse" Width="2.875" PointX="21.25" PointY="5.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.sNumber" Width="2.375" PointX="5.5" PointY="80.25" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.StudentsNumber" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.StudentAlias" Width="2" PointX="0.5" PointY="81.125" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.StudentStudentAlias" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.ApplicationMessageAcknowledgement" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.TranscriptRestriction" Width="2.125" PointX="4.625" PointY="4.125" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.History" Width="1.875" PointX="18.75" PointY="18.25" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.User_UserId" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.ActionType_ActionId" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.TransmissionData_TransmissionDataId" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.TranscriptTermDesc" Width="1.5" PointX="2.875" PointY="3.625" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_InstitutionRequest" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.AdmissionOutstandingRequest" Width="1.5" PointX="18.375" PointY="11.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.RecordsOutstandingRequest" Width="1.5" PointX="20.625" PointY="11.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.RecordsHoldRespons" Width="1.5" PointX="12.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.AdmissionOfflineSearchRespons" Width="1.5" PointX="14.375" PointY="21.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.Requests_Alberta_Education" Width="1.5" PointX="21.375" PointY="15.75" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.BulkSendTranscript" Width="2" PointX="9.375" PointY="42" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.Institution_InstitutionId" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.Student_StudentId" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.SentEmail" Width="2.625" PointX="16" PointY="27.75" IsExpanded="true" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.EmailSentEmail" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_RequestMatchedStudent" />
+        <AssociationConnector Association="Lcapas.Core.Models.Lcapasdb.FK_ResponseMatchedStudent" />
+        <EntityTypeShape EntityType="Lcapas.Core.Models.Lcapasdb.MyCredsMessage" Width="1.5" PointX="17.875" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,192 @@
+﻿@model Lcapas.Core.Library.CollAdmissionConditionsReportViewObj
+
+@section JavaScriptVariables {
+<script type="text/javascript">
+    var PrintReportPath = '@Url.Action("PrintReports", "Reports")';
+    var ExportReportPath = '@Url.Action("ExportReports", "Reports")';
+    var PrintQueryPath = '@Url.Action("PrintQuery", "Reports")';
+
+</script>
+}
+
+@section JavaScript {
+    <script src="@Url.Content("~/Scripts/lcapas-settings.js?<?=time()?>")" type="text/javascript"></script>
+}
+
+@section Styles {
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+}
+@section Menu {
+    @RenderPage("~/Views/Menu/_ReportsMenu.cshtml")
+}
+ 
+@Html.AntiForgeryToken()
+
+    <div class="container">
+        <h2>@Model.PageTitle</h2>
+        <div class="paging">
+            @if (Model.CollAdmissionConditionsReportSearchFilter != null)
+            {
+                <div class="page-print">
+                    <input id="excelAdmissionConditionsReportBtn" type="button" value="Export to Excel" class="button" />
+                </div>
+                <div class="page-print">
+                    <input id="prntAdmissionConditionsReportBtn" type="button" value="Print Report" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-print">
+                    <input id="prntAdmissionConditionsQueryReportBtn" type="button" value="Query Report" class="btn btn-default button pull-right hor-pad" />
+                </div>
+                <div class="page-last">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="lastPage" type="image" title="Last Page" value="" src="~/Content/images/last.png" class="button" />
+                    }
+                </div>
+                <div class="page-next">
+                    @if (Model.Pagination.PageIndex < Model.Pagination.PageCount)
+                    {
+                        <input id="nextPage" type="image" title="Next Page" value="" src="~/Content/images/next.png" class="button" />
+                    }
+                </div>
+                <div class="page-num">
+                    @Html.LabelFor(m => m.Pagination.PageIndex, new { @class = "control-label" }) @Html.DisplayFor(m => m.Pagination.PageIndex, new { @class = "text ui-widget-content ui-corner-all" }) of @Html.DisplayFor(m => m.Pagination.PageCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-prev">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="prevPage" type="image" title="Previous Page" value="" src="~/Content/images/prev.png" class="button" />
+                    }
+                </div>
+                <div class="page-first">
+                    @if (Model.Pagination.PageIndex > 1)
+                    {
+                        <input id="firstPage" type="image" title="First Page" value="" src="~/Content/images/first.png" class="button" />
+                    }
+                </div>
+                <div class="page-size">
+                    @Html.LabelFor(m => m.Pagination.PageSizes, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.Pagination.PageSize, Model.Pagination.PageSizes, string.Empty, new { @id = "pSize", @class = "text ui-widget-content ui-corner-all" })
+                </div>
+                <div class="page-results">
+                    @Html.LabelFor(m => m.Pagination.RecCount, new { @class = "control-label" })
+                    @Html.DisplayFor(m => m.Pagination.RecCount, new { @class = "text ui-widget-content ui-corner-all" })
+                </div>
+            }
+        </div>
+        <br />
+        <div id="table-container">
+            @using (Html.BeginForm("CollAdmissionConditionsReport", "Reports", FormMethod.Post, new { DefaultButton = "search-btn", id = "submitForm" }))
+            {
+                <table id="data-tbl" class="TFtable display">
+                    <thead class="tableHeader">
+                        <tr class="tableHeader">
+                            <th></th>
+                            <th>
+                                @Html.LabelFor(m => m.CollAdmissionConditionsReportSearchFilter.PersonID, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollAdmissionConditionsReportSearchFilter.ApplicationStatus, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollAdmissionConditionsReportSearchFilter.FullName, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollAdmissionConditionsReportSearchFilter.Term, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollAdmissionConditionsReportSearchFilter.AlienStatus, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollAdmissionConditionsReportSearchFilter.ConditionProgram, new { @class = "control-label" })
+                            </th>
+                            <th>
+                                @Html.LabelFor(m => m.CollAdmissionConditionsReportSearchFilter.Condition, new { @class = "control-label" })
+                            </th>
+                            <th colspan="2" />
+                        </tr>
+                        <tr class="tableHeader hide-scroll">
+                            <th id="selectAll" title="Select All" class="col-xw-20">
+                                <input type="checkbox" id="SelectAll" class="text" checked>
+                            </th>
+                            <th title="Person Id" class="col-xw-60">
+                                @Html.TextBoxFor(m => m.CollAdmissionConditionsReportSearchFilter.PersonID, new { @id = "PersonID", @class = "text ui-widget-content ui-corner-all searchfield col-xw-60" })
+                            </th>
+                            <th title="Application Status" class="col-xw-80">
+                                @Html.ListBoxFor(m => m.CollAdmissionConditionsReportSearchFilter.ApplicationStatus, Model.ColleagueApplicationStatusSelectedList, new { @id = "ApplicationStatus", @class = "multi-select col-xw-80" })
+                            </th>
+                            <th title="Full Name" class="col-xw-160">
+                                @Html.TextBoxFor(m => m.CollAdmissionConditionsReportSearchFilter.FullName, new { @id = "FullName", @class = "text ui-widget-content ui-corner-all searchfield col-xw-160" })
+                            </th>
+                            <th title="Term" class="col-xw-80">
+                                @Html.ListBoxFor(m => m.CollAdmissionConditionsReportSearchFilter.Term, Model.ColleagueTermSelectedList, new { @id = "Term", @class = "text ui-widget-content ui-corner-all multi-select col-xw-80" })
+                            </th>
+                            <th title="Alien Status" class="col-xw-80">
+                                @Html.ListBoxFor(m => m.CollAdmissionConditionsReportSearchFilter.AlienStatus, Model.ColleagueAlienStatusSelectedList, new { @id = "AlienStatus", @class = "multi-select col-xw-80" })
+                            </th>
+                            <th title="Program" class="col-xw-80  ms-fw-170">
+                                @Html.ListBoxFor(m => m.CollAdmissionConditionsReportSearchFilter.ConditionProgram, Model.ColleagueProgramSelectedList, new { @id = "ConditionProgram", @class = "multi-select col-xw-80" })
+                            </th>
+                            <th title="Condition" class="col-xw-100">
+                                @Html.TextBoxFor(m => m.CollAdmissionConditionsReportSearchFilter.Condition, new { @id = "Condition", @class = "text ui-widget-content ui-corner-all searchfield col-xw-100" })
+                            </th>
+                            <th title="Clear">
+                                <input id="clear-btn" type="image" title="Clear" src="~/Content/images/eraser_small.png" class="submit-btn" onclick="location.href='@Url.Action("CollAdmissionConditionsReport", "Reports")';return false;" />
+                            </th>
+                            <th title="Search">
+                                <input id="search-btn" type="image" title="Search" src="~/Content/images/search.png" class="submit-btn" />
+                                @Html.HiddenFor(m => m.Pagination.PageIndex, new { id = "hf-pIndex" })
+                                @Html.HiddenFor(m => m.Pagination.PageSize, new { id = "hf-pSize" })
+                                @Html.HiddenFor(m => m.Pagination.PageCount, new { id = "hf-pCount" })
+                                @Html.HiddenFor(m => m.Pagination.RecCount, new { id = "totalRes" })
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.CollAdmissionConditionReportSearchResultsFilter.Count > 0)
+                        {
+                            foreach (var item in Model.CollAdmissionConditionReportSearchResultsFilter)
+                            {
+                                <tr class="tableBody">
+                                    <td>
+                                        <input type="checkbox" name="@item.ApplicationID.ToUpper().Trim()" checked>
+                                    </td>
+                                    <td>
+                                        @item.PersonID
+                                    </td>
+                                    <td class="text-center">
+                                        @item.ApplicationStatus
+                                    </td>
+                                    <td>
+                                        @item.FullName
+                                    </td>
+                                    <td class="text-center">
+                                        @item.Term
+                                    </td>
+                                    <td class="text-center">
+                                        @item.AlienStatus
+                                    </td>
+                                    <td>
+                                        @item.ConditionProgram
+                                    </td>
+                                    <td colspan="3">
+                                        @item.Condition
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="35" style="color:red;text-align:center;">
+                                    <br />No records found.
+                                    <br />Please enter search parameters and click 'Search'. <br />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            </div>
+        <div id="bottom_anchor"></div>
+        <br />
+        </div>
